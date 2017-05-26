@@ -1,6 +1,6 @@
 <?php
 
-class m170101_000001_workflow extends \tecnocen\workflow\\migrations\BaseTable
+class m170101_000001_workflow extends tecnocen\workflow\migrations\BaseTable
 {
     public function getTableName()
     {

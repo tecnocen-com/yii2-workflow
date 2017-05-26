@@ -1,6 +1,6 @@
 <?php
 
-namespace tecnocen\workflow\migrations
+namespace tecnocen\workflow\migrations;
 
 class BaseTable extends \tecnocen\migrate\CreateTableMigration
 {
