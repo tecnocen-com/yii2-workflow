@@ -11,7 +11,7 @@ namespace tecnocen\workflow\models;
  *
  * @property Stage[] $stages
  */
-class Transition extends BaseActiveRecord
+class Workflow extends BaseActiveRecord
 {
     /**
      * @inheritdoc
