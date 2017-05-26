@@ -11,7 +11,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.6",
-        "yiisoft/yii2": "~2.0.10"
+        "yiisoft/yii2": "~2.0.10",
+        "tecnocen/yii2-roa": "*"
     },
     "require-dev": {
         "codeception/base": "^2.2.11",
