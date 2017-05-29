@@ -2,7 +2,7 @@
 
 namespace tecnocen\workflow\migrations;
 
-class BaseTable extends \tecnocen\migrate\CreateTableMigration
+abstract class BaseTable extends \tecnocen\migrate\CreateTableMigration
 {
     public function defaultColumns()
     {
