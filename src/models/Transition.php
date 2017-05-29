@@ -15,6 +15,9 @@ namespace tecnocen\workflow\models;
  */
 class Transition extends BaseActiveRecord
 {
+    const SCENARIO_UPDATE = 'update';
+    const SCENARIO_CREATE = 'create';
+
     /**
      * @inheritdoc
      */
@@ -29,19 +32,49 @@ class Transition extends BaseActiveRecord
     public function rules()
     {
         return [
+            [
+                ['!source_stage_id', '!target_stage_id'],
+                'safe',
+                'on' => [self::SCENARIO_UPDATE],
+            ],
+            [['name'], 'string', 'min' => 8],
             [['source_stage_id', 'target_stage_id', 'name'], 'required'],
-            [['source_stage_id', 'target_stage_id'], 'integer'],
+            [
+                ['source_stage_id', 'target_stage_id'],
+                'integer',
+                'on' => [self::SCENARIO_CREATE],
+            ],
             [
                 ['source_stage_id', 'target_stage_id'],
                 'exist',
                 'targetClass' => Stage::class,
                 'skipOnError' => true,
+                'on' => [self::SCENARIO_CREATE],
+            ],
+            [
+                ['target_stage_id'],
+                'exist',
+                'targetAttribute' => [
+                     'target_stage_id' => 'targetStage.id',
+                     'source_stage_id' => 'sibling.id',
+                ],
+                'targetClass' => Stage::class,
+                'skipOnError' => true,
+                'when' => function () {
+                    return !$this->hasErrors('source_stage_id');
+                },
+                'filter' => function ($query) {
+                    $query->alias('targetStage')->innerJoinWith(['siblings']);
+                },
+                'on' => [self::SCENARIO_CREATE],
+                'message' => 'The stages are not associated to the same workflow.',
             ],
 
             [
                 ['target_stage_id'],
                 'unique',
                 'targetAttribute' => ['source_stage_id', 'target_stage_id'],
+                'on' => [self::SCENARIO_CREATE],
                 'message' => 'Target already in use for the source stage.'
             ],
             [
@@ -50,8 +83,6 @@ class Transition extends BaseActiveRecord
                 'targetAttribute' => ['source_stage_id', 'name'],
                 'message' => 'Name already used for the source stage.'
             ],
-
-            [['name'], 'string', 'min' => 8],
         ];
     }
 
@@ -72,7 +103,10 @@ class Transition extends BaseActiveRecord
      */
     public function getSourceStage()
     {
-        return $this->hasOne(Stage::class, ['id' => 'source_stage_id']);
+        return $this->hasOne(
+             $this->getNamespace() . '\\Stage',
+             ['id' => 'source_stage_id']
+        );
     }
 
     /**
@@ -80,7 +114,10 @@ class Transition extends BaseActiveRecord
      */
     public function getTargetStage()
     {
-        return $this->hasOne(Stage::class, ['id' => 'target_stage_id']);
+        return $this->hasOne(
+             $this->getNamespace() . '\\Stage',
+             ['id' => 'target_stage_id']
+        );
     }
 
     /**
@@ -88,9 +125,12 @@ class Transition extends BaseActiveRecord
      */
     public function getPermissions()
     {
-        return $this->hasOne(TransitionPermission::class, [
-            'source_stage_id' => 'source_stage_id',
-            'target_stage_id' => 'target_stage_id',
-        ])->inverseOf('transition');
+        return $this->hasOne(
+            $this->getNamespace() . '\\TransitionPermission',
+            [
+                'source_stage_id' => 'source_stage_id',
+                'target_stage_id' => 'target_stage_id',
+            ]
+        )->inverseOf('transition');
     }
 }

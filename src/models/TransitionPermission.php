@@ -71,7 +71,10 @@ class TransitionPermission extends BaseActiveRecord
      */
     public function getSourceStage()
     {
-        return $this->hasOne(Stage::class, ['id' => 'source_stage_id']);
+        return $this->hasOne(
+            $this->getNamespace(). '\\Stage',
+            ['id' => 'source_stage_id']
+        );
     }
 
     /**
@@ -79,7 +82,10 @@ class TransitionPermission extends BaseActiveRecord
      */
     public function getTargetStage()
     {
-        return $this->hasOne(Stage::class, ['id' => 'target_stage_id']);
+        return $this->hasOne(
+            $this->getNamespace(). '\\Stage',
+            ['id' => 'target_stage_id']
+        );
     }
 
     /**
@@ -87,9 +93,12 @@ class TransitionPermission extends BaseActiveRecord
      */
     public function getTransition()
     {
-        return $this->hasOne(Transition::class, [
-            'source_stage_id' => 'source_stage_id',
-            'target_stage_id' => 'target_stage_id',
-        ]);
+        return $this->hasOne(
+            $this->getNamespace(). '\\Transition',
+            [
+                'source_stage_id' => 'source_stage_id',
+                'target_stage_id' => 'target_stage_id',
+            ]
+        );
     }
 }

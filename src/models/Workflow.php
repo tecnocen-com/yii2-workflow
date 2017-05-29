@@ -49,7 +49,9 @@ class Workflow extends BaseActiveRecord
      */
     public function getStages()
     {
-        return $this->hasMany(Stage::class, ['workflow_id' => 'id'])
-            ->inverseOf('workflow');
+        return $this->hasMany(
+            $this->getNamespace() . '\\Stage',
+            ['workflow_id' => 'id']
+        )->inverseOf('workflow');
     }
 }

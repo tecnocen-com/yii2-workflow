@@ -18,6 +18,15 @@ use yii\db\Expression as DbExpression;
 class BaseActiveRecord extends ActiveRecord
 {
     /**
+     * @return string namespace of the model
+     */
+    public function getNamespace()
+    {
+        $class = static::class;
+        return substr($class, 0, strrpos($class, '\\'));
+    }
+
+    /**
      * @inheritdoc
      */
     public function behaviors()

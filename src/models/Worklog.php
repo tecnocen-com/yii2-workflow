@@ -13,6 +13,9 @@ namespace tecnocen\workflow\models;
  */
 abstract class Worklog extends BaseActiveRecord
 {
+    /**
+     * @return string class name for the process this worklog is attached to.
+     */
     abstract function getProcessClass();
 
     /**
@@ -32,6 +35,18 @@ abstract class Worklog extends BaseActiveRecord
                 ['stage_id'],
                 'exist',
                 'targetClass' => Stage::class,
+            ],
+            [
+                ['stage_id'],
+                'exist',
+                'targetClass' => Stage::class,
+                'when' => function () { 
+                    return !$this->hasErrors('process_id')
+                        && null === $this->process->currentStage;
+                },
+                'filter' => function ($query) {
+                    $query->andWhere(['initial' => true]);
+                },
             ],
             [
                 ['stage_id'],

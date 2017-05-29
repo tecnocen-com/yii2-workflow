@@ -7,6 +7,7 @@ namespace tecnocen\workflow\models;
  * @property integer $id
  * @property integer $workflow_id
  * @property string $name
+ * @property boolean $initial
  *
  * @property Workflow $workflow
  * @property Transition[] $transitions
@@ -28,6 +29,8 @@ class Stage extends BaseActiveRecord
     {
         return [
             [['workflow_id', 'name'], 'required'],
+            [['initial'], 'default', 'value' => false],
+            [['initial'], 'boolean'],
             [['workflow_id'], 'integer'],
             [
                 ['workflow_id'],
@@ -48,7 +51,7 @@ class Stage extends BaseActiveRecord
     {
         return array_merge([
             'id' => 'ID',
-            'name' => 'Workflow name',
+            'name' => 'Stage name',
         ], parent::attributeLabels());
     }
 
@@ -57,7 +60,10 @@ class Stage extends BaseActiveRecord
      */
     public function getWorkflow()
     {
-        return $this->hasOne(Workflow::class, ['id' => 'workflow_id']);
+        return $this->hasOne(
+            $this->getNamespace() . '\\Workflow',
+            ['id' => 'workflow_id']
+        );
     }
 
     /**
@@ -65,7 +71,18 @@ class Stage extends BaseActiveRecord
      */
     public function getTransitions()
     {
-        return $this->hasMany(Transition::class, ['source_stage_id' => 'id'])
-            ->inverseOf('source');
+        return $this->hasMany(
+            $this->getNamespace() . '\\Transition',
+            ['source_stage_id' => 'id']
+        )->inverseOf('source');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery sibling stages for the same workflow
+     */
+    public function getSiblings()
+    {
+        return $this->hasMany(static::class, ['workflow_id' => 'workflow_id'])
+            ->alias('siblings');
     }
 }
