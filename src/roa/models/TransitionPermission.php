@@ -27,7 +27,7 @@ class TransitionPermission
                 'resourceName' => 'permission',
                 'parentSlugRelation' => 'transition',
             ],
-        ];
+        ]);
     }
 
     /**

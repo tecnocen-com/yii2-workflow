@@ -26,7 +26,7 @@ class Transition extends \tecnocen\workflow\models\Transition
                 'resourceName' => 'transition',
                 'parentSlugRelation' => 'sourceStage',
             ],
-        ];
+        ]);
     }
 
     /**

@@ -24,7 +24,7 @@ class Workflow extends \tecnocen\workflow\models\Workflow
                 'class' => Slug::class,
                 'resourceName' => 'workflow',
             ]
-        ];
+        ]);
     }
 
     /**

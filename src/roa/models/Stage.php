@@ -25,7 +25,7 @@ class Stage extends \tecnocen\workflow\models\Stage
                 'resourceName' => 'stage',
                 'parentSlugRelation' => 'workflow',
             ],
-        ];
+        ]);
     }
 
     /**
