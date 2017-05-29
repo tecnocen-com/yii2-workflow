@@ -13,10 +13,20 @@ namespace tecnocen\workflow\models;
  */
 abstract class Worklog extends BaseActiveRecord
 {
+    static $tableSuffix = '_worklog';
+
     /**
      * @return string class name for the process this worklog is attached to.
      */
-    abstract function getProcessClass();
+    public static function processClass()
+    {
+        return '';
+    }
+
+    public static function tableName()
+    {
+        return static::processClass()::tableName() . static::$tableSuffix;
+    }
 
     /**
      * @inheritdoc
@@ -29,7 +39,7 @@ abstract class Worklog extends BaseActiveRecord
             [
                 ['process_id'],
                 'exist',
-                'targetClass' => $this->getProcessClass(),
+                'targetClass' => static::processClass(),
             ],
             [
                 ['stage_id'],
@@ -81,9 +91,8 @@ abstract class Worklog extends BaseActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getStages()
+    public function getProcess()
     {
-        return $this->hasMany(Stage::class, ['workflow_id' => 'id'])
-            ->inverseOf('workflow');
+        return $this->hasOne(static::processClass(), ['process_id' => 'id']);
     }
 }

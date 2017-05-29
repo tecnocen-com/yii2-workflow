@@ -5,14 +5,35 @@ namespace tecnocen\workflow\roa\resources;
 use Yii;
 use tecnocen\workflow\roa\models\Transition;
 
+/**
+ * Resource to handle transition records.
+ *
+ * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ */
 class TransitionResource extends \tecnocen\roa\controllers\OAuth2Resource
 {
+    /**
+     * @inhertidoc
+     */
     public $modelClass = Transition::class;
 
+    /**
+     * @inheritdoc
+     */
     public $idAttribute = 'target_source_id';
 
     /**
-     * @return Transition
+     * @inheritdoc
+     */
+    public $createScenario = Stage::SCENARIO_CREATE;
+
+    /**
+     * @inheritdoc
+     */
+    public $updateScenario = Stage::SCENARIO_UPDATE;
+
+    /**
+     * @inheritdoc
      */
     public function baseQuery()
     {
