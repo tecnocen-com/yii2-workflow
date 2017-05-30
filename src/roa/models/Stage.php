@@ -37,4 +37,12 @@ class Stage extends \tecnocen\workflow\models\Stage
             'transitions' => $this->getSelfLink() . '/transition',
         ]);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        return ['transitions'];
+    }
 }

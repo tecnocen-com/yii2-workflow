@@ -37,7 +37,7 @@ class Transition extends BaseActiveRecord
                 'safe',
                 'on' => [self::SCENARIO_UPDATE],
             ],
-            [['name'], 'string', 'min' => 8],
+            [['name'], 'string', 'min' => 6],
             [['source_stage_id', 'target_stage_id', 'name'], 'required'],
             [
                 ['source_stage_id', 'target_stage_id'],
@@ -45,9 +45,18 @@ class Transition extends BaseActiveRecord
                 'on' => [self::SCENARIO_CREATE],
             ],
             [
-                ['source_stage_id', 'target_stage_id'],
+                ['source_stage_id'],
                 'exist',
                 'targetClass' => Stage::class,
+                'targetAttribute' => ['source_stage_id' => 'id'],
+                'skipOnError' => true,
+                'on' => [self::SCENARIO_CREATE],
+            ],
+            [
+                ['target_stage_id'],
+                'exist',
+                'targetClass' => Stage::class,
+                'targetAttribute' => ['target_stage_id' => 'id'],
                 'skipOnError' => true,
                 'on' => [self::SCENARIO_CREATE],
             ],
@@ -56,7 +65,7 @@ class Transition extends BaseActiveRecord
                 'exist',
                 'targetAttribute' => [
                      'target_stage_id' => 'targetStage.id',
-                     'source_stage_id' => 'sibling.id',
+                     'source_stage_id' => 'siblings.id',
                 ],
                 'targetClass' => Stage::class,
                 'skipOnError' => true,

@@ -20,7 +20,7 @@ class TransitionResource extends \tecnocen\roa\controllers\OAuth2Resource
     /**
      * @inheritdoc
      */
-    public $idAttribute = 'target_source_id';
+    public $idAttribute = 'target_stage_id';
 
     /**
      * @inheritdoc

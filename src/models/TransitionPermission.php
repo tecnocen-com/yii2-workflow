@@ -31,7 +31,7 @@ class TransitionPermission extends BaseActiveRecord
         return [
             [['source_stage_id', 'target_stage_id', 'permission'], 'required'],
             [['source_stage_id', 'target_stage_id'], 'integer'],
-            [['permission'], 'string', 'min' => 8],
+            [['permission'], 'string', 'min' => 6],
 
             [
                 ['source_stage_id', 'target_stage_id'],

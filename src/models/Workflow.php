@@ -28,7 +28,7 @@ class Workflow extends BaseActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name'], 'string', 'min' => 8],
+            [['name'], 'string', 'min' => 6],
             [['name'], 'unique'],
         ];
     }

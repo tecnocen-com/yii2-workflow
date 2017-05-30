@@ -39,7 +39,7 @@ class Stage extends BaseActiveRecord
                 'targetClass' => Workflow::class,
                 'targetAttribute' => ['workflow_id' => 'id'],
             ],
-            [['name'], 'string', 'min' => 8],
+            [['name'], 'string', 'min' => 6],
             [['name'], 'unique', 'targetAttribute' => ['workflow_id', 'name']],
         ];
     }
@@ -74,7 +74,7 @@ class Stage extends BaseActiveRecord
         return $this->hasMany(
             $this->getNamespace() . '\\Transition',
             ['source_stage_id' => 'id']
-        )->inverseOf('source');
+        )->inverseOf('sourceStage');
     }
 
     /**
