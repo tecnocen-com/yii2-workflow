@@ -31,7 +31,7 @@ class m170101_000003_workflow_transition extends tecnocen\workflow\migrations\Ba
 
     public function compositeUniqueKeys()
     {
-        return ['source_stage_id', 'name'];
+        return [['source_stage_id', 'name']];
     }
 
 }

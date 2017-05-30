@@ -24,6 +24,6 @@ class m170101_000002_workflow_stage extends tecnocen\workflow\migrations\BaseTab
 
     public function compositeUniqueKeys()
     {
-        return ['workflow_id', 'name'];
+        return [['workflow_id', 'name']];
     }
 }
