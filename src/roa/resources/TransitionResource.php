@@ -25,12 +25,12 @@ class TransitionResource extends \tecnocen\roa\controllers\OAuth2Resource
     /**
      * @inheritdoc
      */
-    public $createScenario = Stage::SCENARIO_CREATE;
+    public $createScenario = Transition::SCENARIO_CREATE;
 
     /**
      * @inheritdoc
      */
-    public $updateScenario = Stage::SCENARIO_UPDATE;
+    public $updateScenario = Transition::SCENARIO_UPDATE;
 
     /**
      * @inheritdoc
