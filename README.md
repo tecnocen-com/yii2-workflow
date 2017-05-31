@@ -3,6 +3,31 @@ Tecnocen Workflow
 
 Library to dynamically handle workflows in a database.
 
+Instalation
+-----------
+
+You can use composer to install the library `tecnocen/yii2-workflow` by running
+the command;
+
+`composer require tecnocen/yii2-workflow`
+
+or edit the `composer.json` file
+
+```json
+require: {
+    "tecnocen/yii2-workflow": "*",
+}
+```
+
+Then run the required migrations
+
+`php yii migrate/up -p=@vendor/tecnocen/yii2-workflow/src/migrations`
+
+Which will install the following table structure
+
+![Database Diagram](diagram.png)
+
+
 ROA Backend Usage
 -----------------
 
