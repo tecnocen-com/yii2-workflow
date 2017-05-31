@@ -5,8 +5,7 @@ namespace tecnocen\workflow\models;
 /**
  * Model class for table `{{%tecnocen_workflow}}`
  *
- * @property integer $source_stage_id
- * @property integer $target_stage_id
+ * @property integer $id
  * @property string $name
  *
  * @property Stage[] $stages
@@ -19,6 +18,14 @@ class Workflow extends BaseActiveRecord
     public static function tableName()
     {
         return '{{%tecnocen_workflow}}';
+    }
+ 
+    /**
+     * @inheritdoc
+     */
+    protected function attributeTypecast()
+    {
+        return parent::attributeTypecast() + ['id' => 'integer'];
     }
 
     /**

@@ -15,6 +15,9 @@ namespace tecnocen\workflow\models;
  */
 class TransitionPermission extends BaseActiveRecord
 {
+    const SCENARIO_UPDATE = 'update';
+    const SCENARIO_CREATE = 'create';
+
     /**
      * @inheritdoc
      */
@@ -26,20 +29,52 @@ class TransitionPermission extends BaseActiveRecord
     /**
      * @inheritdoc
      */
+    protected function attributeTypecast()
+    {
+        return parent::attributeTypecast() + [
+            'source_stage_id' => 'integer',
+            'target_stage_id' => 'integer',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
+            [
+                ['!source_stage_id', '!target_stage_id', '!permission'],
+                'safe',
+                'on' => [self::SCENARIO_UPDATE],
+            ],
             [['source_stage_id', 'target_stage_id', 'permission'], 'required'],
-            [['source_stage_id', 'target_stage_id'], 'integer'],
-            [['permission'], 'string', 'min' => 6],
-
             [
                 ['source_stage_id', 'target_stage_id'],
+                'integer',
+                'on' => [self::SCENARIO_CREATE],
+            ],
+            [
+                ['permission'],
+                'string',
+                'min' => 6,
+                'on' => [self::SCENARIO_CREATE],
+            ],
+
+            [
+                ['target_stage_id'],
                 'exist',
                 'targetClass' => Transition::class,
-                'targetAttribute' => ['source_stage_id', 'target_stage_id'],
+                'targetAttribute' => [
+                    'source_stage_id' => 'source_stage_id',
+                    'target_stage_id' => 'target_stage_id',
+                ],
                 'skipOnError' => true,
+                'when' => function () {
+                    return !$this->hasErrors('source_stage_id');
+                },
                 'message' => 'There is no transaction between the stages.',
+                'on' => [self::SCENARIO_CREATE],
             ],
 
             [
@@ -51,6 +86,8 @@ class TransitionPermission extends BaseActiveRecord
                     'permission',
                 ],
                 'message' => 'Permission already set for the transition.',
+                'on' => [self::SCENARIO_CREATE],
+            ],
         ];
     }
 

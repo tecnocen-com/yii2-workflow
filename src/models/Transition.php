@@ -29,6 +29,17 @@ class Transition extends BaseActiveRecord
     /**
      * @inheritdoc
      */
+    protected function attributeTypecast()
+    {
+        return parent::attributeTypecast() + [
+            'source_stage_id' => 'integer',
+            'target_stage_id' => 'integer',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [

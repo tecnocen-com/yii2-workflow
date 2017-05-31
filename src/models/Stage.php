@@ -25,6 +25,18 @@ class Stage extends BaseActiveRecord
     /**
      * @inheritdoc
      */
+    protected function attributeTypecast()
+    {
+        return parent::attributeTypecast() + [
+            'id' => 'integer',
+            'workflow_id' => 'integer',
+            'initial' => 'boolean',
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [

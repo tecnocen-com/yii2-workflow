@@ -11,8 +11,8 @@ class Version extends \tecnocen\roa\modules\ApiVersion
 {
     const WORKFLOW_ROUTE = 'workflow';
     const STAGE_ROUTE = self::WORKFLOW_ROUTE . '/<workflow_id:\d+>/stage';
-    const TRANSITION_ROUTE = self::STAGE_ROUTE . '/<stage_id:\d+>/transition';
-    const PERMISSION_ROUTE = self::TRANSITION_ROUTE . '/<target_id:\d+>/permission';
+    const TRANSITION_ROUTE = self::STAGE_ROUTE . '/<source_stage_id:\d+>/transition';
+    const PERMISSION_ROUTE = self::TRANSITION_ROUTE . '/<target_stage_id:\d+>/permission';
 
     /**
      * @inheritdoc
@@ -23,7 +23,7 @@ class Version extends \tecnocen\roa\modules\ApiVersion
         self::TRANSITION_ROUTE => ['class' => TransitionResource::class],
         self::PERMISSION_ROUTE => [
             'class' => PermissionResource::class,
-            'urlRule' => ['patterns' => ['id' => '<id:\w+>']],
+            'urlRule' => ['tokens' => ['id' => '<id:\w+>']],
         ],
     ];
 }

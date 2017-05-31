@@ -38,7 +38,8 @@ class TransitionResource extends \tecnocen\roa\controllers\OAuth2Resource
     public function baseQuery()
     {
         return parent::baseQuery()->andWhere([
-            'source_stage_id' => Yii::$app->request->getQueryParam('stage_id')
+            'source_stage_id' => Yii::$app->request
+                ->getQueryParam('source_stage_id')
         ]);
     }
 }

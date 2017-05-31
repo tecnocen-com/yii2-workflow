@@ -15,25 +15,6 @@ use yii\web\Linkable;
 class Transition extends \tecnocen\workflow\models\Transition
     implements Linkable
 {
-    public function setStage_id($id) {
-        $this->source_stage_id = $id;
-    }
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return array_merge(
-            [
-                [['stage_id'], 'safe'],
-                [['source_stage_id'], 'default', 'value' => function () {
-                    return Yii::$app->request->getQueryParam('stage_id');
-                }],
-            ],
-            parent::rules()
-        );
-    }
-
     /**
      * @inheritdoc
      */

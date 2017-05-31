@@ -2,8 +2,9 @@
 
 namespace tecnocen\workflow\models;
 
-use yii\behaviors\TimestampBehavior;
+use yii\behaviors\AttributeTypecastBehavior;
 use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression as DbExpression;
 
@@ -32,6 +33,11 @@ class BaseActiveRecord extends ActiveRecord
     public function behaviors()
     {
         return [
+            'typecast' => [
+                'class' => AttributeTypecastBehavior::class,
+                'attributeTypes' => $this->attributeTypecast(),
+                'typecastAfterFind' => true,
+            ],
             'timestamp' => [
                 'class' => TimestampBehavior::class,
                 'updatedAtAttribute' => null,
@@ -42,6 +48,15 @@ class BaseActiveRecord extends ActiveRecord
                 'updatedByAttribute' => null,
             ],
         ];
+    }
+
+    /**
+     * @return string[] pairs of 'attribute' => 'cast_type' to be passed to
+     * `AttributeTypeCastBehavior`
+     */
+    protected function attributeTypecast()
+    {
+        return ['created_by' => 'integer'];
     }
 
     /**
