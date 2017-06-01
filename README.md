@@ -42,6 +42,7 @@ class Api extends \tecnocen\roa\modules\ApiContainer
        'w1' => ['class' => 'tecnocen\workflow\roa\modules\Version'],
    ];
 }
+```
 
 You can then access the module to check the available resources.
 
