@@ -13,6 +13,8 @@ use yii\db\Expression as DbExpression;
  *
  * @property string $created_at
  * @property integer $created_by
+ * @property string $deleted_at
+ * @property integer $deleted_by
  *
  * @property ActiveRecord $creator
  */
@@ -47,6 +49,13 @@ class BaseActiveRecord extends ActiveRecord
                 'class' => BlameableBehavior::class,
                 'updatedByAttribute' => null,
             ],
+            'softDelete' => [
+                'class' => SoftDeleteBehavior::class,
+                'softDeleteAttributeValues' => [
+                    'deleted_at' => new DbExpression('now()'),
+                    'deleted_by' => Yii::$app->user->getId(),
+                ],
+            ]
         ];
     }
 
@@ -67,6 +76,8 @@ class BaseActiveRecord extends ActiveRecord
         return [
             'created_at' => 'Created At Date',
             'created_by' => 'Created By User',
+            'deleted_at' => 'Deletes At Date',
+            'deleted_by' => 'Deleted By User',
         ];
     }
 

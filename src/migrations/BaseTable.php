@@ -12,6 +12,8 @@ abstract class BaseTable extends \tecnocen\migrate\CreateTableMigration
         return [
             'created_at' => $this->datetime()->notNull(),
             'created_by' => $this->normalKey(),
+            'deleted_at' => $this->datetime()->null(),
+            'deleted_by' => $this->normalKey()->null()            
         ];
     }
 }
