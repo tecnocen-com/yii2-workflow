@@ -6,7 +6,7 @@
         "framework",
         "workflow"
     ],
-    "type": "library",
+    "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "minimum-stability": "dev",
     "require": {
