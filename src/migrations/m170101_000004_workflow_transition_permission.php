@@ -26,6 +26,22 @@ class m170101_000004_workflow_transition_permission
     /**
      * @inhertidoc
      */
+    public function foreignKeys()
+    {
+        return [
+            'transition' => [
+                'table' => 'tecnocen_workflow_transition',
+                'columns' => [
+                    'source_stage_id' => 'source_stage_id',
+                    'target_stage_id' => 'target_stage_id',
+                ]
+            ],
+        ];
+    }
+
+    /**
+     * @inhertidoc
+     */
     public function compositePrimaryKeys()
     {
         return ['source_stage_id', 'target_stage_id', 'permission'];

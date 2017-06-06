@@ -46,8 +46,8 @@ class WorkLog extends BaseMigration
     public function foreignKeys()
     {
         return [
-            'stage_id' => ['table' => 'tecnocen_workflow_stage']
-            'process_id' => ['table' => $this->getProcessTableName()];
+            'stage_id' => 'tecnocen_workflow_stage',
+            'process_id' => $this->getProcessTableName(),
         ];
     }
 }

@@ -2,11 +2,17 @@
 
 class m170101_000002_workflow_stage extends tecnocen\workflow\migrations\BaseTable
 {
+    /**
+     * @inhertidoc
+     */
     public function getTableName()
     {
         return 'tecnocen_workflow_stage';
     }
 
+    /**
+     * @inhertidoc
+     */
     public function columns()
     {
         return [
@@ -17,11 +23,17 @@ class m170101_000002_workflow_stage extends tecnocen\workflow\migrations\BaseTab
         ];
     }
 
+    /**
+     * @inhertidoc
+     */
     public function foreignKeys()
     {
-        return ['workflow_id' => ['table' => 'tecnocen_workflow']];
+        return ['workflow_id' => 'tecnocen_workflow'];
     }
 
+    /**
+     * @inhertidoc
+     */
     public function compositeUniqueKeys()
     {
         return [['workflow_id', 'name']];

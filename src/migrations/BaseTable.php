@@ -4,6 +4,9 @@ namespace tecnocen\workflow\migrations;
 
 abstract class BaseTable extends \tecnocen\migrate\CreateTableMigration
 {
+    /**
+     * @inhertidoc
+     */
     public function defaultColumns()
     {
         return [

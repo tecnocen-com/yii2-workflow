@@ -2,11 +2,17 @@
 
 class m170101_000001_workflow extends tecnocen\workflow\migrations\BaseTable
 {
+    /**
+     * @inhertidoc
+     */
     public function getTableName()
     {
         return 'tecnocen_workflow';
     }
 
+    /**
+     * @inhertidoc
+     */
     public function columns()
     {
         return [
