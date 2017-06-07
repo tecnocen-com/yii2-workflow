@@ -75,8 +75,7 @@ class Transition extends BaseActiveRecord
                 ['target_stage_id'],
                 'exist',
                 'targetAttribute' => [
-                     'target_stage_id' => 'targetStage.id',
-                     'source_stage_id' => 'siblings.id',
+                     'target_stage_id' => 'id',
                 ],
                 'targetClass' => Stage::class,
                 'skipOnError' => true,
@@ -84,7 +83,9 @@ class Transition extends BaseActiveRecord
                     return !$this->hasErrors('source_stage_id');
                 },
                 'filter' => function ($query) {
-                    $query->alias('targetStage')->innerJoinWith(['siblings']);
+                    $query->innerJoinWith(['siblings'])->andWhere([
+                        'siblings.id' => $this->source_stage_id
+                    ]);
                 },
                 'on' => [self::SCENARIO_CREATE],
                 'message' => 'The stages are not associated to the same workflow.',

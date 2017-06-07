@@ -2,11 +2,13 @@
 
 namespace tecnocen\workflow\models;
 
+use Yii;
 use yii\behaviors\AttributeTypecastBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression as DbExpression;
+use yii2tech\ar\softdelete\SoftDeleteBehavior;
 
 /**
  * Base Model class for the models used on the workflow library

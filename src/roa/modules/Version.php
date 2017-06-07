@@ -23,7 +23,7 @@ class Version extends \tecnocen\roa\modules\ApiVersion
         self::TRANSITION_ROUTE => ['class' => TransitionResource::class],
         self::PERMISSION_ROUTE => [
             'class' => PermissionResource::class,
-            'urlRule' => ['tokens' => ['id' => '<id:\w+>']],
+            'urlRule' => ['tokens' => ['{id}' => '<id:\w+>']],
         ],
     ];
 }
