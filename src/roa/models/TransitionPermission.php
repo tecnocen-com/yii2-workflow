@@ -24,6 +24,7 @@ class TransitionPermission
         return array_merge(parent::behaviors(), [
             'slug' => [
                 'class' => Slug::class,
+                'idAttribute' => 'permission',
                 'resourceName' => 'permission',
                 'parentSlugRelation' => 'transition',
             ],
