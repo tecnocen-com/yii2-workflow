@@ -18,6 +18,8 @@ class m170101_000002_workflow_stage extends tecnocen\workflow\migrations\BaseTab
         return [
             'id' => $this->primaryKey(),
             'workflow_id' => $this->normalKey(),
+            'position_x' => $this->integer()->notNull()->defaultValue(0),
+            'position_y' => $this->integer()->notNull()->defaultValue(0),
             'name' => $this->string(64)->notNull(),
             'initial' => $this->activable(false),
         ];

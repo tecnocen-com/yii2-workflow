@@ -7,6 +7,8 @@ namespace tecnocen\workflow\models;
  * @property integer $id
  * @property integer $workflow_id
  * @property string $name
+ * @property integer $position_x
+ * @property integer $position_y
  * @property boolean $initial
  *
  * @property Workflow $workflow
@@ -43,7 +45,11 @@ class Stage extends BaseActiveRecord
             [['workflow_id', 'name'], 'required'],
             [['initial'], 'default', 'value' => false],
             [['initial'], 'boolean'],
-            [['workflow_id'], 'integer'],
+            [
+                ['workflow_id', 'position_x', 'position_y'],
+                'integer',
+                'min' => 0,
+            ],
             [
                 ['workflow_id'],
                 'exist',
@@ -64,6 +70,9 @@ class Stage extends BaseActiveRecord
         return array_merge([
             'id' => 'ID',
             'name' => 'Stage name',
+            'workflow_id' => 'Workflow ID',
+            'position_x' => 'Position X',
+            'position_y' => 'Position Y',
         ], parent::attributeLabels());
     }
 
