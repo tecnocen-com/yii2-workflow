@@ -14,8 +14,20 @@ namespace tecnocen\workflow\models;
  * @property Workflow $workflow
  * @property Transition[] $transitions
  */
-class Stage extends BaseActiveRecord
+class Stage extends \tecnocen\rmdb\models\PersistentEntity
 {
+    /**
+     * @var string full class name of the model to be used for the relation
+     * `getWorkflow()`.
+     */
+    protected $workflowClass = Workflow::class;
+
+    /**
+     * @var string full class name of the model to be used for the relation
+     * `getTransitions()`.
+     */
+    protected $transitionClass = Transition::class;
+
     /**
      * @inheritdoc
      */
@@ -82,7 +94,7 @@ class Stage extends BaseActiveRecord
     public function getWorkflow()
     {
         return $this->hasOne(
-            $this->getNamespace() . '\\Workflow',
+            $this->workflowClass,
             ['id' => 'workflow_id']
         );
     }
@@ -93,7 +105,7 @@ class Stage extends BaseActiveRecord
     public function getTransitions()
     {
         return $this->hasMany(
-            $this->getNamespace() . '\\Transition',
+            $this->transitionClass,
             ['source_stage_id' => 'id']
         )->inverseOf('sourceStage');
     }

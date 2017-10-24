@@ -13,10 +13,22 @@ namespace tecnocen\workflow\models;
  * @property Stage $targetStage
  * @property TransitionPermission[] $permissions
  */
-class Transition extends BaseActiveRecord
+class Transition extends \tecnocen\rmdb\models\Pivot
 {
     const SCENARIO_UPDATE = 'update';
     const SCENARIO_CREATE = 'create';
+
+    /**
+     * @var string full class name of the model to be used for the relations
+     * `getSourceStage()` and `getTargetStage()`.
+     */
+    protected $stageClass = Stage::class;
+
+    /**
+     * @var string full class name of the model to be used for the relation
+     * `getPermissions()`.
+     */
+    protected $permissionClass = TransitionPermission::class;
 
     /**
      * @inheritdoc
@@ -124,10 +136,7 @@ class Transition extends BaseActiveRecord
      */
     public function getSourceStage()
     {
-        return $this->hasOne(
-             $this->getNamespace() . '\\Stage',
-             ['id' => 'source_stage_id']
-        );
+        return $this->hasOne($this->stageClass, ['id' => 'source_stage_id']);
     }
 
     /**
@@ -135,10 +144,7 @@ class Transition extends BaseActiveRecord
      */
     public function getTargetStage()
     {
-        return $this->hasOne(
-             $this->getNamespace() . '\\Stage',
-             ['id' => 'target_stage_id']
-        );
+        return $this->hasOne($this->stageClass, ['id' => 'target_stage_id']);
     }
 
     /**
@@ -147,7 +153,7 @@ class Transition extends BaseActiveRecord
     public function getPermissions()
     {
         return $this->hasOne(
-            $this->getNamespace() . '\\TransitionPermission',
+            $this->permissionClass,
             [
                 'source_stage_id' => 'source_stage_id',
                 'target_stage_id' => 'target_stage_id',

@@ -50,7 +50,7 @@ abstract class Worklog extends BaseActiveRecord
                 ['stage_id'],
                 'exist',
                 'targetClass' => Stage::class,
-                'when' => function () { 
+                'when' => function () {
                     return !$this->hasErrors('process_id')
                         && null === $this->process->currentStage;
                 },
@@ -73,7 +73,7 @@ abstract class Worklog extends BaseActiveRecord
                    ]);
                 },
                 'message' => 'There is no transition for the current stage'
-            ],    
+            ],
         ];
     }
 

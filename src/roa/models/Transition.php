@@ -18,6 +18,16 @@ class Transition extends \tecnocen\workflow\models\Transition
     /**
      * @inheritdoc
      */
+    protected $stageClass = Stage::class;
+
+    /**
+     * @inheritdoc
+     */
+    protected $permissionClass = TransitionPermission::class;
+
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [

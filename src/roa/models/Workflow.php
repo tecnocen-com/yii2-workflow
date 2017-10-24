@@ -17,6 +17,11 @@ class Workflow extends \tecnocen\workflow\models\Workflow
     /**
      * @inheritdoc
      */
+    protected $stageClass = Stage::class;
+
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [

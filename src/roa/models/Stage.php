@@ -17,6 +17,16 @@ class Stage extends \tecnocen\workflow\models\Stage
     /**
      * @inheritdoc
      */
+    protected $workflowClass = Workflow::class;
+
+    /**
+    * @inheritdoc
+     */
+    protected $transitionClass = Transition::class;
+
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return array_merge(parent::behaviors(), [

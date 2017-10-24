@@ -13,7 +13,7 @@
         "php": ">=5.6",
         "yiisoft/yii2": "~2.0.10",
         "tecnocen/yii2-roa": "*",
-        "tecnocen/yii2-migrate": "*",
+        "tecnocen/yii2-rmdb": "*",
         "yii2tech/ar-softdelete": "*"
     },
     "require-dev": {
