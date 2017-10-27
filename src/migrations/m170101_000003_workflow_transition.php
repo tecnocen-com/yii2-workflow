@@ -1,6 +1,6 @@
 <?php
 
-class m170101_000003_workflow_transition extends tecnocen\workflow\migrations\BaseTable
+class m170101_000003_workflow_transition extends tecnocen\rmdb\migrations\CreateEntity
 {
     /**
      * @inhertidoc

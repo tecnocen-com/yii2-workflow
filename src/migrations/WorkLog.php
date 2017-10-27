@@ -7,7 +7,7 @@ namespace tecnocen\workflow\migrations;
  *
  *
  */
-class WorkLog extends BaseMigration
+class WorkLog extends tecnocen\rmdb\migrations\CreatePívot
 {
     /**
      * @var string suffix attached at the end of the process table.
