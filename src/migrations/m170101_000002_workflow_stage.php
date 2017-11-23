@@ -1,6 +1,6 @@
 <?php
 
-class m170101_000002_workflow_stage extends tecnocen\rmdb\migrations\CreateEntity
+class m170101_000002_workflow_stage extends tecnocen\rmdb\migrations\CreatePersistentEntity
 {
     /**
      * @inhertidoc
