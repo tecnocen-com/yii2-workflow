@@ -9,6 +9,18 @@
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Angel (Faryshta) Guevara",
+            "email": "aguevara@solmipro.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "require": {
         "php": ">=5.6",
         "yiisoft/yii2": "~2.0.10",
@@ -20,12 +32,17 @@
         "codeception/base": "^2.2.11",
         "codeception/verify": "~0.3.1"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
-        }
-    ],    
+    "scripts": {
+        "deploy-tests": [
+            "@composer update --prefer-stable",
+            "@php tests/_app/yii.php migrate -p=@tecnocen/oauth2server/migrations/tables --interactive=0",
+            "@php tests/_app/yii.php migrate -p=@tecnocen/workflow/migrations/tables --interactive=0",
+            "@php tests/_app/yii.php migrate -p=@app/migrations/ --interactive=0"
+        ],
+        "run-tests": [
+            "@php vendor/bin/codecept run --steps"
+        ]
+    },
     "autoload": {
         "psr-4": {
             "tecnocen\\workflow\\": "src/"
