@@ -2,7 +2,7 @@ actor: ApiTester
 modules:
     enabled:
         - REST:
-            url: http://localhost:8080/api
+            url: http://localhost:8080/api/w1
             depends: Yii2
         - Yii2:
             cleanup: false
