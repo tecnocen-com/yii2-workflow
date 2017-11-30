@@ -36,7 +36,7 @@
         "deploy-tests": [
             "@composer update --prefer-stable",
             "@php tests/_app/yii.php migrate -p=@tecnocen/oauth2server/migrations/tables --interactive=0",
-            "@php tests/_app/yii.php migrate -p=@tecnocen/workflow/migrations/tables --interactive=0",
+            "@php tests/_app/yii.php migrate -p=@tecnocen/workflow/migrations --interactive=0",
             "@php tests/_app/yii.php migrate -p=@app/migrations/ --interactive=0"
         ],
         "run-tests": [
