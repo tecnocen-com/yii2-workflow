@@ -1,0 +1,78 @@
+<?php
+
+$now = new yii\db\Expression('now()');
+
+return [
+    [
+        'source_stage_id' => 1,
+        'target_stage_id' => 2,
+        'name' => 'Transition 1 Stage 1 to Stage 2 Wf 1',
+        'created_by' => 1,
+        'created_at' => $now,
+        'updated_by' => 1,
+        'updated_at' => $now,
+    ],
+    [
+        'source_stage_id' => 2,
+        'target_stage_id' => 3,
+        'name' => 'Transition 2 Stage 2 to Stage 3 Wf 1',
+        'created_by' => 1,
+        'created_at' => $now,
+        'updated_by' => 1,
+        'updated_at' => $now,
+    ],
+    [
+        'source_stage_id' => 3,
+        'target_stage_id' => 1,
+        'name' => 'Transition 3 Stage 3 to Stage 1 Wf 1',
+        'created_by' => 1,
+        'created_at' => $now,
+        'updated_by' => 1,
+        'updated_at' => $now,
+    ],
+    [
+        'source_stage_id' => 4,
+        'target_stage_id' => 5,
+        'name' => 'Transition 1 Stage 1 to Stage 2 Wf 2',
+        'created_by' => 1,
+        'created_at' => $now,
+        'updated_by' => 1,
+        'updated_at' => $now,
+    ],
+    [
+        'source_stage_id' => 5,
+        'target_stage_id' => 6,
+        'name' => 'Transition 2 Stage 2 to Stage 3 Wf 2',
+        'created_by' => 1,
+        'created_at' => $now,
+        'updated_by' => 1,
+        'updated_at' => $now,
+    ],
+    [
+        'source_stage_id' => 5,
+        'target_stage_id' => 7,
+        'name' => 'Transition 3 Stage 2 to Stage 4 Wf 2',
+        'created_by' => 1,
+        'created_at' => $now,
+        'updated_by' => 1,
+        'updated_at' => $now,
+    ],
+    [
+        'source_stage_id' => 6,
+        'target_stage_id' => 7,
+        'name' => 'Transition 4 Stage 3 to Stage 4 Wf 2',
+        'created_by' => 1,
+        'created_at' => $now,
+        'updated_by' => 1,
+        'updated_at' => $now,
+    ],
+    [
+        'source_stage_id' => 7,
+        'target_stage_id' => 4,
+        'name' => 'Transition 5 Stage 4 to Stage 1 Wf 2',
+        'created_by' => 1,
+        'created_at' => $now,
+        'updated_by' => 1,
+        'updated_at' => $now,
+    ],
+];
