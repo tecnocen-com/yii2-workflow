@@ -6,7 +6,7 @@ use tecnocen\roa\hal\JsonResponseFormatter;
 use yii\web\Response;
 
 return [
-    'id' => 'yii2-formgenerator-tests',
+    'id' => 'yii2-workflow-tests',
     'basePath' => dirname(__DIR__),
     'language' => 'en-US',
     'aliases' => [
