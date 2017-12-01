@@ -2,10 +2,9 @@ imports:
     - php
 
 tools:
-    external_code_coverage: false
-    php_analyzer: true
-    php_code_coverage: true
-    php_code_sniffer:
-        config:
-            standard: PSR2
-            sniffs: { generic: { formatting: { multiple_statement_alignment_sniff: false } } }
+    external_code_coverage:
+        timeout: 2100
+    # disable copy paste detector and similarity analyzer as they have no real value
+    # and a huge bunch of false-positives
+    php_sim: false
+    php_cpd: false
