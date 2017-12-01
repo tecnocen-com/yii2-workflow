@@ -7,7 +7,7 @@ namespace tecnocen\workflow\migrations;
  *
  *
  */
-abstract class WorkLog extends tecnocen\rmdb\migrations\CreatePívot
+abstract class WorkLog extends \tecnocen\rmdb\migrations\CreatePivot
 {
     /**
      * @var string suffix attached at the end of the process table.
