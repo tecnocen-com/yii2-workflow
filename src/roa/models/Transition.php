@@ -2,7 +2,6 @@
 
 namespace tecnocen\workflow\roa\models;
 
-use Yii;
 use tecnocen\roa\behaviors\Slug;
 use yii\web\Linkable;
 
