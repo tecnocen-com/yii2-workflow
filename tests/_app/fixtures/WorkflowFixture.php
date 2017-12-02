@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\unit\fixtures;
+namespace app\fixtures;
 
 use tecnocen\workflow\models\Workflow;
 use yii\test\ActiveFixture;
