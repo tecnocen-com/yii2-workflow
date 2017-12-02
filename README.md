@@ -131,4 +131,4 @@ public $resources = [
 ];
 ```
 
-![yii2-workflow](https://img.shields.io/badge/Powered__by-Tecnocen.com-orange.svg?style=flat)
+![yii2-workflow](https://img.shields.io/badge/Powered__by-Tecnocen.com-orange.svg?style=for-the-badge)
