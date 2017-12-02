@@ -40,7 +40,15 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     protected function indexDataProvider()
     {
         return [
-            [
+            'list' => [
+                'httpCode' => HttpCode::OK,
+            ],
+            'filter by name' => [
+                'urlParams' => ['name' => 'wo'],
+                'httpCode' => HttpCode::OK,
+            ],
+            'filter by author' => [
+                'urlParams' => ['created_by' => 1],
                 'httpCode' => HttpCode::OK,
             ],
         ];
