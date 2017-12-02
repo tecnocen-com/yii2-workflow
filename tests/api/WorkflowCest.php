@@ -36,7 +36,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             [
-                'httpCode' => HttpCode::UNAUTHORIZED,
+                'httpCode' => HttpCode::OK,
             ],
         ];
     }
