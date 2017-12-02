@@ -42,6 +42,7 @@ before_script:
 
 script:
   - composer deploy-tests
+  - composer run-tests
 
 after_script:
   - |
