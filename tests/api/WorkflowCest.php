@@ -1,9 +1,10 @@
 <?php
 
 use app\fixtures\OauthAccessTokensFixture;
+use app\fixtures\WorkflowFixture;
 use Codeception\Example;
 use Codeception\Util\HttpCode;
-use tecnocen\workflow\fixtures\WorkflowFixture;
+
 
 class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
 {
