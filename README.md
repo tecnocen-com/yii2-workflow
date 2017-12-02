@@ -3,7 +3,7 @@ Tecnocen Workflow
 
 Library to dynamically handle workflows in a database.
 
-Instalation
+Installation
 -----------
 
 You can use composer to install the library `tecnocen/yii2-workflow` by running
@@ -112,7 +112,7 @@ class CreditWorkLog extends \tecnocen\workflow\models\WorkLog
 Worklog Resource
 ----------------
 
-Each process gets a workflog about the flow of stages it goes through.
+Each process gets a worklog about the flow of stages it goes through.
 
 On ROA you can declare each worklog as a child resource for the process resource
 
