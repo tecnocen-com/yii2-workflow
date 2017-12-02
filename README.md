@@ -4,9 +4,11 @@ Library to dynamically handle workflows in a database.
 
 [![Latest Stable Version](https://poser.pugx.org/tecnocen/yii2-workflow/v/stable)](https://packagist.org/packages/tecnocen/yii2-workflow)
 [![Total Downloads](https://poser.pugx.org/tecnocen/yii2-workflow/downloads)](https://packagist.org/packages/tecnocen/yii2-workflow)
-[![Build Status](https://scrutinizer-ci.com/g/tecnocen-com/yii2-workflow/badges/build.png?b=master)](https://scrutinizer-ci.com/g/tecnocen-com/yii2-workflow/build-status/master)
 [![Code Coverage](https://scrutinizer-ci.com/g/tecnocen-com/yii2-workflow/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/tecnocen-com/yii2-workflow/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/tecnocen-com/yii2-workflow/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/tecnocen-com/yii2-workflow/?branch=master)
+
+Scrutinizer [![Build Status Scrutinizer](https://scrutinizer-ci.com/g/tecnocen-com/yii2-workflow/badges/build.png?b=master&style=flat)](https://scrutinizer-ci.com/g/tecnocen-com/yii2-workflow/build-status/master)
+Travis [![Build Status Travis](https://travis-ci.org/tecnocen-com/yii2-workflow.svg?branch=master&style=flat?style=for-the-badge)](https://travis-ci.org/tecnocen-com/yii2-workflow)
 
 Installation
 -----------
