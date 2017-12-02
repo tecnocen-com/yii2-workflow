@@ -42,6 +42,9 @@
         ],
         "run-tests": [
             "@php vendor/bin/codecept run --steps"
+        ],
+        "run-coverage": [
+            "@php vendor/bin/codecept run --steps --coverage --coverage-xml"
         ]
     },
     "autoload": {
