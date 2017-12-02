@@ -8,18 +8,13 @@ php:
   - 5.6
   - 7.0
   - 7.1
+  - 7.2
   - nightly
 
 matrix:
   fast_finish: true
   allow_failures:
     - php: nightly
-
-# cache vendor dirs
-# cache:
-#  directories:
-#    - vendor
-#    - $HOME/.composer/cache
 
 install:
   - |
@@ -29,19 +24,15 @@ install:
         phpenv config-rm xdebug.ini || echo "xdebug is not installed"
     fi
   - travis_retry composer self-update && composer --version
-  - travis_retry composer global require "fxp/composer-asset-plugin:^1.4.0"
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
   - travis_retry composer install --prefer-dist --no-interaction
 
 before_script:
   - php -r "echo INTL_ICU_VERSION . \"\n\";"
   - php -r "echo INTL_ICU_DATA_VERSION . \"\n\";"
   - mysql --version
-
+            
   # initialize database
-  - mysql -e 'CREATE DATABASE `yii2-usuario-test`;';
-  - php tests/_app/yii.php migrate/up --interactive=0
-  - php tests/_app/yii.php migrate/up --interactive=0 --migrationPath=@yii/rbac/migrations
+  - mysql -e "create database yii2_workflow_test"
 
   # enable code coverage on PHP 7.1, only one PHP version needs to generate coverage data
   - |
@@ -50,8 +41,7 @@ before_script:
     fi
 
 script:
-  - composer validate --no-check-lock
-  - vendor/bin/codecept run $CODECEPTION_FLAGS
+  - composer deploy-tests
 
 after_script:
   - |
