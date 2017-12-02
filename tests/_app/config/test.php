@@ -25,6 +25,9 @@ return [
                 ],
             ],
         ],
+        'rmdb' => [
+            'class' => tecnocen\rmdb\Module::class,
+        ],
     ],
     'components' => [
         'db' => require __DIR__ . '/db.php',
