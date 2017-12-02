@@ -19,4 +19,9 @@ class StageFixture extends ActiveFixture
      * @inheritdoc
      */
     public $dataFile = __DIR__ . '/data/stage.php';
+
+    /**
+     * @inheritdoc
+     */
+    public $depends = ['app\fixtures\WorkflowFixture'];
 }
