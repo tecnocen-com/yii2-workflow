@@ -50,6 +50,6 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
 
     protected function getRoutePattern()
     {
-        return 'form';
+        return 'workflow';
     }
 }
