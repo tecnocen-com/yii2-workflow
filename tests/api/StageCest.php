@@ -1,10 +1,9 @@
 <?php
 
-use app\fixtures\OauthAccessTokensFixture;
-use app\fixtures\StageFixture;
 use Codeception\Example;
 use Codeception\Util\HttpCode;
-
+use app\fixtures\OauthAccessTokensFixture;
+use app\fixtures\StageFixture;
 
 class StageCest extends \tecnocen\roa\test\AbstractResourceCest
 {
@@ -47,26 +46,26 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
                     'X-Pagination-Total-Count' => 3,
                 ],
             ],
-            // 'not found workflow' => [
-            //     'url' => '/workflow/10/stage',
-            //     'httpCode' => HttpCode::NOT_FOUND,
-            // ],
-            // 'filter by name' => [
-            //     'url' => '/workflow/1/stage',
-            //     'urlParams' => ['name' => 'Stage 2 - Wf 1'],
-            //     'httpCode' => HttpCode::OK,
-            //     'headers' => [
-            //         'X-Pagination-Total-Count' => 1,
-            //     ],
-            // ],
-            // 'filter by author' => [
-            //     'url' => '/workflow/1/stage',
-            //     'urlParams' => ['created_by' => 1],
-            //     'httpCode' => HttpCode::OK,
-            //     'headers' => [
-            //         'X-Pagination-Total-Count' => 3,
-            //     ],
-            // ],
+            'not found workflow' => [
+                'url' => '/workflow/10/stage',
+                'httpCode' => HttpCode::NOT_FOUND,
+            ],
+            'filter by name' => [
+                'url' => '/workflow/1/stage',
+                'urlParams' => ['name' => 'Stage 2 - Wf 1'],
+                'httpCode' => HttpCode::OK,
+                'headers' => [
+                    'X-Pagination-Total-Count' => 1,
+                ],
+            ],
+            'filter by author' => [
+                'url' => '/workflow/1/stage',
+                'urlParams' => ['created_by' => 1],
+                'httpCode' => HttpCode::OK,
+                'headers' => [
+                    'X-Pagination-Total-Count' => 3,
+                ],
+            ],
         ];
     }
 
@@ -92,9 +91,9 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
             'single record' => [
                 'url' => '/workflow/1/stage/1',
                 'httpCode' => HttpCode::OK,
-                // 'headers' => [
-                //     'X-Pagination-Total-Count' => 1,
-                // ],
+                'headers' => [
+                    'X-Pagination-Total-Count' => 1,
+                ],
             ],
             'not found stage record' => [
                 'url' => '/workflow/1/stage/10',
