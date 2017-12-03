@@ -200,6 +200,41 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
     /**
      * @param  ApiTester $I
      * @param  Example $example
+     * @dataprovider updateDataProvider
+     * @depends fixtures
+     * @before authToken
+     */
+    public function update(ApiTester $I, Example $example)
+    {
+        $I->wantTo('Update a Transition record.');
+        $this->internalUpdate($I, $example);
+    }
+
+    /**
+     * @return array[] data for test `update()`.
+     */
+    protected function updateDataProvider()
+    {
+        return [
+            'update transition' => [
+                'url' => '/workflow/1/stage/1/transition/2',
+                'data' => ['name' => 'update transition'],
+                'httpCode' => HttpCode::OK,
+            ],
+            'to short' => [
+                'url' => '/workflow/1/stage/1/transition/2',
+                'data' => ['name' => 'tr'],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+                'validationErrors' => [
+                    'name' => 'Transition Name should contain at least 6 characters.'
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param  ApiTester $I
+     * @param  Example $example
      * @dataprovider deleteDataProvider
      * @depends fixtures
      * @before authToken
