@@ -35,7 +35,7 @@ return [
     ],
     [
         'name' => 'Stage 1 - Wf 2',
-        'workflow_id' => 1,
+        'workflow_id' => 2,
         'position_x' => 0,
         'position_y' => 0,
         'created_by' => 1,
@@ -45,7 +45,7 @@ return [
     ],
     [
         'name' => 'Stage 2 - Wf 2',
-        'workflow_id' => 1,
+        'workflow_id' => 2,
         'position_x' => 1,
         'position_y' => 1,
         'created_by' => 1,
@@ -55,7 +55,7 @@ return [
     ],
     [
         'name' => 'Stage 3 - Wf 2',
-        'workflow_id' => 1,
+        'workflow_id' => 2,
         'position_x' => 2,
         'position_y' => 2,
         'created_by' => 1,
@@ -65,7 +65,7 @@ return [
     ],
     [
         'name' => 'Stage 4 - Wf 2',
-        'workflow_id' => 1,
+        'workflow_id' => 2,
         'position_x' => 2,
         'position_y' => 2,
         'created_by' => 1,
