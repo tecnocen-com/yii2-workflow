@@ -19,4 +19,9 @@ class TransitionFixture extends ActiveFixture
      * @inheritdoc
      */
     public $dataFile = __DIR__ . '/data/transition.php';
+
+    /**
+     * @inheritdoc
+     */
+    public $depends = ['app\fixtures\StageFixture'];
 }
