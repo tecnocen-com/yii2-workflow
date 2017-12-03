@@ -5,7 +5,7 @@ use Codeception\Util\HttpCode;
 use app\fixtures\OauthAccessTokensFixture;
 use app\fixtures\TransitionFixture;
 
-class StageCest extends \tecnocen\roa\test\AbstractResourceCest
+class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
 {
     protected function authToken(ApiTester $I)
     {
