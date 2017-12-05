@@ -19,4 +19,9 @@ class TransitionPermissionFixture extends ActiveFixture
      * @inheritdoc
      */
     public $dataFile = __DIR__ . '/data/transition_permission.php';
+
+    /**
+     * @inheritdoc
+     */
+    public $depends = ['app\fixtures\TransitionFixture'];
 }
