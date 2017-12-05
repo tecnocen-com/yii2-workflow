@@ -71,18 +71,17 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
             ],
             'rule workflow_id' => [
-                'url' => '/workflow/1/stage',
-                'data' => ['id' => 'wo'],
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'stage_id' => 'wo',
+                ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
             ],
             'rule created_by' => [
-                'url' => '/workflow/1/stage',
-                'data' => ['id' => 'wo'],
-                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
-            ],
-            'rule name' => [
-                'url' => '/workflow/1/stage',
-                'data' => ['id' => 1],
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'created_by' => 'wo',
+                ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
             ],
         ];
