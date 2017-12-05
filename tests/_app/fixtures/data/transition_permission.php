@@ -6,7 +6,7 @@ return [
     [
         'source_stage_id' => 1,
         'target_stage_id' => 2,
-        'permission' => 'admin',
+        'permission' => 'administrator',
         'created_by' => 1,
         'created_at' => $now,
         'updated_by' => 1,
