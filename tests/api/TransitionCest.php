@@ -293,6 +293,6 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     protected function getRoutePattern()
     {
-        return 'transition';
+        return 'workflow/<workflow_id:\d+>/stage/<stage_id:\d+>/transition';
     }
 }
