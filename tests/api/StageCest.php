@@ -70,13 +70,6 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
                     'X-Pagination-Total-Count' => 3,
                 ],
             ],
-            'rule workflow_id' => [
-                'urlParams' => [
-                    'workflow_id' => 1,
-                    'stage_id' => 'wo',
-                ],
-                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
-            ],
             'rule created_by' => [
                 'urlParams' => [
                     'workflow_id' => 1,
