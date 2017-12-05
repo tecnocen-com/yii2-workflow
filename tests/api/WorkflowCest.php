@@ -50,6 +50,14 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
                 'urlParams' => ['created_by' => 1],
                 'httpCode' => HttpCode::OK,
             ],
+            'rule created_by' => [
+                'data' => ['id' => 'wo'],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+            ],
+            'rule name' => [
+                'data' => ['id' => 1],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+            ],
         ];
     }
 
