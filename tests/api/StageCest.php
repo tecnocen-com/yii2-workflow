@@ -51,16 +51,20 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'filter by name' => [
-                'url' => '/workflow/1/stage',
-                'urlParams' => ['name' => 'Stage 2 - Wf 1'],
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'name' => 'Stage 2 - Wf 1',
+                ],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
                     'X-Pagination-Total-Count' => 1,
                 ],
             ],
             'filter by author' => [
-                'url' => '/workflow/1/stage',
-                'urlParams' => ['created_by' => 1],
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'created_by' => 1,
+                ],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
                     'X-Pagination-Total-Count' => 3,
@@ -243,6 +247,6 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     protected function getRoutePattern()
     {
-        return 'workflow';
+        return 'workflow/<workflow_id:\d+>/stage';
     }
 }
