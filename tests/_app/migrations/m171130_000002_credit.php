@@ -9,10 +9,10 @@ class m171130_000002_credit extends \tecnocen\migrate\CreateTableMigration
 
     public function columns()
     {
-         return [
-             'id' => $this->primaryKey(),
-             'workflow_id' => $this->normalKey(),
-         ];
+        return [
+            'id' => $this->primaryKey(),
+            'workflow_id' => $this->normalKey(),
+        ];
     }
 
     public function foreignKeys()

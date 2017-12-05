@@ -2,9 +2,9 @@
 
 namespace app\models;
 
-use tecnocen\oauth2server\models\OauthAccessTokens as AccessToken;
 use OAuth2\Storage\UserCredentialsInterface;
 use Yii;
+use tecnocen\oauth2server\models\OauthAccessTokens as AccessToken;
 use yii\web\IdentityInterface;
 
 class User extends \yii\db\ActiveRecord
@@ -74,7 +74,7 @@ class User extends \yii\db\ActiveRecord
             return false;
         }
 
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
 
         return $timestamp + $expire >= time();
@@ -175,7 +175,7 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getAccessTokens()
     {

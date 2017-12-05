@@ -20,7 +20,7 @@ class Stage extends \tecnocen\workflow\models\Stage
     protected $workflowClass = Workflow::class;
 
     /**
-    * @inheritdoc
+     * @inheritdoc
      */
     protected $transitionClass = Transition::class;
 

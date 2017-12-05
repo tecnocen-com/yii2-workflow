@@ -70,7 +70,7 @@ abstract class Worklog extends BaseActiveRecord
                 'filter' => function ($query) {
                     $query->andWhere([
                         'source_stage_id' => $this->process->currentStage->id
-                   ]);
+                    ]);
                 },
                 'message' => 'There is no transition for the current stage'
             ],

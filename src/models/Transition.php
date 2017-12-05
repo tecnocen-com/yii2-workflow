@@ -87,7 +87,7 @@ class Transition extends \tecnocen\rmdb\models\Entity
                 ['target_stage_id'],
                 'exist',
                 'targetAttribute' => [
-                     'target_stage_id' => 'id',
+                    'target_stage_id' => 'id',
                 ],
                 'targetClass' => Stage::class,
                 'skipOnError' => true,

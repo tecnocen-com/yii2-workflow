@@ -23,7 +23,7 @@ class ApiTester extends \Codeception\Actor implements RoaTester
     use _generated\ApiTesterActions;
     use RoaTesterTrait;
 
-   /**
-    * Define custom actions here
-    */
+    /**
+     * Define custom actions here
+     */
 }
