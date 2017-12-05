@@ -91,9 +91,6 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
             'single record' => [
                 'url' => '/workflow/1/stage/1',
                 'httpCode' => HttpCode::OK,
-                'headers' => [
-                    'X-Pagination-Total-Count' => 1,
-                ],
             ],
             'not found stage record' => [
                 'url' => '/workflow/1/stage/10',
