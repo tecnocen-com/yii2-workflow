@@ -4,6 +4,7 @@ namespace tecnocen\workflow\roa\models;
 
 use tecnocen\roa\behaviors\Slug;
 use yii\web\Linkable;
+use yii\web\NotFoundHttpException;
 
 /**
  * ROA contract to handle workflow records.
@@ -28,7 +29,16 @@ class Workflow extends \tecnocen\workflow\models\Workflow
             'slug' => [
                 'class' => Slug::class,
                 'resourceName' => 'workflow',
-            ]
+                'checkAccess' => function ($params) {
+                    if (isset($params['workflow_id'])
+                        && $this->id != $params['workflow_id']
+                    ) {
+                        throw new NotFoundHttpException(
+                            'Workflow not associated to element.'
+                        );
+                    }
+                },
+            ],
         ]);
     }
 

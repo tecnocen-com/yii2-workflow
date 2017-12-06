@@ -4,6 +4,7 @@ namespace tecnocen\workflow\roa\resources;
 
 use Yii;
 use tecnocen\workflow\roa\models\Transition;
+use tecnocen\workflow\roa\models\TransitionSearch;
 
 /**
  * Resource to handle transition records.
@@ -18,9 +19,19 @@ class TransitionResource extends \tecnocen\roa\controllers\OAuth2Resource
     public $modelClass = Transition::class;
 
     /**
+     * @inhertidoc
+     */
+    public $searchClass = TransitionSearch::class;
+
+    /**
      * @inheritdoc
      */
     public $idAttribute = 'target_stage_id';
+
+    /**
+     * @inheritdoc
+     */
+    public $filterParams = ['source_stage_id'];
 
     /**
      * @inheritdoc
@@ -31,15 +42,4 @@ class TransitionResource extends \tecnocen\roa\controllers\OAuth2Resource
      * @inheritdoc
      */
     public $updateScenario = Transition::SCENARIO_UPDATE;
-
-    /**
-     * @inheritdoc
-     */
-    public function baseQuery()
-    {
-        return parent::baseQuery()->andWhere([
-            'source_stage_id' => Yii::$app->request
-                ->getQueryParam('source_stage_id')
-        ]);
-    }
 }
