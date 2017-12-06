@@ -59,8 +59,12 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'filter by name' => [
-                'url' => '/workflow/1/stage/1/transition/2/permission',
-                'data' => ['permission' => 'admin'],
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'stage_id' => 1,
+                    'target_id' => 2,
+                    'permission' => 'administrator'
+                ],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
                     'X-Pagination-Total-Count' => 1,
