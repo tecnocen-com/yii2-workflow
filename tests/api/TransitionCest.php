@@ -55,8 +55,11 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'filter by name' => [
-                'url' => '/workflow/2/stage/5/transition',
-                'urlParams' => ['name' => 'Stage 2 to Stage 3'],
+                'urlParams' => [
+                    'workflow_id' => 2,
+                    'stage_id' => 5,
+                    'name' => 'Stage 2 to Stage 3'
+                ],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
                     'X-Pagination-Total-Count' => 1,
