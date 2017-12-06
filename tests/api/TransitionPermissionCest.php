@@ -282,7 +282,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
         return [
             'source_stage_id' => 'integer:>0',
             'target_stage_id' => 'integer:>0',
-            'name' => 'string',
+            'permission' => 'string',
             'created_by' => 'integer:>0',
             'created_at' => 'string',
             'updated_by' => 'integer:>0',
