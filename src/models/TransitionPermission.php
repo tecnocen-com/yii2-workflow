@@ -13,7 +13,7 @@ namespace tecnocen\workflow\models;
  * @property Stage $sourceStage
  * @property Stage $targetStage
  */
-class TransitionPermission extends \tecnocen\rmdb\models\Pivot
+class TransitionPermission extends \tecnocen\rmdb\models\Entity
 {
     const SCENARIO_UPDATE = 'update';
     const SCENARIO_CREATE = 'create';

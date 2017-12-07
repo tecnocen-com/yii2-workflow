@@ -11,7 +11,7 @@ namespace tecnocen\workflow\models;
  *
  * @property ActiveRecord $process
  */
-abstract class Worklog
+abstract class Worklog extends \yii\db\ActiveRecord
 {
     static $tableSuffix = '_worklog';
 

@@ -4,6 +4,7 @@ namespace tecnocen\workflow\roa\resources;
 
 use Yii;
 use tecnocen\workflow\roa\models\TransitionPermission;
+use tecnocen\workflow\roa\models\TransitionPermissionSearch;
 
 /**
  * Resource to assign permissions to a transition.
@@ -16,6 +17,11 @@ class PermissionResource extends \tecnocen\roa\controllers\OAuth2Resource
      * @inheritdoc
      */
     public $modelClass = TransitionPermission::class;
+
+    /**
+     * @inheritdoc
+     */
+    public $searchClass = TransitionPermissionSearch::class;
 
     /**
      * @inheritdoc
@@ -33,14 +39,7 @@ class PermissionResource extends \tecnocen\roa\controllers\OAuth2Resource
     public $updateScenario = TransitionPermission::SCENARIO_UPDATE;
 
     /**
-     * @return Transition
+     * @inheritdoc
      */
-    public function baseQuery()
-    {
-        $req = Yii::$app->getRequest();
-        return parent::baseQuery()->andWhere([
-            'source_stage_id' => $req->getQueryParam('source_stage_id'),
-            'target_stage_id' => $req->getQueryParam('target_stage_id'),
-        ]);
-    }
+    public $filterParams = ['source_stage_id', 'target_stage_id'];
 }
