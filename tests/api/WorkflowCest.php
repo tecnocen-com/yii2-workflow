@@ -107,7 +107,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array<string,array<string,array<string,string|integer>>> data for test `create()`.
+     * @return array<string,array<string,array<string,string>>> data for test `create()`.
      */
     protected function createDataProvider()
     {
