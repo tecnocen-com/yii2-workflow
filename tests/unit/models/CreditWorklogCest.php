@@ -8,7 +8,7 @@ use app\models\CreditWorklog;
  *
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
-class CreditWorklogCest 
+class CreditWorklogCest
 {
 
     public function fixtures(ApiTester $I)
