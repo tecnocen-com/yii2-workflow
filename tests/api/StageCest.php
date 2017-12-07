@@ -5,6 +5,11 @@ use Codeception\Util\HttpCode;
 use app\fixtures\OauthAccessTokensFixture;
 use app\fixtures\StageFixture;
 
+/**
+ * Cest to stage resource.
+ *
+ * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
+ */
 class StageCest extends \tecnocen\roa\test\AbstractResourceCest
 {
     protected function authToken(ApiTester $I)
@@ -34,7 +39,7 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] for test `index()`.
+     * @return array<string,array> for test `index()`.
      */
     protected function indexDataProvider()
     {
@@ -94,7 +99,7 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] data for test `view()`.
+     * @return array<string,array<string,string>> data for test `view()`.
      */
     protected function viewDataProvider()
     {

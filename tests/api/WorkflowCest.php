@@ -5,6 +5,11 @@ use Codeception\Util\HttpCode;
 use app\fixtures\OauthAccessTokensFixture;
 use app\fixtures\WorkflowFixture;
 
+/**
+ * Cest to workflow resource.
+ *
+ * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
+ */
 class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
 {
     protected function authToken(ApiTester $I)
@@ -34,7 +39,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] for test `index()`.
+     * @return array<string,array> for test `index()`.
      */
     protected function indexDataProvider()
     {
@@ -43,20 +48,18 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
                 'httpCode' => HttpCode::OK,
             ],
             'filter by name' => [
-                'urlParams' => ['name' => 'wo'],
+                'urlParams' => ['name' => 'workflow 2'],
                 'httpCode' => HttpCode::OK,
+                'headers' => [
+                    'X-Pagination-Total-Count' => 1,
+                ],
             ],
             'filter by author' => [
-                'urlParams' => ['created_by' => 1],
+                'urlParams' => ['created_by' => 5],
                 'httpCode' => HttpCode::OK,
-            ],
-            'rule created_by' => [
-                'data' => ['id' => 'wo'],
-                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
-            ],
-            'rule name' => [
-                'data' => ['id' => 1],
-                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+                'headers' => [
+                    'X-Pagination-Total-Count' => 0,
+                ],               
             ],
         ];
     }
@@ -104,7 +107,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] data for test `create()`.
+     * @return array<string,array<string,array<string,string>>> data for test `create()`.
      */
     protected function createDataProvider()
     {

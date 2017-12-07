@@ -5,6 +5,11 @@ use Codeception\Util\HttpCode;
 use app\fixtures\OauthAccessTokensFixture;
 use app\fixtures\TransitionPermissionFixture;
 
+/**
+ * Cest to transition_permission resource.
+ *
+ * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
+ */
 class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
 {
     protected function authToken(ApiTester $I)
@@ -93,8 +98,8 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'not allowed' => [
-                'url' => '/workflow/1/stage/1/transition/2/permission/1',
-                'httpCode' => HttpCode::METHOD_NOT_ALLOWED,
+                'url' => '/workflow/1/stage/1/transition/2/permission/administrator',
+                'httpCode' => HttpCode::OK,
             ]
         ];
     }
@@ -121,56 +126,31 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
             'create transition permission' => [
                 'url' => '/workflow/1/stage/1/transition/2/permission',
                 'data' => [
-                    'source_stage_id' => 1,
-                    'target_stage_id' => 2,
                     'permission' => 'credit'
                 ],
                 'httpCode' => HttpCode::CREATED,
             ],
             'required data' => [
                 'url' => '/workflow/1/stage/1/transition/2/permission',
-                'data' => [
-                    'source_stage_id' => 2,
-                    'target_stage_id' => 3,
-                ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
                     'permission' => 'Permission cannot be blank.'
                 ],
             ],
-            'required data 2' => [
-                'url' => '/workflow/1/stage/1/transition/2/permission',
-                'data' => [
-                    'source_stage_id' => 1,
-                    'permission' => '123123123123'
-                ],
-                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
-                'validationErrors' => [
-                    'permission' => 'Permission cannot be blank.',
-                    'target_stage_id' => 'The stages are not associated to the same workflow.'
-                ],
-            ],
             'workflow not found' => [
                 'url' => '/workflow/10/stage/1/transition/2/permission',
-                'data' => [
-                    'source_stage_id' => 1,
-                    'target_stage_id' => 4
-                ],
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'stage not found' => [
                 'url' => '/workflow/1/stage/19/transition/2/permission',
                 'data' => [
-                    'source_stage_id' => 1,
-                    'target_stage_id' => 4
+                    'permission' => 'administrator',
                 ],
                 'httpCode' => HttpCode::NOT_FOUND,
             ],            
             'to short' => [
                 'url' => '/workflow/1/stage/1/transition/2/permission',
                 'data' => [
-                    'source_stage_id' => 1,
-                    'target_stage_id' => 2,
                     'permission' => 'ad'
                 ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
@@ -181,8 +161,6 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
             'unique transition permission' => [
                 'url' => '/workflow/1/stage/1/transition/2/permission',
                 'data' => [
-                    'source_stage_id' => 1,
-                    'target_stage_id' => 2,
                     'permission' => 'administrator'
                 ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
@@ -239,24 +217,39 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
     protected function deleteDataProvider()
     {
         return [
-            'workflow not found' => [
-                'url' => '/workflow/10/stage/1/transition/2/permission',
+            'delete permission administrator' => [
+                'url' => '/workflow/1/stage/1/transition/2/permission/administrator',
+                'httpCode' => HttpCode::NO_CONTENT,
+            ],
+            'cannot be blank' => [
+                'url' => '/workflow/1/stage/1/transition/2/permission',
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+                'validationErrors' => [
+                    'permission' => 'Permission cannot be blank.',
+                ],
+            ],
+            'transition not found' => [
+                'url' => '/workflow/1/stage/1/transition/10/permission',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'stage not found' => [
                 'url' => '/workflow/1/stage/10/transition/2/permission',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
-            'transition not found' => [
-                'url' => '/workflow/1/stage/1/transition/10/permission',
+            'workflow not found' => [
+                'url' => '/workflow/10/stage/1/transition/2/permission',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
-            'delete permission admin' => [
-                'url' => '/workflow/1/stage/1/transition/2/permission/administrator',
-                'httpCode' => HttpCode::NO_CONTENT,
+            'transition with permission not found' => [
+                'url' => '/workflow/1/stage/1/transition/10/permission/administrator',
+                'httpCode' => HttpCode::NOT_FOUND,
             ],
-            'not found' => [
-                'url' => '/workflow/1/stage/1/transition/2/permission/administrator',
+            'stage with permission not found' => [
+                'url' => '/workflow/1/stage/10/transition/2/permission/administrator',
+                'httpCode' => HttpCode::NOT_FOUND,
+            ],
+            'workflow with permission not found' => [
+                'url' => '/workflow/10/stage/1/transition/2/permission/administrator',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
         ];
@@ -271,10 +264,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
             'source_stage_id' => 'integer:>0',
             'target_stage_id' => 'integer:>0',
             'permission' => 'string',
-            'created_by' => 'integer:>0',
-            'created_at' => 'string',
-            'updated_by' => 'integer:>0',
-            'updated_at' => 'string',
+
         ];
     }
 

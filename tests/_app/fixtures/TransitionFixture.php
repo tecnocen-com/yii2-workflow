@@ -7,6 +7,8 @@ use yii\test\ActiveFixture;
 
 /**
  * Fixture to load default transition.
+ *
+ * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
 class TransitionFixture extends ActiveFixture
 {

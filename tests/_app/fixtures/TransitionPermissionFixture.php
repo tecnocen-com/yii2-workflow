@@ -7,6 +7,8 @@ use yii\test\ActiveFixture;
 
 /**
  * Fixture to load default transition_permission.
+ *
+ * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
 class TransitionPermissionFixture extends ActiveFixture
 {

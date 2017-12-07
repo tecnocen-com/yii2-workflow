@@ -7,6 +7,8 @@ use yii\test\ActiveFixture;
 
 /**
  * Fixture to load default workflow.
+ *
+ * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
 class WorkflowFixture extends ActiveFixture
 {
