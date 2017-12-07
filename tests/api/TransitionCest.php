@@ -219,10 +219,18 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
     protected function updateDataProvider()
     {
         return [
-            'method not allowed' => [
+            'update transition' => [
                 'url' => '/workflow/1/stage/1/transition/2',
                 'data' => ['name' => 'update transition'],
-                'httpCode' => HttpCode::METHOD_NOT_ALLOWED,
+                'httpCode' => HttpCode::OK,
+            ],
+            'to short' => [
+                'url' => '/workflow/1/stage/1/transition/2',
+                'data' => ['name' => 'tr'],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+                'validationErrors' => [
+                    'name' => 'Transition Name should contain at least 6 characters.'
+                ],
             ],
         ];
     }

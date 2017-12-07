@@ -212,26 +212,10 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
     protected function updateDataProvider()
     {
         return [
-            'update transition' => [
+            'method not allowed' => [
                 'url' => '/workflow/1/stage/1/transition/2/permission',
                 'data' => ['permission' => 'update transition'],
-                'httpCode' => HttpCode::OK,
-            ],
-            'unique' => [
-                'url' => '/workflow/1/stage/1/transition/2/permission',
-                'data' => ['permission' => 'administrator'],
-                'httpCode' => HttpCode::OK,
-                'validationErrors' => [
-                    'permission' => 'Permission already set for the transition.'
-                ],
-            ],
-            'to short' => [
-                'url' => '/workflow/1/stage/1/transition/2/permission',
-                'data' => ['permission' => 'tr'],
-                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
-                'validationErrors' => [
-                    'permission' => 'Permission should contain at least 3 characters.'
-                ],
+                'httpCode' => HttpCode::METHOD_NOT_ALLOWED,
             ],
         ];
     }
