@@ -133,7 +133,7 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] data for test `create()`.
+     * @return array<string,array<string,string|array<string,string>>> data for test `create()`.
      */
     protected function createDataProvider()
     {

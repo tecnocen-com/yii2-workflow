@@ -44,7 +44,7 @@ class TransitionPermissionSearch extends TransitionPermission
         if (!$this->validate()) {
             return null;
         }
-	if (null === $this->transition
+        if (null === $this->transition
             || $this->sourceStage->workflow_id != $params['workflow_id']
         ) {
             throw new NotFoundHttpException('Unexistant permission path.');

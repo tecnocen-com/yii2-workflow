@@ -3,7 +3,11 @@
 use app\fixtures\TransitionFixture;
 use app\models\CreditWorklog;
 
-
+/**
+ * Cest to credit worklog model.
+ *
+ * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
+ */
 class CreditWorklogCest 
 {
 
@@ -30,7 +34,7 @@ class CreditWorklogCest
     {
         $creditWorklog = new CreditWorklog();
         $creditWorklog->process_id = 1;
-        $creditWorklog->stage_id= 2;
+        $creditWorklog->stage_id = 2;
         $creditWorklog->save();
         $this->tester->seeInDatabase('credit_worklog', 
             ['process_id' => 1, 'stage_id' => 2]);

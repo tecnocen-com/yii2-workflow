@@ -39,7 +39,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] for test `index()`.
+     * @return array<string,array> for test `index()`.
      */
     protected function indexDataProvider()
     {
@@ -92,7 +92,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] data for test `view()`.
+     * @return array<string,array<string,string>> data for test `view()`.
      */
     protected function viewDataProvider()
     {
@@ -118,7 +118,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] data for test `create()`.
+     * @return array<string,array> data for test `create()`.
      */
     protected function createDataProvider()
     {
@@ -185,7 +185,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] data for test `update()`.
+     * @return array<string,array<string,string|array<string,string>>> data for test `update()`.
      */
     protected function updateDataProvider()
     {
@@ -212,7 +212,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] data for test `delete()`.
+     * @return array<string,array<string,string|array<string,string>>> data for test `delete()`.
      */
     protected function deleteDataProvider()
     {
