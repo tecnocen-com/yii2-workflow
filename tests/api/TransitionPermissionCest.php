@@ -175,7 +175,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
-                    'permission' => 'Permission should contain at least 3 characters.'
+                    'permission' => 'Permission should contain at least 6 characters.'
                 ],
             ],
             'unique transition permission' => [
