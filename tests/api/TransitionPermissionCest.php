@@ -241,23 +241,23 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
         return [
             'workflow not found' => [
                 'url' => '/workflow/10/stage/1/transition/2/permission',
-                'httpCode' => HttpCode::METHOD_NOT_ALLOWED,
+                'httpCode' => HttpCode::NOT_FOUND,
             ],
             'stage not found' => [
                 'url' => '/workflow/1/stage/10/transition/2/permission',
-                'httpCode' => HttpCode::METHOD_NOT_ALLOWED,
+                'httpCode' => HttpCode::NOT_FOUND,
             ],
             'transition not found' => [
                 'url' => '/workflow/1/stage/1/transition/10/permission',
-                'httpCode' => HttpCode::METHOD_NOT_ALLOWED,
+                'httpCode' => HttpCode::NOT_FOUND,
             ],
-            'delete stage 1' => [
-                'url' => '/workflow/1/stage/1/transition/2/permission',
-                'httpCode' => HttpCode::METHOD_NOT_ALLOWED,
+            'delete permission admin' => [
+                'url' => '/workflow/1/stage/1/transition/2/permission/administrator',
+                'httpCode' => HttpCode::NO_CONTENT,
             ],
             'not found' => [
-                'url' => '/workflow/1/stage/1/transition/2/permission',
-                'httpCode' => HttpCode::METHOD_NOT_ALLOWED,
+                'url' => '/workflow/1/stage/1/transition/2/permission/administrator',
+                'httpCode' => HttpCode::NOT_FOUND,
             ],
         ];
     }
