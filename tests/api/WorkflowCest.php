@@ -55,10 +55,10 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
             ],
             'filter by author' => [
-                'urlParams' => ['created_by' => 5],
+                'urlParams' => ['created_by' => 1],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
-                    'X-Pagination-Total-Count' => 0,
+                    'X-Pagination-Total-Count' => 2,
                 ],               
             ],
         ];
