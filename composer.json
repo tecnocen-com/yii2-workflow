@@ -41,10 +41,10 @@
             "@php tests/_app/yii.php migrate -p=@app/migrations --interactive=0"
         ],
         "run-tests": [
-            "@php vendor/bin/codecept run --steps"
+            "@php vendor/bin/codecept run --steps api"
         ],
         "run-coverage": [
-            "@php vendor/bin/codecept run --steps --coverage --coverage-xml"
+            "@php vendor/bin/codecept run --steps api --coverage --coverage-xml"
         ]
     },
     "autoload": {
