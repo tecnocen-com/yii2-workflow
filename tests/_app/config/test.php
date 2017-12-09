@@ -1,5 +1,6 @@
 <?php
 
+use app\api\modules\Version as V1;
 use tecnocen\workflow\roa\modules\Version as WorkflowVersion;
 use tecnocen\roa\controllers\ProfileResource;
 use tecnocen\roa\hal\JsonResponseFormatter;
@@ -25,7 +26,7 @@ return [
                     'class' => WorkflowVersion::class,
                 ],
                 'v1' => [
-                    'class' => CreditResource::class,
+                    'class' => V1::class,
                 ],
             ],
         ],
