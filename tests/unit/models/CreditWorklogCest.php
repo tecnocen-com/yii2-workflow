@@ -3,7 +3,7 @@
 namespace models;
 
 use UnitTester;
-use app\fixtures\TransitionFixture;
+use app\fixtures\CreditWorklogFixture;
 use app\models\CreditWorklog;
 
 /**
@@ -17,7 +17,7 @@ class CreditWorklogCest
     public function fixtures(UnitTester $I)
     {
         $I->haveFixtures([
-            'transition' => TransitionFixture::class,
+            'credit_worklog' => CreditWorklogFixture::class,
         ]);
     }
 
@@ -25,10 +25,10 @@ class CreditWorklogCest
     {
         $creditWorklog = new CreditWorklog();
 
-        $creditWorklog->process_id = 1;
+        $creditWorklog->process_id = 4;
         $I->assertTrue($creditWorklog->validate(['process_id']));
 
-        $creditWorklog->stage_id = 2;
+        $creditWorklog->stage_id = 5;
         $I->assertTrue($creditWorklog->validate(['stage_id']));
 
     }
