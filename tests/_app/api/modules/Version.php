@@ -7,6 +7,7 @@ use app\api\resources\CreditResource;
 class Version extends \tecnocen\roa\modules\ApiVersion
 {
     const CREDIT_ROUTE = 'credit';
+    
     /**
      * @inheritdoc
      */
