@@ -1,5 +1,8 @@
 <?php
 
+namespace models;
+
+use UnitTester;
 use app\fixtures\TransitionFixture;
 use app\models\CreditWorklog;
 
@@ -11,32 +14,35 @@ use app\models\CreditWorklog;
 class CreditWorklogCest
 {
 
-    public function fixtures(ApiTester $I)
+    public function fixtures(UnitTester $I)
     {
         $I->haveFixtures([
             'transition' => TransitionFixture::class,
         ]);
     }
 
-    public function credit()
+    public function validate(UnitTester $I)
     {
-        $creditWorklog = CreditWorklog::create();
+        $creditWorklog = new CreditWorklog();
 
         $creditWorklog->process_id = 1;
-        $this->assertTrue($creditWorklog->validate(['process_id']));
+        $I->assertTrue($creditWorklog->validate(['process_id']));
 
         $creditWorklog->stage_id = 2;
-        $this->assertTrue($creditWorklog->validate(['stage_id']));
+        $I->assertTrue($creditWorklog->validate(['stage_id']));
 
     }
 
-    public function save()
+    public function save(UnitTester $I)
     {
         $creditWorklog = new CreditWorklog();
         $creditWorklog->process_id = 1;
         $creditWorklog->stage_id   = 2;
-        $creditWorklog->save();
-        $this->tester->seeInDatabase('credit_worklog', 
-            ['process_id' => 1, 'stage_id' => 2]);
+	$creditWorklog->save();
+	$I->assertEmpty($creditWorklog->getFirstErrors());
+	$I->seeRecord(CreditWorkLog::class, [
+            'process_id' => 1,
+	    'stage_id' => 2,
+        ]);
     }
 }

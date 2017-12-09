@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $credit
  */
-class Credit extends ActiveRecord
+class Credit extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
