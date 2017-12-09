@@ -32,7 +32,7 @@ abstract class WorkLog extends \yii\db\ActiveRecord
             [
                 ['process_id'],
                 'exist',
-		        'targetAttribute' => ['process_id' => 'id'],
+                'targetAttribute' => ['process_id' => 'id'],
                 'targetClass' => static::processClass(),
             ],
             [
