@@ -1,6 +1,6 @@
 <?php
 
-class m171130_000002_credit extends \tecnocen\migrate\CreateTableMigration
+class m171130_000002_credit extends tecnocen\rmdb\migrations\CreatePersistentEntity
 {
     public function getTableName()
     {
@@ -18,7 +18,7 @@ class m171130_000002_credit extends \tecnocen\migrate\CreateTableMigration
     public function foreignKeys()
     {
         return [
-            'workflow_id' => ['table' => 'tecnocen_workflow']
+            'workflow_id' => ['table' => 'workflow']
         ];
     }
 }
