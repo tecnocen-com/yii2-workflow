@@ -3,7 +3,7 @@
 namespace tecnocen\workflow\models;
 
 /**
- * Model class for table `{{%tecnocen_workflow}}`
+ * Model class for table `{{%workflow}}`
  *
  * @property integer $id
  * @property string $name
@@ -23,7 +23,7 @@ class Workflow extends \tecnocen\rmdb\models\PersistentEntity
      */
     public static function tableName()
     {
-        return '{{%tecnocen_workflow}}';
+        return '{{%workflow}}';
     }
 
     /**

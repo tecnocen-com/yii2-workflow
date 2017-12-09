@@ -3,7 +3,7 @@
 namespace tecnocen\workflow\models;
 
 /**
- * Model class for table `{{%tecnocen_workflow_transition}}`
+ * Model class for table `{{%workflow_transition}}`
  *
  * @property integer $source_stage_id
  * @property integer $target_stage_id
@@ -35,7 +35,7 @@ class TransitionPermission extends \tecnocen\rmdb\models\Entity
      */
     public static function tableName()
     {
-        return '{{%tecnocen_workflow_transition_permission}}';
+        return '{{%workflow_transition_permission}}';
     }
 
     /**

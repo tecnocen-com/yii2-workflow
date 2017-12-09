@@ -2,7 +2,7 @@
 
 namespace tecnocen\workflow\models;
 /**
- * Model class for table `{{%tecnocen_workflow_stage}}`
+ * Model class for table `{{%workflow_stage}}`
  *
  * @property integer $id
  * @property integer $workflow_id
@@ -33,7 +33,7 @@ class Stage extends \tecnocen\rmdb\models\PersistentEntity
      */
     public static function tableName()
     {
-        return '{{%tecnocen_workflow_stage}}';
+        return '{{%workflow_stage}}';
     }
 
     /**

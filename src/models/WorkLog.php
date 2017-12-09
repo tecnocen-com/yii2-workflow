@@ -3,7 +3,7 @@
 namespace tecnocen\workflow\models;
 
 /**
- * Model class for table `{{%tecnocen_workflow}}`
+ * Model class for table `{{%workflow}}`
  *
  * @property integer $source_stage_id
  * @property integer $target_stage_id
