@@ -42,7 +42,7 @@ class Credit extends \yii\db\ActiveRecord
     }
 
     /**
-     * @return ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getWorkflow()
     {

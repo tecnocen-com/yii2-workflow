@@ -31,20 +31,20 @@ abstract class WorkLog extends \yii\db\ActiveRecord
             [['process_id', 'stage_id'], 'integer'],
             [
                 ['process_id'],
-		'exist',
-		'targetAttribute' => ['process_id' => 'id'],
+                'exist',
+		        'targetAttribute' => ['process_id' => 'id'],
                 'targetClass' => static::processClass(),
             ],
             [
                 ['stage_id'],
                 'exist',
-		'targetAttribute' => ['stage_id' => 'id'],
+                'targetAttribute' => ['stage_id' => 'id'],
                 'targetClass' => Stage::class,
             ],
             [
                 ['stage_id'],
                 'exist',
-		'targetAttribute' => ['stage_id' => 'id'],
+                'targetAttribute' => ['stage_id' => 'id'],
                 'targetClass' => Stage::class,
                 'when' => function () {
                     return !$this->hasErrors('process_id')

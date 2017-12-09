@@ -276,7 +276,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
             'workflow not found' => [
                 'url' => '/w1/workflow/10/stage/1/transition/2/permission/admin',
                 'httpCode' => HttpCode::NOT_FOUND,
-	    ],
+	        ],
         ];
     }
 

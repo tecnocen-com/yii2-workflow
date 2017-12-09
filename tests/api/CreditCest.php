@@ -2,8 +2,8 @@
 
 use Codeception\Example;
 use Codeception\Util\HttpCode;
-use app\fixtures\OauthAccessTokensFixture;
 use app\fixtures\CreditFixture;
+use app\fixtures\OauthAccessTokensFixture;
 
 /**
  * Cest to stage resource.
