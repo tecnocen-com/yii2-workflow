@@ -93,11 +93,11 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'single record' => [
-                'url' => '/credit/1',
+                'url' => '/v1/credit/1',
                 'httpCode' => HttpCode::OK,
             ],
             'not found credit record' => [
-                'url' => '/credit/8',
+                'url' => '/v1/credit/8',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
         ];
@@ -122,20 +122,22 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
     protected function createDataProvider()
     {
         return [
-            'create credit 8' => [
-                'url' => '/credit',
-                'data' => [
+            'create credit 1' => [
+                'urlParams' => [
                     'workflow_id' => 1,
                 ],
                 'httpCode' => HttpCode::CREATED,
             ],
             'not found' => [
-                'url' => '/credit',
-                'data' => ['workflow_id' => 123],
+                'urlParams' => [
+                    'workflow_id' => 123,
+                ],
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'not blank' => [
-                'url' => '/credit',
+                'urlParams' => [
+                    'workflow_id' => '',
+                ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
                     'workflow_id' => 'Credit workflow_id cannot be blank.'
@@ -222,7 +224,6 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'id' => 'integer:>0',
-            'name' => 'string',
         ];
     }
 
