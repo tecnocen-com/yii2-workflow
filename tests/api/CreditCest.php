@@ -117,7 +117,7 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array<string,array<string,string|array<string,string>>> data for test `create()`.
+     * @return array<string,array> data for test `create()`.
      */
     protected function createDataProvider()
     {
@@ -163,7 +163,7 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
     }
 
     /**
-     * @return array[] data for test `update()`.
+     * @return array<string,array> data for test `update()`.
      */
     protected function updateDataProvider()
     {
