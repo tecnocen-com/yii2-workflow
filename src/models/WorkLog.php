@@ -11,21 +11,14 @@ namespace tecnocen\workflow\models;
  *
  * @property ActiveRecord $process
  */
-abstract class Worklog extends \yii\db\ActiveRecord
+abstract class WorkLog extends \yii\db\ActiveRecord
 {
-    static $tableSuffix = '_worklog';
-
     /**
      * @return string class name for the process this worklog is attached to.
      */
     public static function processClass()
     {
         return '';
-    }
-
-    public static function tableName()
-    {
-        return static::processClass()::tableName() . static::$tableSuffix;
     }
 
     /**
@@ -38,17 +31,20 @@ abstract class Worklog extends \yii\db\ActiveRecord
             [['process_id', 'stage_id'], 'integer'],
             [
                 ['process_id'],
-                'exist',
+		'exist',
+		'targetAttribute' => ['process_id' => 'id'],
                 'targetClass' => static::processClass(),
             ],
             [
                 ['stage_id'],
                 'exist',
+		'targetAttribute' => ['stage_id' => 'id'],
                 'targetClass' => Stage::class,
             ],
             [
                 ['stage_id'],
                 'exist',
+		'targetAttribute' => ['stage_id' => 'id'],
                 'targetClass' => Stage::class,
                 'when' => function () {
                     return !$this->hasErrors('process_id')
