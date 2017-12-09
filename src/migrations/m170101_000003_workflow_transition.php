@@ -7,7 +7,7 @@ class m170101_000003_workflow_transition extends tecnocen\rmdb\migrations\Create
      */
     public function getTableName()
     {
-        return 'tecnocen_workflow_transition';
+        return 'workflow_transition';
     }
 
     /**
@@ -28,8 +28,8 @@ class m170101_000003_workflow_transition extends tecnocen\rmdb\migrations\Create
     public function foreignKeys()
     {
         return [
-            'source_stage_id' => 'tecnocen_workflow_stage',
-            'target_stage_id' => 'tecnocen_workflow_stage',
+            'source_stage_id' => 'workflow_stage',
+            'target_stage_id' => 'workflow_stage',
         ];
     }
 

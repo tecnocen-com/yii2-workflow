@@ -7,7 +7,7 @@ class m170101_000001_workflow extends tecnocen\rmdb\migrations\CreatePersistentE
      */
     public function getTableName()
     {
-        return 'tecnocen_workflow';
+        return 'workflow';
     }
 
     /**

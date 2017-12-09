@@ -8,7 +8,7 @@ class m170101_000004_workflow_transition_permission
      */
     public function getTableName()
     {
-        return 'tecnocen_workflow_transition_permission';
+        return 'workflow_transition_permission';
     }
 
     /**
@@ -30,7 +30,7 @@ class m170101_000004_workflow_transition_permission
     {
         return [
             'transition' => [
-                'table' => 'tecnocen_workflow_transition',
+                'table' => 'workflow_transition',
                 'columns' => [
                     'source_stage_id' => 'source_stage_id',
                     'target_stage_id' => 'target_stage_id',

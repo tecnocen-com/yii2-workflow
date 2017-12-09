@@ -46,7 +46,7 @@ abstract class WorkLog extends \tecnocen\rmdb\migrations\CreatePivot
     public function foreignKeys()
     {
         return [
-            'stage_id' => 'tecnocen_workflow_stage',
+            'stage_id' => 'workflow_stage',
             'process_id' => $this->getProcessTableName(),
         ];
     }

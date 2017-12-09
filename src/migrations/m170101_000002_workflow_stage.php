@@ -7,7 +7,7 @@ class m170101_000002_workflow_stage extends tecnocen\rmdb\migrations\CreatePersi
      */
     public function getTableName()
     {
-        return 'tecnocen_workflow_stage';
+        return 'workflow_stage';
     }
 
     /**
@@ -30,7 +30,7 @@ class m170101_000002_workflow_stage extends tecnocen\rmdb\migrations\CreatePersi
      */
     public function foreignKeys()
     {
-        return ['workflow_id' => 'tecnocen_workflow'];
+        return ['workflow_id' => 'workflow'];
     }
 
     /**
