@@ -45,18 +45,27 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'list' => [
-                'url' => '/workflow/2/stage/5/transition',
+                'urlParams' => [
+                    'workflow_id' => 2,
+                    'stage_id' => 5
+                ],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
                     'X-Pagination-Total-Count' => 2,
                 ],
             ],
             'not found workflow' => [
-                'url' => '/workflow/1/stage/5/transition',
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'stage_id' => 5
+                ],
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'not found stage' => [
-                'url' => '/workflow/2/stage/10/transition',
+                'urlParams' => [
+                    'workflow_id' => 2,
+                    'stage_id' => 10
+                ],
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'filter by name' => [
@@ -93,19 +102,19 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'single record' => [
-                'url' => '/workflow/1/stage/1/transition/2',
+                'url' => '/w1/workflow/1/stage/1/transition/2',
                 'httpCode' => HttpCode::OK,
             ],
             'transition not found' => [
-                'url' => '/workflow/1/stage/2/transition/2',
+                'url' => '/w1/workflow/1/stage/2/transition/2',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'stage not found' => [
-                'url' => '/workflow/1/stage/10/transition/2',
+                'url' => '/w1/workflow/1/stage/10/transition/2',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'workflow not found' => [
-                'url' => '/workflow/10/stage/1/transition/2',
+                'url' => '/w1/workflow/10/stage/1/transition/2',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
         ];
@@ -131,7 +140,10 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'create transition' => [
-                'url' => '/workflow/1/stage/1/transition',
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'stage_id' => 1
+                ],
                 'data' => [
                     'source_stage_id' => 1,
                     'target_stage_id' => 3,
@@ -140,7 +152,10 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                 'httpCode' => HttpCode::CREATED,
             ],
             'required data' => [
-                'url' => '/workflow/1/stage/1/transition',
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'stage_id' => 1
+                ],
                 'data' => [
                     'source_stage_id' => 2,
                     'target_stage_id' => 3,
@@ -151,7 +166,10 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
             ],
             'required data 2' => [
-                'url' => '/workflow/1/stage/1/transition',
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'stage_id' => 1
+                ],
                 'data' => [
                     'source_stage_id' => 1,
                     'target_stage_id' => 4
@@ -163,7 +181,10 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
             ],
             'workflow not found' => [
-                'url' => '/workflow/10/stage/1/transition',
+                'urlParams' => [
+                    'workflow_id' => 10,
+                    'stage_id' => 1
+                ],
                 'data' => [
                     'source_stage_id' => 1,
                     'target_stage_id' => 4
@@ -171,7 +192,10 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'stage not found' => [
-                'url' => '/workflow/1/stage/19/transition',
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'stage_id' => 19
+                ],
                 'data' => [
                     'source_stage_id' => 1,
                     'target_stage_id' => 4
@@ -179,7 +203,10 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                 'httpCode' => HttpCode::NOT_FOUND,
             ],            
             'unique source target' => [
-                'url' => '/workflow/1/stage/1/transition',
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'stage_id' => 1
+                ],
                 'data' => [
                     'source_stage_id' => 1,
                     'target_stage_id' => 2,
@@ -191,7 +218,10 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
             ],
             'unique source name' => [
-                'url' => '/workflow/1/stage/1/transition',
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'stage_id' => 1
+                ],
                 'data' => [
                     'source_stage_id' => 1,
                     'target_stage_id' => 3,
@@ -225,12 +255,12 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'update transition' => [
-                'url' => '/workflow/1/stage/1/transition/2',
+                'url' => '/w1/workflow/1/stage/1/transition/2',
                 'data' => ['name' => 'update transition'],
                 'httpCode' => HttpCode::OK,
             ],
             'to short' => [
-                'url' => '/workflow/1/stage/1/transition/2',
+                'url' => '/w1/workflow/1/stage/1/transition/2',
                 'data' => ['name' => 'tr'],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
@@ -260,23 +290,23 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'workflow not found' => [
-                'url' => '/workflow/10/stage/1/transition/2',
+                'url' => '/w1/workflow/10/stage/1/transition/2',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'stage not found' => [
-                'url' => '/workflow/1/stage/10/transition/2',
+                'url' => '/w1/workflow/1/stage/10/transition/2',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'transition not found' => [
-                'url' => '/workflow/1/stage/1/transition/10',
+                'url' => '/w1/workflow/1/stage/1/transition/10',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'delete stage 1' => [
-                'url' => '/workflow/1/stage/1/transition/2',
+                'url' => '/w1/workflow/1/stage/1/transition/2',
                 'httpCode' => HttpCode::NO_CONTENT,
             ],
             'not found' => [
-                'url' => '/workflow/1/stage/1/transition/2',
+                'url' => '/w1/workflow/1/stage/1/transition/2',
                 'httpCode' => HttpCode::NOT_FOUND,
                 'validationErrors' => [
                     'name' => 'The record "2" does not exists.'
@@ -301,6 +331,6 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     protected function getRoutePattern()
     {
-        return 'workflow/<workflow_id:\d+>/stage/<stage_id:\d+>/transition';
+        return 'w1/workflow/<workflow_id:\d+>/stage/<stage_id:\d+>/transition';
     }
 }

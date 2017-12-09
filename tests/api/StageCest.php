@@ -45,14 +45,18 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'list' => [
-                'url' => '/workflow/1/stage',
+                'urlParams' => [
+                    'workflow_id' => 1
+                ],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
                     'X-Pagination-Total-Count' => 3,
                 ],
             ],
             'not found workflow' => [
-                'url' => '/workflow/10/stage',
+                'urlParams' => [
+                    'workflow_id' => 10
+                ],
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'filter by name' => [
@@ -105,15 +109,15 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'single record' => [
-                'url' => '/workflow/1/stage/1',
+                'url' => '/w1/workflow/1/stage/1',
                 'httpCode' => HttpCode::OK,
             ],
             'not found stage record' => [
-                'url' => '/workflow/1/stage/10',
+                'url' => '/w1/workflow/1/stage/10',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'not found workflow record' => [
-                'url' => '/workflow/10/stage/10',
+                'url' => '/w1/workflow/10/stage/10',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
         ];
@@ -139,12 +143,16 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'create stage 3' => [
-                'url' => '/workflow/1/stage',
+                'urlParams' => [
+                    'workflow_id' => 1
+                ],
                 'data' => ['name' => 'stage 3'],
                 'httpCode' => HttpCode::CREATED,
             ],
             'unique' => [
-                'url' => '/workflow/1/stage',
+                'urlParams' => [
+                    'workflow_id' => 1
+                ],
                 'data' => ['name' => 'stage 3'],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
@@ -152,7 +160,9 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
             ],
             'to short' => [
-                'url' => '/workflow/1/stage',
+                'urlParams' => [
+                    'workflow_id' => 1
+                ],
                 'data' => ['name' => 'wo'],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
@@ -160,7 +170,9 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
             ],
             'not blank' => [
-                'url' => '/workflow/1/stage',
+                'urlParams' => [
+                    'workflow_id' => 1
+                ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
                     'name' => 'Stage name cannot be blank.'
@@ -189,12 +201,12 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'update stage 1' => [
-                'url' => '/workflow/1/stage/1',
+                'url' => '/w1/workflow/1/stage/1',
                 'data' => ['name' => 'stage 7'],
                 'httpCode' => HttpCode::OK,
             ],
             'to short' => [
-                'url' => '/workflow/1/stage/1',
+                'url' => '/w1/workflow/1/stage/1',
                 'data' => ['name' => 'wo'],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
@@ -224,15 +236,15 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'workflow not found' => [
-                'url' => '/workflow/10/stage/1',
+                'url' => '/w1/workflow/10/stage/1',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'delete stage 1' => [
-                'url' => '/workflow/1/stage/1',
+                'url' => '/w1/workflow/1/stage/1',
                 'httpCode' => HttpCode::NO_CONTENT,
             ],
             'not found' => [
-                'url' => '/workflow/1/stage/1',
+                'url' => '/w1/workflow/1/stage/1',
                 'httpCode' => HttpCode::NOT_FOUND,
                 'validationErrors' => [
                     'name' => 'The record "1" does not exists.'
@@ -256,6 +268,6 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     protected function getRoutePattern()
     {
-        return 'workflow/<workflow_id:\d+>/stage';
+        return 'w1/workflow/<workflow_id:\d+>/stage';
     }
 }

@@ -3,14 +3,14 @@
 use Codeception\Example;
 use Codeception\Util\HttpCode;
 use app\fixtures\OauthAccessTokensFixture;
-use app\fixtures\WorkflowFixture;
+use app\fixtures\CreditFixture;
 
 /**
- * Cest to workflow resource.
+ * Cest to stage resource.
  *
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
-class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
+class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
 {
     protected function authToken(ApiTester $I)
     {
@@ -21,7 +21,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         $I->haveFixtures([
             'access_tokens' => OauthAccessTokensFixture::class,
-            'workflow' => WorkflowFixture::class,
+            'credit' => CreditFixture::class,
         ]);
     }
 
@@ -34,7 +34,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     public function index(ApiTester $I, Example $example)
     {
-        $I->wantTo('Retrieve list of Workflow records.');
+        $I->wantTo('Retrieve list of Credit records.');
         $this->internalIndex($I, $example);
     }
 
@@ -45,21 +45,30 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'list' => [
-                'httpCode' => HttpCode::OK,
-            ],
-            'filter by name' => [
-                'urlParams' => ['name' => 'workflow 2'],
+                'url' => '/v1/credit',
                 'httpCode' => HttpCode::OK,
                 'headers' => [
-                    'X-Pagination-Total-Count' => 1,
+                    'X-Pagination-Total-Count' => 7,
                 ],
             ],
+            'not found credit' => [
+                'url' => '/v1/credit/15',
+                'httpCode' => HttpCode::NOT_FOUND,
+            ],
             'filter by author' => [
-                'urlParams' => ['created_by' => 1],
+                'urlParams' => [
+                    'created_by' => 1,
+                ],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
-                    'X-Pagination-Total-Count' => 2,
-                ],               
+                    'X-Pagination-Total-Count' => 7,
+                ],
+            ],
+            'rule created_by' => [
+                'urlParams' => [
+                    'created_by' => 'wo',
+                ],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
             ],
         ];
     }
@@ -73,22 +82,23 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     public function view(ApiTester $I, Example $example)
     {
-        $I->wantTo('Retrieve Workflow single record.');
+        $I->wantTo('Retrieve Credit single record.');
         $this->internalView($I, $example);
     }
 
     /**
-     * @return array[] data for test `view()`.
+     * @return array<string,array<string,string>> data for test `view()`.
      */
     protected function viewDataProvider()
     {
         return [
-            'filter by name' => [
-                'urlParams' => ['name' => '1'],
+            'single record' => [
+                'url' => '/credit/1',
                 'httpCode' => HttpCode::OK,
-                'headers' => [
-                    'X-Pagination-Total-Count' => 1,
-                ],
+            ],
+            'not found credit record' => [
+                'url' => '/credit/8',
+                'httpCode' => HttpCode::NOT_FOUND,
             ],
         ];
     }
@@ -102,38 +112,33 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     public function create(ApiTester $I, Example $example)
     {
-        $I->wantTo('Create a Workflow record.');
+        $I->wantTo('Create a Credit record.');
         $this->internalCreate($I, $example);
     }
 
     /**
-     * @return array<string,array<string,array<string,string>>> data for test `create()`.
+     * @return array<string,array<string,string|array<string,string>>> data for test `create()`.
      */
     protected function createDataProvider()
     {
         return [
-            'create workflow 3' => [
-                'data' => ['name' => 'workflow 3'],
+            'create credit 8' => [
+                'url' => '/credit',
+                'data' => [
+                    'workflow_id' => 1,
+                ],
                 'httpCode' => HttpCode::CREATED,
             ],
-            'unique' => [
-                'data' => ['name' => 'workflow 3'],
-                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
-                'validationErrors' => [
-                    'name' => 'Workflow name "workflow 3" has already been taken.'
-                ],
-            ],
-            'to short' => [
-                'data' => ['name' => 'wo'],
-                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
-                'validationErrors' => [
-                    'name' => 'Workflow name should contain at least 6 characters.'
-                ],
+            'not found' => [
+                'url' => '/credit',
+                'data' => ['workflow_id' => 123],
+                'httpCode' => HttpCode::NOT_FOUND,
             ],
             'not blank' => [
+                'url' => '/credit',
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
-                    'name' => 'Workflow name cannot be blank.'
+                    'workflow_id' => 'Credit workflow_id cannot be blank.'
                 ],
             ],
         ];
@@ -148,7 +153,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     public function update(ApiTester $I, Example $example)
     {
-        $I->wantTo('Update a Workflow record.');
+        $I->wantTo('Update a Credit record.');
         $this->internalUpdate($I, $example);
     }
 
@@ -158,17 +163,17 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     protected function updateDataProvider()
     {
         return [
-            'update workflow 1' => [
-                'urlParams' => ['id' => '1'],
-                'data' => ['name' => 'workflow 7'],
+            'update credit 1' => [
+                'url' => '/credit/1',
+                'data' => ['name' => 'credit 9'],
                 'httpCode' => HttpCode::OK,
             ],
             'to short' => [
-                'urlParams' => ['id' => '1'],
+                'url' => '/credit/1',
                 'data' => ['name' => 'wo'],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
-                    'name' => 'Workflow name should contain at least 6 characters.'
+                    'name' => 'Credit name should contain at least 6 characters.'
                 ],
             ],
         ];
@@ -183,7 +188,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     public function delete(ApiTester $I, Example $example)
     {
-        $I->wantTo('Delete a Workflow record.');
+        $I->wantTo('Delete a Credit record.');
         $this->internalDelete($I, $example);
     }
 
@@ -193,12 +198,16 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     protected function deleteDataProvider()
     {
         return [
-            'delete workflow 1' => [
-                'urlParams' => ['id' => '1'],
+            'credit not found' => [
+                'url' => '/credit/10',
+                'httpCode' => HttpCode::NOT_FOUND,
+            ],
+            'delete credit 1' => [
+                'url' => '/credit/1',
                 'httpCode' => HttpCode::NO_CONTENT,
             ],
             'not found' => [
-                'urlParams' => ['id' => '1'],
+                'url' => '/credit/1',
                 'httpCode' => HttpCode::NOT_FOUND,
                 'validationErrors' => [
                     'name' => 'The record "1" does not exists.'
@@ -222,6 +231,6 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     protected function getRoutePattern()
     {
-        return 'w1/workflow';
+        return 'v1/credit';
     }
 }
