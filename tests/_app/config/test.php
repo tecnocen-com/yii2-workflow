@@ -3,7 +3,7 @@
 use tecnocen\workflow\roa\modules\Version as WorkflowVersion;
 use tecnocen\roa\controllers\ProfileResource;
 use tecnocen\roa\hal\JsonResponseFormatter;
-use app\api\resource\CreditResource as CreditResource;
+use app\api\modules\Version as CreditResource;
 use yii\web\Response;
 
 return [
