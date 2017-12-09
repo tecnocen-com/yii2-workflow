@@ -128,11 +128,14 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
                 'httpCode' => HttpCode::CREATED,
             ],
-            'not found' => [
+            'dont exists' => [
                 'urlParams' => [
                     'workflow_id' => 123,
                 ],
-                'httpCode' => HttpCode::NOT_FOUND,
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+                'validationErrors' => [
+                    'workflow_id' => 'Workflow ID is invalid.',
+                ],
             ],
             'not blank' => [
                 'urlParams' => [
@@ -140,7 +143,7 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
-                    'workflow_id' => 'Credit workflow_id cannot be blank.'
+                    'workflow_id' => 'Workflow ID cannot be blank.'
                 ],
             ],
         ];
@@ -166,16 +169,29 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'update credit 1' => [
-                'url' => '/credit/1',
-                'data' => ['name' => 'credit 9'],
+                'url' => '/v1/credit/1',
+                'data' => ['workflow_id' => 2],
                 'httpCode' => HttpCode::OK,
             ],
-            'to short' => [
-                'url' => '/credit/1',
-                'data' => ['name' => 'wo'],
+            'update credit 10' => [
+                'url' => '/v1/credit/10',
+                'data' => ['workflow_id' => 2],
+                'httpCode' => HttpCode::NOT_FOUND,
+            ],
+            'not exists' => [
+                'url' => '/v1/credit/1',
+                'data' => ['workflow_id' => 123],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
-                    'name' => 'Credit name should contain at least 6 characters.'
+                    'workflow_id' => 'Workflow ID is invalid.',
+                ],
+            ],
+            'not blank' => [
+                'url' => '/v1/credit/1',
+                'data' => ['workflow_id' => ''],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+                'validationErrors' => [
+                    'workflow_id' => 'Workflow ID cannot be blank.'
                 ],
             ],
         ];
@@ -201,15 +217,15 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'credit not found' => [
-                'url' => '/credit/10',
+                'url' => '/v1/credit/10',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'delete credit 1' => [
-                'url' => '/credit/1',
+                'url' => '/v1/credit/1',
                 'httpCode' => HttpCode::NO_CONTENT,
             ],
             'not found' => [
-                'url' => '/credit/1',
+                'url' => '/v1/credit/1',
                 'httpCode' => HttpCode::NOT_FOUND,
                 'validationErrors' => [
                     'name' => 'The record "1" does not exists.'

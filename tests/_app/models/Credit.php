@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use tecnocen\workflow\models\Workflow;
 
 /**
  * This is the model class for table `{{%credit}}`.
@@ -10,8 +11,14 @@ use Yii;
  * @property integer $id
  * @property string $credit
  */
-class Credit extends \yii\db\ActiveRecord
+class Credit extends \tecnocen\rmdb\models\Entity
 {
+    /**
+     * @var string full class name of the model to be used for the relation
+     * `getWorkflow()`.
+     */
+    protected $workflowClass = Workflow::class;
+
     /**
      * @inheritdoc
      */
@@ -27,6 +34,13 @@ class Credit extends \yii\db\ActiveRecord
     {
         return [
             [['workflow_id'], 'required'],
+            [
+                ['workflow_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Workflow::class,
+                'targetAttribute' => ['workflow_id' => 'id'],
+            ],
         ];
     }
 
