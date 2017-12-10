@@ -51,4 +51,12 @@ class Workflow extends \tecnocen\workflow\models\Workflow
             'stages' => $this->getSelfLink() . '/stage',
         ]);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        return ['stages'];
+    }
 }

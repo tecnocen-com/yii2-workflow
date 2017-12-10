@@ -48,4 +48,12 @@ class TransitionPermission
     {
         return $this->getSlugLinks();
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        return ['sourceStage', 'targetStage', 'transition'];
+    }
 }

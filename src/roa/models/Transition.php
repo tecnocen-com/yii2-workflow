@@ -49,4 +49,12 @@ class Transition extends \tecnocen\workflow\models\Transition
             'target_stage' => $this->targetStage->getSelfLink(),
         ]);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        return ['permissions'];
+    }
 }
