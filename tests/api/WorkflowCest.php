@@ -48,7 +48,10 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
                 'httpCode' => HttpCode::OK,
             ],
             'filter by name' => [
-                'urlParams' => ['name' => 'workflow 2'],
+                'urlParams' => [
+                    'name' => 'workflow 2',
+                    'expand' => 'stages'
+                ],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
                     'X-Pagination-Total-Count' => 1,
