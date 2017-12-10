@@ -17,6 +17,5 @@ coverage:
     enabled: true
     whitelist:
         include:
-            - src/migrations/WorkLog.php
             - src/models/*
             - src/roa/*
