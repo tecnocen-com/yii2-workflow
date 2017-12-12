@@ -89,6 +89,6 @@ abstract class WorkLog extends \yii\db\ActiveRecord
      */
     public function getProcess()
     {
-        return $this->hasOne(static::processClass(), ['process_id' => 'id']);
+        return $this->hasOne(static::processClass(), ['id' => 'process_id']);
     }
 }
