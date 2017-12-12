@@ -51,27 +51,6 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
                     'X-Pagination-Total-Count' => 2,
                 ],
             ],
-            'not found credit' => [
-                'url' => '/v1/credit/15/worklog',
-                'httpCode' => HttpCode::NOT_FOUND,
-            ],
-            'filter by author' => [
-                'urlParams' => [
-                    'credit_id' => 1,
-                    'created_by' => 1,
-                ],
-                'httpCode' => HttpCode::OK,
-                'headers' => [
-                    'X-Pagination-Total-Count' => 2,
-                ],
-            ],
-            'rule created_by' => [
-                'urlParams' => [
-                    'credit_id' => 1,
-                    'created_by' => 'wo',
-                ],
-                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
-            ],
         ];
     }
 
@@ -97,10 +76,6 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
             'single record' => [
                 'url' => '/v1/credit/1/worklog/1',
                 'httpCode' => HttpCode::OK,
-            ],
-            'not found credit record' => [
-                'url' => '/v1/credit/8/worklog/1',
-                'httpCode' => HttpCode::NOT_FOUND,
             ],
         ];
     }
