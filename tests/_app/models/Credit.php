@@ -11,7 +11,7 @@ use tecnocen\workflow\models\Workflow;
  * @property integer $id
  * @property string $credit
  */
-class Credit extends \tecnocen\rmdb\models\Entity
+class Credit extends \tecnocen\workflow\models\Process
 {
     /**
      * @var string full class name of the model to be used for the relation
@@ -25,6 +25,16 @@ class Credit extends \tecnocen\rmdb\models\Entity
     public static function tableName()
     {
         return '{{%credit}}';
+    }
+
+    protected function workLogClass()
+    {
+        return CreditWorklog::class;
+    }
+
+    public function getWorkflowId()
+    {
+        return $this->workflow_id;
     }
 
     /**
