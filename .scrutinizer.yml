@@ -154,24 +154,34 @@ tools:
         excluded_dirs: [vendor, tests]
 build:
     environment:
-        mysql: 5.6
         php:
             version: 7.0.7
-    project_setup:
-        before:
-            # crear la base de datos, el nombre tiene que coincidir con la base
-            # del archivo `environments/dev/common/config/main-local.php`
-            - mysql -e "create database yii2_workflow_test"
-    tests:
-        before:
-            # run migrations
-            - composer deploy-tests
-        override:
-            # test coverage
-            -
-                # comando de coverage
-                command: composer run-coverage
-                coverage:
-                    file: 'tests/_output/coverage.xml'
-                    format: 'clover'
-                idle_timeout: 1800
+    nodes:
+        my-tests:
+            environment:
+                mysql: 5.6
+            project_setup:
+                before:
+                    # crear la base de datos, el nombre tiene que coincidir con la base
+                    # del archivo `environments/dev/common/config/main-local.php`
+                    - mysql -e "create database yii2_workflow_test"
+            tests:
+                before:
+                    # run migrations
+                    - composer deploy-tests
+                override:
+                    # test coverage
+                    -
+                        # comando de coverage
+                        command: composer run-coverage
+                        coverage:
+                            file: 'tests/_output/coverage.xml'
+                            format: 'clover'
+                        idle_timeout: 1800
+        analysis:
+            project_setup:
+                override: [true]
+                
+            tests:
+                override:
+                    - php-scrutinizer-run
