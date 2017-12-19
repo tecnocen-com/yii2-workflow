@@ -39,7 +39,7 @@ abstract class Process extends Entity
         $workLogClass = $this->workLogClass();
 
         return $query->andWhere([
-            'created_at' => $workLogClass()::find()
+            'created_at' => $workLogClass::find()
                 ->select(['MAX(created_at)'])
                 ->alias('worklog_groupwise')
                 ->andWhere('worklog.process_id = worklog_groupwise.process_id')
