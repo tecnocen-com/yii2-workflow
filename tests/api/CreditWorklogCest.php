@@ -48,7 +48,7 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
                 'url' => '/v1/credit/1/worklog',
                 'httpCode' => HttpCode::OK,
                 'headers' => [
-                    'X-Pagination-Total-Count' => 2,
+                    'X-Pagination-Total-Count' => 4,
                 ],
             ],
         ];
