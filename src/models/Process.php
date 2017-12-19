@@ -43,7 +43,7 @@ abstract class Process extends Entity
                 ->select(['MAX(created_at)'])
                 ->alias('worklog_groupwise')
                 ->andWhere('worklog.process_id = worklog_groupwise.process_id')
-        ])->groupBy(['worklog.process_id']);
+        ]);
     }
 
     public function flow(&$workLog)
