@@ -98,6 +98,9 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
                     'expand' => 'workLogs, activeWorkLog',
                 ],
                 'httpCode' => HttpCode::OK,
+                'headers' => [
+                    'X-Pagination-Total-Count' => 1,
+                ],
             ],
             'not found credit record' => [
                 'url' => '/v1/credit/8',
