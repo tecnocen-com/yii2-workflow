@@ -42,4 +42,15 @@ class Credit extends \app\models\Credit
             'credits' => $this->getSelfLink() . '/credit',
         ]);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function extraFields()
+    {
+        return [
+            'workLogs',
+            'activeWorkLog',
+        ];
+    } 
 }
