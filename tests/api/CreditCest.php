@@ -94,7 +94,7 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
         return [
             'single record' => [
                 'urlParams' => [
-                    'credit_id' => 1,
+                    'credit_id' => 4,
                     'expand' => 'workLogs, activeWorkLog',
                 ],
                 'httpCode' => HttpCode::OK,
