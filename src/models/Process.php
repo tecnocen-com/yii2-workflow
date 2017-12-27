@@ -72,9 +72,17 @@ abstract class Process extends Entity
     /**
      * @inheritdoc
      */
-    public function save($runValidation = true, $attributes = null)
+    public function updateInternal($attributes = null)
     {
-        return parent::save($runValidation, $attributes ?: parent::attributes());
+        return parent::updateInternal($attributes ?: parent::attributes());
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function insertInternal($attributes = null)
+    {
+        return parent::insertInternal($attributes ?: parent::attributes());
     }
 
     /**
@@ -140,12 +148,12 @@ abstract class Process extends Entity
      * to create said worklog.
      * @param bool $runValidation
      */
-    public function flow(&$workLog, $runValidations = true)
+    public function flow(&$workLog, $runValidation = true)
     {
         $workLog = $this->ensureWorkLog($workLog);
         $workLog->scenario = WorkLog::SCENARIO_FLOW;
 
-        return $workLog->save($runValidations);
+        return $workLog->save($runValidation);
     }
 
     /**
