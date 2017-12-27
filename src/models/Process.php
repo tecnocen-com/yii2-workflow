@@ -10,10 +10,89 @@ use yii\base\InvalidConfigException;
  */
 abstract class Process extends Entity
 {
+    /**
+     * @return string full class name of the class to be used to store the
+     * worklog records.
+     */
     protected abstract function workLogClass();
 
+    /**
+     * @return int the id of the workflow this process belongs to.
+     */
     public abstract function getWorkflowId();
 
+    /**
+     * @inheritdoc
+     */
+    public function attributes()
+    {
+        return array_merge(parent::attributes(), ['initial_stage_id']);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+    	    'required_initial' => [
+                ['initial_stage_id'],
+                'required',
+                'when' => function () {
+    	            return $this->getIsNewRecord();
+    	        },
+            ],
+            'integer_initial' => [['initial_stage_id'], 'integer'],
+            'exist_initial' => [
+                ['initial_stage_id'],
+                'exist',
+                'targetClass' => Stage::class,
+                'targetAttribute' => ['initial_stage_id' => 'id'],
+                'skipOnError' => true,
+                'filter' => function ($query) {
+                    $query->andWhere([
+                        'initial' => true,
+                        'workflow_id' => $this->getWorkflowId(),
+                    ]);
+                },
+            ],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_INSERT,
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function save($runValidation = true, $attributes = null)
+    {
+        return parent::save($runValidation, $attributes ?: parent::attributes());
+    }
+
+    /**
+     * @inheritdoc
+     */ 
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+	if ($insert) {
+            $initialLog = ['stage_id' => $this->initial_stage_id];
+            $this->initialLog($initialLog, false);
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */ 
     public function init()
     {
         if (!is_subclass_of($this->workLogClass(), WorkLog::class)) {
@@ -25,6 +104,9 @@ abstract class Process extends Entity
         parent::init();
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getWorkLogs()
     {
         return $this->hasMany($this->workLogClass(), [
@@ -32,6 +114,10 @@ abstract class Process extends Entity
         ]);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     * @see https://dev.mysql.com/doc/refman/5.7/en/example-maximum-column-group-row.html
+     */
     public function getActiveWorkLog()
     {
         $query = $this->getWorkLogs()->alias('worklog');
@@ -46,20 +132,34 @@ abstract class Process extends Entity
         ]);
     }
 
-    public function flow(&$workLog)
+    /**
+     * Adds record to the worklog effectively transitioning the stage of the
+     * process.
+     *
+     * @param array|WorkLog the worklog the process will transit to or an array
+     * to create said worklog.
+     * @param bool $runValidation
+     */
+    public function flow(&$workLog, $runValidations = true)
     {
         $workLog = $this->ensureWorkLog($workLog);
         $workLog->scenario = WorkLog::SCENARIO_FLOW;
 
-        return $workLog->save();
+        return $workLog->save($runValidations);
     }
 
-    public function initialLog(&$workLog)
+    /**
+     * Saves the initial log record of the process
+     *
+     * @param array|WorkLog the worklog the process will use as the first log.\
+     * @param bool $runValidation
+     */
+    public function initialLog(&$workLog, $runValidations = true)
     {
         $workLog = $this->ensureWorkLog($workLog);
         $workLog->scenario = WorkLog::SCENARIO_INITIAL;
 
-        return $workLog->save();
+        return $workLog->save($runValidations);
     }
 
     private function ensureWorkLog($workLog)
@@ -75,7 +175,7 @@ abstract class Process extends Entity
         }
 
         $workLog->process_id = $this->id;
-        $workLog->setRelation('process', $this);
+        $workLog->populateRelation('process', $this);
 
         return $workLog;
     }

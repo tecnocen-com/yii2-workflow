@@ -6,7 +6,8 @@ return [
     [
         'name' => 'Stage 1 - Wf 1',
         'workflow_id' => 1,
-        'position_x' => 0,
+        'initial' => true,
+	'position_x' => 0,
         'position_y' => 0,
         'created_by' => 1,
         'created_at' => $now,

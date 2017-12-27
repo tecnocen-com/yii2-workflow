@@ -42,7 +42,7 @@ class Credit extends \tecnocen\workflow\models\Process
      */
     public function rules()
     {
-        return [
+        return array_merge(parent::rules(), [
             [['workflow_id'], 'required'],
             [
                 ['workflow_id'],
@@ -51,7 +51,7 @@ class Credit extends \tecnocen\workflow\models\Process
                 'targetClass' => Workflow::class,
                 'targetAttribute' => ['workflow_id' => 'id'],
             ],
-        ];
+        ]);
     }
 
     /**
