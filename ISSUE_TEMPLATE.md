@@ -25,10 +25,12 @@ Add code here if u need
 
 ## **Additional info**
 
-Description....
+Description
 
-Table example....
+Table example if u need
+
 Title1 | Title2 | Title3|
--- | -- | -- 
+-- | -- | --
 data1 | data2 | data3
+data n + 1 | data n + 2 | data n + 3
 
