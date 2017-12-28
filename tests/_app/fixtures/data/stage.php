@@ -7,7 +7,7 @@ return [
         'name' => 'Stage 1 - Wf 1',
         'workflow_id' => 1,
         'initial' => true,
-	'position_x' => 0,
+        'position_x' => 0,
         'position_y' => 0,
         'created_by' => 1,
         'created_at' => $now,
@@ -37,6 +37,7 @@ return [
     [
         'name' => 'Stage 1 - Wf 2',
         'workflow_id' => 2,
+        'initial' => true,
         'position_x' => 0,
         'position_y' => 0,
         'created_by' => 1,
