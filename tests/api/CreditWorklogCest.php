@@ -101,11 +101,26 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
         return [
             'create worklog' => [
                 'urlParams' => [
-                    'credit_id' => 1,
+                    'process_id' => 1
+                ],
+                'data' => [
                     'process_id' => 1,
-                    'stage_id' => 3
+                    'stage_id' => 5
                 ],
                 'httpCode' => HttpCode::CREATED,
+            ],
+            'unprocessable worklog' => [
+                'urlParams' => [
+                    'process_id' => 1
+                ],
+                'data' => [
+                    'process_id' => 1,
+                    'stage_id' => 1
+                ],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+                'validationErrors' => [
+                    'stage_id' => 'Stage ID is invalid.',
+                ],
             ],
         ];
     }
@@ -192,6 +207,6 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
      */
     protected function getRoutePattern()
     {
-        return 'v1/credit/<credit_id:\d+>/worklog';
+        return 'v1/credit/<process_id:\d+>/worklog';
     }
 }
