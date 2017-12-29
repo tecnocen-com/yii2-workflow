@@ -104,7 +104,6 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
                     'process_id' => 1
                 ],
                 'data' => [
-                    'process_id' => 1,
                     'stage_id' => 5
                 ],
                 'httpCode' => HttpCode::CREATED,
@@ -114,12 +113,11 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
                     'process_id' => 1
                 ],
                 'data' => [
-                    'process_id' => 1,
                     'stage_id' => 1
                 ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
-                    'stage_id' => 'Stage ID is invalid.',
+                    'stage_id' => 'There is no transition for the current stage',
                 ],
             ],
         ];
@@ -147,7 +145,6 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
             'update credit 1' => [
                 'url' => '/v1/credit/1/worklog/1',
                 'data' => [
-                    'process_id' => 1,
                     'stage_id' => 3
                 ],
                 'httpCode' => HttpCode::OK,
