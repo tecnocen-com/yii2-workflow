@@ -8,7 +8,7 @@ use app\api\resources\CreditWorklogResource;
 class Version extends \tecnocen\roa\modules\ApiVersion
 {
     const CREDIT_ROUTE = 'credit';
-    const WORKLOG_ROUTE = self::CREDIT_ROUTE . '/<credit_id:\d+>/worklog';
+    const WORKLOG_ROUTE = self::CREDIT_ROUTE . '/<process_id:\d+>/worklog';
 
     /**
      * @inheritdoc

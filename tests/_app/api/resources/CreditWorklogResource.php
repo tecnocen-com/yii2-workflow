@@ -11,10 +11,16 @@ use app\api\models\CreditWorklog;
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
 class CreditWorklogResource extends \tecnocen\roa\controllers\OAuth2Resource
-{
+{ 
+    /**
+     * @inheritdoc
+     */
+    public $createScenario = CreditWorklog::SCENARIO_FLOW;
+
     /**
      * @inheritdoc
      */
     public $modelClass = CreditWorklog::class;
+
 
 }
