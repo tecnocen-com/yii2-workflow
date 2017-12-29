@@ -27,26 +27,24 @@ abstract class WorkLog extends Pivot
     public function rules()
     {
         return [
-            [['process_id'], 'required', 'on' => [self::SCENARIO_DEFAULT]],
-            [['process_id'], 'integer', 'on' => [self::SCENARIO_DEFAULT]],
-            [['stage_id'], 'required'],
-            [['stage_id'], 'integer'],
+            [['process_id', 'stage_id'], 'required'],
+            [['process_id', 'stage_id'], 'integer'],
             [
                 ['process_id'],
                 'exist',
                 'targetAttribute' => ['process_id' => 'id'],
                 'targetClass' => $this->processClass(),
-                'on' => [self::SCENARIO_DEFAULT],
             ],
             [
                 ['stage_id'],
                 'exist',
                 'targetAttribute' => ['stage_id' => 'id'],
-                'targetClass' => Stage::class,
+		'targetClass' => Stage::class,
                 'filter' => function ($query) {
                     $query->andWhere(['initial' => true]);
-                },
-                'on' => [self::SCENARIO_INITIAL],
+		},
+		'message' => 'Not an initial stage for the workflow.',
+		'on' => [self::SCENARIO_INITIAL],
             ],
             [
                 ['stage_id'],
@@ -61,7 +59,7 @@ abstract class WorkLog extends Pivot
                 },
                 'when' => function () {
                     return !$this->hasErrors('process_id')
-                        && null === $this->process->currentStage;
+                        && null !== $this->process->activeWorkLog;
                 },
                 'on' => [self::SCENARIO_FLOW],
                 'message' => 'There is no transition for the current stage'
