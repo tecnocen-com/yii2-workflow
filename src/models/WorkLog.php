@@ -39,12 +39,12 @@ abstract class WorkLog extends Pivot
                 ['stage_id'],
                 'exist',
                 'targetAttribute' => ['stage_id' => 'id'],
-		'targetClass' => Stage::class,
+                'targetClass' => Stage::class,
                 'filter' => function ($query) {
                     $query->andWhere(['initial' => true]);
-		},
-		'message' => 'Not an initial stage for the workflow.',
-		'on' => [self::SCENARIO_INITIAL],
+		        },
+                'on' => [self::SCENARIO_INITIAL],
+		        'message' => 'Not an initial stage for the workflow.'
             ],
             [
                 ['stage_id'],

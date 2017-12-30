@@ -38,11 +38,11 @@ class CreditWorklogCest
         $creditWorklog = new CreditWorklog();
         $creditWorklog->process_id = 1;
         $creditWorklog->stage_id   = 2;
-	    $creditWorklog->save();
-	    $I->assertEmpty($creditWorklog->getFirstErrors());
-	    $I->seeRecord(CreditWorkLog::class, [
+        $creditWorklog->save();
+        $I->assertEmpty($creditWorklog->getFirstErrors());
+        $I->seeRecord(CreditWorkLog::class, [
             'process_id' => 1,
-	        'stage_id' => 2,
+            'stage_id' => 2,
         ]);
     }
 }
