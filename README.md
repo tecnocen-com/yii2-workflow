@@ -1,6 +1,6 @@
-Tecnocen Workflow
+Workflow
 =================
-Library to dynamically handle workflows in a database.
+Library to dynamically handle workflows in a database with ROA support.
 
 [![Latest Stable Version](https://poser.pugx.org/tecnocen/yii2-workflow/v/stable)](https://packagist.org/packages/tecnocen/yii2-workflow)
 [![Total Downloads](https://poser.pugx.org/tecnocen/yii2-workflow/downloads)](https://packagist.org/packages/tecnocen/yii2-workflow)
@@ -10,8 +10,20 @@ Library to dynamically handle workflows in a database.
 Scrutinizer [![Build Status Scrutinizer](https://scrutinizer-ci.com/g/tecnocen-com/yii2-workflow/badges/build.png?b=master&style=flat)](https://scrutinizer-ci.com/g/tecnocen-com/yii2-workflow/build-status/master)
 Travis [![Build Status Travis](https://travis-ci.org/tecnocen-com/yii2-workflow.svg?branch=master&style=flat?style=for-the-badge)](https://travis-ci.org/tecnocen-com/yii2-workflow)
 
-Installation
------------
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+TO DO - What things you need to install the software and how to install them
+
+```
+TO DO - Give examples
+```
+
+### Installation
+----------------
 
 You can use composer to install the library `tecnocen/yii2-workflow` by running
 the command;
@@ -35,7 +47,7 @@ Which will install the following table structure
 ![Database Diagram](diagram.png)
 
 
-ROA Backend Usage
+#### ROA Backend Usage
 -----------------
 
 The ROA support is very simple and can be done by just adding a module version
@@ -60,7 +72,7 @@ You can then access the module to check the available resources.
 
 Which will implement CRUD functionalities for a workflow.
 
-Process and Worklog
+#### Process and Worklog
 -------------------
 
 A `process` is an entity which changes from stage depending on a workflow. Each
@@ -116,7 +128,7 @@ class CreditWorkLog extends \tecnocen\workflow\models\WorkLog
 }
 ```
 
-Worklog Resource
+#### Worklog Resource
 ----------------
 
 Each process gets a worklog about the flow of stages it goes through.
@@ -133,4 +145,72 @@ public $resources = [
 ];
 ```
 
+## Running the tests
+
+This library contains tools to set up a testing environment using composer scripts, for more information see [Testing Environment](https://github.com/tecnocen-com/yii2-workflow/blob/master/CONTRIBUTING.md) section.
+
+### Break down into end to end tests
+
+Once testing environment is setup, run the following commands.
+
+```
+composer deploy-tests
+```
+
+Run tests. 
+
+```
+composer run-tests
+```
+
+Run tests with coverage.
+
+```
+composer run-coverage
+```
+
+## Use Cases
+
+TO DO
+
+## Deployment
+
+TO DO - Add additional notes about how to deploy this on a live system
+
+## Built With
+
+* Yii 2: The Fast, Secure and Professional PHP Framework [http://www.yiiframework.com](http://www.yiiframework.com)
+
+## Code of Conduct
+
+Please read [CODE_OF_CONDUCT.md](https://github.com/tecnocen-com/yii2-workflow/blob/master/CODE_OF_CONDUCT.md) for details on our code of conduct.
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://github.com/tecnocen-com/yii2-workflow/blob/master/CONTRIBUTING.md) for details on the process for submitting pull requests to us.
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/tecnocen-com/yii2-workflow/tags). 
+
+_Considering [SemVer](http://semver.org/) for versioning rules 9, 10 and 11 talk about pre-releases, they will not be used within the Tecnocen-com._
+
+## Authors
+
+* [**Angel Guevara**](https://github.com/Faryshta) - *Initial work* - [Tecnocen.com](https://github.com/Tecnocen-com)
+* [**Carlos Llamosas**](https://github.com/neverabe) - *Initial work* - [Tecnocen.com](https://github.com/Tecnocen-com)
+
+See also the list of [contributors](https://github.com/tecnocen-com/yii2-workflow/graphs/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* TO DO - Hat tip to anyone who's code was used
+* TO DO - Inspiration
+* TO DO - etc
+
 [![yii2-workflow](https://img.shields.io/badge/Powered__by-Tecnocen.com-orange.svg?style=for-the-badge)](https://www.tecnocen.com/)
+
