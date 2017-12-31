@@ -13,7 +13,13 @@
     "authors": [
         {
             "name": "Angel (Faryshta) Guevara",
-            "email": "aguevara@solmipro.com"
+            "email": "aguevara@solmipro.com",
+            "homepage": "http://tecnocen.com"
+        },
+        {
+            "name": "Carlos (neverabe) Llamosas",
+            "email": "carlos@tecnocen.com",
+            "homepage": "http://tecnocen.com"
         }
     ],
     "repositories": [
