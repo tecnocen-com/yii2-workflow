@@ -57,6 +57,6 @@ class Workflow extends \tecnocen\workflow\models\Workflow
      */
     public function extraFields()
     {
-        return ['stages'];
+        return ['stages', 'detailsStages', 'totalStages'];
     }
 }

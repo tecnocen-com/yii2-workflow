@@ -65,4 +65,20 @@ class Workflow extends \tecnocen\rmdb\models\PersistentEntity
         return $this->hasMany($this->stageClass, ['workflow_id' => 'id'])
             ->inverseOf('workflow');
     }
+
+    public function getDetailStages()
+    {
+        $query = $this->getStages();
+        $query->multiple = false;
+
+        return $query->select([
+            'totalStages' => 'count(distinct id)',
+        ])->asArray()
+        ->groupBy('workflow_id');
+    }
+
+    public function getTotalStages()
+    {
+        return (int)$this->detailStages['totalStages'];
+    }
 }

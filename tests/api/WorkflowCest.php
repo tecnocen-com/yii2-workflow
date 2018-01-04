@@ -62,7 +62,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
                 'httpCode' => HttpCode::OK,
                 'headers' => [
                     'X-Pagination-Total-Count' => 2,
-                ],               
+                ],
             ],
         ];
     }
@@ -86,10 +86,20 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     protected function viewDataProvider()
     {
         return [
-            'filter by name' => [
+            'expand stages' => [
                 'urlParams' => [
                     'name' => '1',
                     'expand' => 'stages'
+                ],
+                'httpCode' => HttpCode::OK,
+                'headers' => [
+                    'X-Pagination-Total-Count' => 1,
+                ],
+            ],
+            'expand total stages' => [
+                'urlParams' => [
+                    'name' => '1',
+                    'expand' => 'totalStages'
                 ],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
