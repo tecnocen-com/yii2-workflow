@@ -78,6 +78,9 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         $I->wantTo('Retrieve Workflow single record.');
         $this->internalView($I, $example);
+        if (isset($example['response'])) {
+            $I->seeResponseContainsJson($example['response']);
+        }
     }
 
     /**
@@ -88,23 +91,27 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
         return [
             'expand stages' => [
                 'urlParams' => [
-                    'name' => '1',
+                    'id' => '1',
                     'expand' => 'stages'
                 ],
                 'httpCode' => HttpCode::OK,
-                'headers' => [
-                    'X-Pagination-Total-Count' => 1,
+                'response' => [
+                    '_embedded' => [
+                        'stages' => [
+                            ['id' => 1],
+                        ],
+                    ],
                 ],
             ],
-            'expand total stages' => [
+            'field total stages' => [
                 'urlParams' => [
-                    'name' => '1',
-                    'expand' => 'totalStages'
+                    'id' => '1',
+                    'fields' => 'id,name,totalStages'
                 ],
                 'httpCode' => HttpCode::OK,
-                'headers' => [
-                    'X-Pagination-Total-Count' => 1,
-                ],
+                'response' => [
+                    'totalStages' => 3,
+                ]
             ],
         ];
     }

@@ -30,10 +30,10 @@
     ],
     "require": {
         "php": "^7.1",
-        "yiisoft/yii2": "~2.0.10",
-        "tecnocen/yii2-roa": "*",
+        "tecnocen/yii2-roa": "~0.2.3",
         "tecnocen/yii2-rmdb": "*",
-        "yii2tech/ar-softdelete": "*"
+        "yii2tech/ar-softdelete": "*",
+        "yiisoft/yii2": "~2.0.10"
     },
     "require-dev": {
         "codeception/base": "^2.2.11",
