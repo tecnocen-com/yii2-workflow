@@ -3,6 +3,8 @@
 namespace tecnocen\workflow\roa\models;
 
 use tecnocen\roa\behaviors\Slug;
+use tecnocen\roa\hal\Embeddable;
+use tecnocen\roa\hal\EmbeddableTrait;
 use yii\web\Linkable;
 
 /**
@@ -12,8 +14,34 @@ use yii\web\Linkable;
  * @method string getSelfLink()
  */
 class Stage extends \tecnocen\workflow\models\Stage
-    implements Linkable
+    implements Linkable, Embeddable
 {
+    use EmbeddableTrait {
+        EmbeddableTrait::toArray as embedArray;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function toArray(
+        array $fields = [],
+        array $expand = [],
+        $recursive = true
+    ) {
+        return $this->embedArray(
+            $fields ?: $this->attributes(),
+            $expand,
+            $recursive
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function fields()
+    {
+        return array_merge($this->attributes(), ['totalTransitions']);
+    }
     /**
      * @inheritdoc
      */

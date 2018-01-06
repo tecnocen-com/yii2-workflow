@@ -4,17 +4,19 @@ namespace tecnocen\workflow\roa\models;
 
 use Yii;
 use tecnocen\roa\behaviors\Slug;
+use tecnocen\roa\hal\Embeddable;
+use tecnocen\roa\hal\EmbeddableTrait;
 use yii\web\Linkable;
 
 /**
- * ROA contract to handle workflow transition permissions records.
  *
+ * ROA contract to handle workflow transition permissions records.
  * @method string[] getSlugLinks()
  * @method string getSelfLink()
  */
 class TransitionPermission
     extends \tecnocen\workflow\models\TransitionPermission
-    implements Linkable
+    implements Linkable, Embeddable
 {
     /**
      * @inheritdoc
