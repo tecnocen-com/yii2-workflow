@@ -111,6 +111,28 @@ class Stage extends \tecnocen\rmdb\models\PersistentEntity
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDetailTransitions()
+    {
+        $query = $this->getTransitions();
+        $query->multiple = false;
+
+        return $query->select([
+            'source_stage_id',
+            'totalTransitions' => 'count(distinct target_stage_id)',
+        ])->asArray()
+        ->groupBy('source_stage_id');
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalTransitions()
+    {
+        return (int)$this->detailTransitions['totalTransitions'];
+    }
+    /**
      * @return \yii\db\ActiveQuery sibling stages for the same workflow
      */
     public function getSiblings()

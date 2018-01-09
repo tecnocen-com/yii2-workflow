@@ -16,6 +16,8 @@ use yii\web\Linkable;
 class Transition extends \tecnocen\workflow\models\Transition
     implements Linkable, Embeddable
 {
+    use EmbeddableTrait;
+
     /**
      * @inheritdoc
      */

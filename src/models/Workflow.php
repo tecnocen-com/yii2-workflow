@@ -66,17 +66,24 @@ class Workflow extends \tecnocen\rmdb\models\PersistentEntity
             ->inverseOf('workflow');
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getDetailStages()
     {
         $query = $this->getStages();
         $query->multiple = false;
 
         return $query->select([
+            'workflow_id',
             'totalStages' => 'count(distinct id)',
         ])->asArray()
         ->groupBy('workflow_id');
     }
 
+    /**
+     * @return int
+     */
     public function getTotalStages()
     {
         return (int)$this->detailStages['totalStages'];
