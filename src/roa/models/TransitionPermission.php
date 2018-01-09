@@ -18,6 +18,8 @@ class TransitionPermission
     extends \tecnocen\workflow\models\TransitionPermission
     implements Linkable, Embeddable
 {
+    use EmbeddableTrait;
+
     /**
      * @inheritdoc
      */
