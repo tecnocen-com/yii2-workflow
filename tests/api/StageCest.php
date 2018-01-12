@@ -110,8 +110,19 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'single record' => [
-                'url' => '/w1/workflow/1/stage/1',
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'id' => 1,
+                    'expand' => 'transitions, totalTransitions, detailTransitions'
+                ],
                 'httpCode' => HttpCode::OK,
+                'response' => [
+                    '_embedded' => [
+                        'transitions' => [
+                            ['id' => 2],
+                        ],
+                    ],
+                ],
             ],
             'not found stage record' => [
                 'url' => '/w1/workflow/1/stage/10',

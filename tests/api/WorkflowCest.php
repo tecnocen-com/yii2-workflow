@@ -92,7 +92,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
             'expand stages' => [
                 'urlParams' => [
                     'id' => '1',
-                    'expand' => 'stages'
+                    'expand' => 'stages, totalStages, detailStages'
                 ],
                 'httpCode' => HttpCode::OK,
                 'response' => [
