@@ -7,6 +7,10 @@ use yii\base\InvalidConfigException;
 
 /**
  * Model class for process which change stages depending on a worklow
+ *
+ * @property int workflowId
+ * @property WorkLog[] $workLogs
+ * @property WorkLog $activeWorkLog
  */
 abstract class Process extends Entity
 {
@@ -87,7 +91,7 @@ abstract class Process extends Entity
 
     /**
      * @inheritdoc
-     */ 
+     */
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
@@ -100,7 +104,7 @@ abstract class Process extends Entity
 
     /**
      * @inheritdoc
-     */ 
+     */
     public function init()
     {
         if (!is_subclass_of($this->workLogClass(), WorkLog::class)) {

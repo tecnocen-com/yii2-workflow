@@ -5,11 +5,11 @@ namespace tecnocen\workflow\models;
 use tecnocen\rmdb\models\Pivot;
 
 /**
- * @property integer $process_id
- * @property integer $stage_id
- * @property string $name
+ * @property int $id
+ * @property int $process_id
+ * @property int $stage_id
  *
- * @property ActiveRecord $process
+ * @property Process $process
  */
 abstract class WorkLog extends Pivot
 {
@@ -74,10 +74,24 @@ abstract class WorkLog extends Pivot
     {
         return array_merge([
             'id' => 'ID',
-            'name' => 'Workflow name',
+            'process_id' => 'Process ID',
+            'stage_id' => 'Stage ID',
         ], parent::attributeLabels());
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        if (!is_subclass_of($this->workLogClass(), WorkLog::class)) {
+            throw new InvalidConfigException(
+                static::class . '::workLogClass() must extend '
+                    . WorkLog::class
+            );
+        }
+        parent::init();
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
