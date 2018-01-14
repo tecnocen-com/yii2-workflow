@@ -1,5 +1,5 @@
-Workflow
-=================
+Yii2 Workflow
+==============
 Library to dynamically handle workflows in a database with ROA support.
 
 [![Latest Stable Version](https://poser.pugx.org/tecnocen/yii2-workflow/v/stable)](https://packagist.org/packages/tecnocen/yii2-workflow)
@@ -16,11 +16,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-TO DO - What things you need to install the software and how to install them
+- Install PHP 7.1 or higher
+- [Composer Installed](https://getcomposer.org/doc/00-intro.md)
 
-```
-TO DO - Give examples
-```
+The rest of the requirements are checked by composer when installing the
+repository on the next step.
 
 ### Installation
 ----------------
@@ -37,6 +37,8 @@ require: {
     "tecnocen/yii2-workflow": "*",
 }
 ```
+
+### Deployment
 
 Then run the required migrations
 
@@ -56,7 +58,7 @@ to the api container which will be used to hold the resources.
 ```php
 class Api extends \tecnocen\roa\modules\ApiContainer
 {
-   $versions = [
+    public $versions = [
        // other versions
        'w1' => ['class' => 'tecnocen\workflow\roa\modules\Version'],
    ];
@@ -73,7 +75,7 @@ You can then access the module to check the available resources.
 Which will implement CRUD functionalities for a workflow.
 
 #### Process and Worklog
--------------------
+------------------------
 
 A `process` is an entity which changes from stage depending on a workflow. Each
 stage change is registered on a `worklog` for each `process` record.
@@ -118,6 +120,30 @@ class m170101_010102_credit_worklog extends \tecnocen\workflow\migrations\WorkLo
 }
 ```
 
+After running the migrations its necessary to create Active Record models.
+
+```php
+class Credit extends \tecnocen\workflow\models\Process
+{
+    protected function workflowClass()
+    {
+        return CreditWorklog::class;
+    }
+
+    public function getWorkflowId()
+    {
+        return $this->workflow_id;
+    }
+
+    public function rules()
+    {
+        return \yii\helpers\ArrayHelper::merge(parent::rules(), [
+            // other rules here
+        ]);
+    }
+}
+```
+
 ```php
 class CreditWorkLog extends \tecnocen\workflow\models\WorkLog
 {
@@ -157,7 +183,7 @@ Once testing environment is setup, run the following commands.
 composer deploy-tests
 ```
 
-Run tests. 
+Run tests.
 
 ```
 composer run-tests
@@ -173,10 +199,6 @@ composer run-coverage
 
 TO DO
 
-## Deployment
-
-TO DO - Add additional notes about how to deploy this on a live system
-
 ## Built With
 
 * Yii 2: The Fast, Secure and Professional PHP Framework [http://www.yiiframework.com](http://www.yiiframework.com)
@@ -191,7 +213,7 @@ Please read [CONTRIBUTING.md](https://github.com/tecnocen-com/yii2-workflow/blob
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/tecnocen-com/yii2-workflow/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/tecnocen-com/yii2-workflow/tags).
 
 _Considering [SemVer](http://semver.org/) for versioning rules 9, 10 and 11 talk about pre-releases, they will not be used within the Tecnocen-com._
 
@@ -213,4 +235,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * TO DO - etc
 
 [![yii2-workflow](https://img.shields.io/badge/Powered__by-Tecnocen.com-orange.svg?style=for-the-badge)](https://www.tecnocen.com/)
-
