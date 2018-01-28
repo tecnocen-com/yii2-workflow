@@ -113,7 +113,7 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
                 'urlParams' => [
                     'workflow_id' => 1,
                     'id' => 1,
-                    'expand' => 'transitions, totalTransitions, detailTransitions'
+                    'expand' => 'workflow, transitions, detailTransitions totalTransitions, siblings'
                 ],
                 'httpCode' => HttpCode::OK,
                 'response' => [

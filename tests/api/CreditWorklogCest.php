@@ -75,6 +75,9 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
         return [
             'single record' => [
                 'url' => '/v1/credit/1/worklog/1',
+                'data' => [
+                    'expand' => 'process',
+                ],
                 'httpCode' => HttpCode::OK,
             ],
         ];

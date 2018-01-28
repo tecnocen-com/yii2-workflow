@@ -49,7 +49,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
                     'workflow_id' => 1,
                     'stage_id' => 1,
                     'target_id' => 2,
-                    'expand' => 'sourceStage'
+                    'expand' => 'sourceStage, transition'
                 ],
                 'httpCode' => HttpCode::OK,
                 'headers' => [
