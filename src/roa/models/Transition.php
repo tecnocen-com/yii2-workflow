@@ -59,6 +59,6 @@ class Transition extends \tecnocen\workflow\models\Transition
      */
     public function extraFields()
     {
-        return ['permissions'];
+        return ['sourceStage', 'targetStage', 'permissions'];
     }
 }
