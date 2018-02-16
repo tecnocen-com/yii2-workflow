@@ -11,7 +11,7 @@ use app\api\models\CreditWorklog;
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
 class CreditWorklogResource extends \tecnocen\roa\controllers\OAuth2Resource
-{ 
+{	
     /**
      * @inheritdoc
      */
@@ -22,5 +22,5 @@ class CreditWorklogResource extends \tecnocen\roa\controllers\OAuth2Resource
      */
     public $modelClass = CreditWorklog::class;
 
-
+    public $filterParams = ['process_id'];
 }

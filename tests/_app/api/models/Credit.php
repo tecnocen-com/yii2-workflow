@@ -39,7 +39,7 @@ class Credit extends \app\models\Credit
     public function getLinks()
     {
         return array_merge($this->getSlugLinks(), [
-            'credits' => $this->getSelfLink() . '/credit',
+            'worklog' => $this->getSelfLink() . '/worklog',
         ]);
     }
 

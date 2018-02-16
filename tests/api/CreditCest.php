@@ -117,6 +117,13 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         $I->wantTo('Create a Credit record.');
         $this->internalCreate($I, $example);
+        if (HttpCode::CREATED == $example['httpCode']) {
+            $worklogRoute = $I->grabDataFromResponseByJsonPath(
+                '$._links.worklog.href'
+            )[0];
+            $I->sendGET($worklogRoute);
+            $I->seeHTTPHeader('X-PAGINATION-TOTAL-COUNT', 1);
+        }
     }
 
     /**
