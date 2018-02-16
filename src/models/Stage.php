@@ -119,10 +119,11 @@ class Stage extends \tecnocen\rmdb\models\PersistentEntity
         $query->multiple = false;
 
         return $query->select([
-            'source_stage_id',
-            'totalTransitions' => 'count(distinct target_stage_id)',
-        ])->asArray()
-        ->groupBy('source_stage_id');
+                'source_stage_id',
+                'totalTransitions' => 'count(distinct target_stage_id)',
+            ])->asArray()
+            ->inverseOf(null)
+            ->groupBy('source_stage_id');
     }
 
     /**
@@ -132,6 +133,7 @@ class Stage extends \tecnocen\rmdb\models\PersistentEntity
     {
         return (int)$this->detailTransitions['totalTransitions'];
     }
+
     /**
      * @return \yii\db\ActiveQuery sibling stages for the same workflow
      */

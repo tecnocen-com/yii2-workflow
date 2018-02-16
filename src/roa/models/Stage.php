@@ -82,11 +82,9 @@ class Stage extends \tecnocen\workflow\models\Stage
     public function extraFields()
     {
         return [
-            'workflow', 
-            'transitions', 
-            'detailTransitions', 
+            'workflow',
+            'detailTransitions',
             'totalTransitions',
-            'siblings'
         ];
     }
 }
