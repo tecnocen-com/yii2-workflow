@@ -15,6 +15,11 @@ use yii\base\InvalidConfigException;
 abstract class Process extends Entity
 {
     /**
+     * @var WorkLog model used internally to create the initial worklog
+     */
+    private $initialWorklog;
+
+    /**
      * @return string full class name of the class to be used to store the
      * worklog records.
      */
@@ -28,39 +33,16 @@ abstract class Process extends Entity
     /**
      * @inheritdoc
      */
-    public function attributes()
+    public function load($data, $formName = null)
     {
-        return array_merge(parent::attributes(), ['initial_stage_id']);
-    }
+        if ($this->isNewRecord) {
+            $this->ensureInitialWorklog();
+            $logLoad = $this->initialWorklog->load($data, $formName);
 
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-    	    'required_initial' => [
-                ['initial_stage_id'],
-                'required',
-                'when' => function () {
-    	            return $this->getIsNewRecord();
-    	        },
-            ],
-            'integer_initial' => [['initial_stage_id'], 'integer'],
-            'exist_initial' => [
-                ['initial_stage_id'],
-                'exist',
-                'targetClass' => Stage::class,
-                'targetAttribute' => ['initial_stage_id' => 'id'],
-                'skipOnError' => true,
-                'filter' => function ($query) {
-                    $query->andWhere([
-                        'initial' => true,
-                        'workflow_id' => $this->getWorkflowId(),
-                    ]);
-                },
-            ],
-        ];
+            return parent::load($data, $formName) || $logLoad;
+        }
+
+        return parent::load($data, $formName);
     }
 
     /**
@@ -76,27 +58,12 @@ abstract class Process extends Entity
     /**
      * @inheritdoc
      */
-    public function updateInternal($attributes = null)
-    {
-        return parent::updateInternal($attributes ?: parent::attributes());
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function insertInternal($attributes = null)
-    {
-        return parent::insertInternal($attributes ?: parent::attributes());
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function afterSave($insert, $changedAttributes)
+    public function validate($attributeNames = null, $clearErrors = true)
     {
         parent::afterSave($insert, $changedAttributes);
 
-	if ($insert) {
+        if ($insert) {
+            $this->initialWorklog->save();
             $initialLog = ['stage_id' => $this->initial_stage_id];
             $this->initialLog($initialLog, false);
         }
