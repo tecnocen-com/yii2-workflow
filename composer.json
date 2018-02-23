@@ -39,8 +39,9 @@
     "require-dev": {
         "codeception/base": "^2.2.11",
         "codeception/verify": "~0.3.1",
+        "flow/jsonpath": "~0.3",
         "phpunit/php-code-coverage": "5.3.*",
-        "flow/jsonpath": "~0.3"
+        "yiisoft/yii2-debug": "*"
     },
     "scripts": {
         "deploy-tests": [
