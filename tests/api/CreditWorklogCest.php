@@ -45,7 +45,7 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'list' => [
-                'url' => '/v1/credit/1/worklog',
+                'url' => '/v1/credit/4/worklog',
                 'httpCode' => HttpCode::OK,
                 'headers' => [
                     'X-Pagination-Total-Count' => 4,
@@ -74,7 +74,7 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'single record' => [
-                'url' => '/v1/credit/1/worklog/1',
+                'url' => '/v1/credit/4/worklog/1',
                 'data' => [
                     'expand' => 'process',
                 ],
@@ -146,7 +146,7 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'update credit 1' => [
-                'url' => '/v1/credit/1/worklog/1',
+                'url' => '/v1/credit/4/worklog/1',
                 'data' => [
                     'stage_id' => 3
                 ],
@@ -179,11 +179,11 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
             'delete credit worklog 1' => [
-                'url' => '/v1/credit/1/worklog/1',
+                'url' => '/v1/credit/4/worklog/1',
                 'httpCode' => HttpCode::NO_CONTENT,
             ],
             'not found' => [
-                'url' => '/v1/credit/1/worklog/1',
+                'url' => '/v1/credit/4/worklog/1',
                 'httpCode' => HttpCode::NOT_FOUND,
                 'validationErrors' => [
                     'name' => 'The record "1" does not exists.'
