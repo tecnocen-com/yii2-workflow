@@ -17,11 +17,16 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
         $I->amBearerAuthenticated(OauthAccessTokensFixture::SIMPLE_TOKEN);
     }
 
+    /**
+     * @depends CreditCest:fixtures
+     */
     public function fixtures(ApiTester $I)
     {
         $I->haveFixtures([
-            'access_tokens' => OauthAccessTokensFixture::class,
-            'credit_worklog' => CreditWorklogFixture::class,
+            'credit_worklog' => [
+                'class' => CreditWorklogFixture::class,
+                'depends' => [],
+            ]
         ]);
     }
 
