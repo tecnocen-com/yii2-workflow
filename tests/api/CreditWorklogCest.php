@@ -133,6 +133,25 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
 
     /**
      * @param  ApiTester $I
+     * @depends create
+     * @before authToken
+     */
+    public function permission(ApiTester $I)
+    {
+        $auth = Yii::$app->authManager;
+        $adminRole = $auth->getRole('admin');
+        $I->sendPOST('/v1/credit/1/worklog', ['stage_id' => 7]);
+        $I->seeResponseCodeIs(HttpCode::FORBIDDEN);
+
+        $auth->assign($admin, 1);
+        $I->sendPOST('/v1/credit/1/worklog', ['stage_id' => 7]);
+        $I->seeResponseCodeIs(HttpCode::FORBIDDEN);
+
+        $auth->revoke($admin, 1);
+    }
+
+    /**
+     * @param  ApiTester $I
      * @param  Example $example
      * @dataprovider updateDataProvider
      * @depends fixtures
