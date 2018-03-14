@@ -16,6 +16,12 @@ abstract class Process extends Entity
 {
     /**
      * @return string full class name of the class to be used to store the
+     * assignment records.
+     */
+    protected abstract function assignmentClass();
+
+    /**
+     * @return string full class name of the class to be used to store the
      * worklog records.
      */
     protected abstract function workLogClass();
@@ -113,7 +119,23 @@ abstract class Process extends Entity
                     . WorkLog::class
             );
         }
+        if (!is_subclass_of($this->assignmentClass(), Assignment::class)) {
+            throw new InvalidConfigException(
+                static::class . '::assignmentClass() must extend '
+                    . Assignment::class
+            );
+        }
         parent::init();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssignments()
+    {
+        return $this->hasMany($this->assignmentClass(), [
+            'process_id' => 'id',
+        ]);
     }
 
     /**
