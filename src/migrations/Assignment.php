@@ -5,7 +5,7 @@ namespace tecnocen\workflow\migrations;
 /**
  * Base Migration for creating assignment tables for process.
  */
-abstract class Assigment extends \tecnocen\rmdb\migrations\CreatePivot
+abstract class Assignment extends \tecnocen\rmdb\migrations\CreatePivot
 {
     /**
      * @var string suffix attached at the end of the process table.
@@ -22,7 +22,7 @@ abstract class Assigment extends \tecnocen\rmdb\migrations\CreatePivot
      */
     public function getTableName()
     {
-        return $this->getProcessTableName() . $this->worklogSuffix;
+        return $this->getProcessTableName() . $this->assignmentSuffix;
     }
 
     /**
