@@ -115,7 +115,7 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
      * @param  ApiTester $I
      * @param  Example $example
      * @dataprovider createDataProvider
-     * @depends fixtures
+     * @depends CreditWorklogCest:fixtures
      * @before authToken
      */
     public function create(ApiTester $I, Example $example)

@@ -79,7 +79,7 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'single record' => [
-                'url' => '/v1/credit/4/worklog/1',
+                'url' => '/v1/credit/1/worklog/1',
                 'data' => [
                     'expand' => 'process',
                 ],
@@ -143,18 +143,18 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
         $I->sendPOST('/v1/credit/1/worklog', ['stage_id' => 7]);
         $I->seeResponseCodeIs(HttpCode::FORBIDDEN);
 
-        $auth->assign($admin, 1);
+        $auth->assign($adminRole, 1);
         $I->sendPOST('/v1/credit/1/worklog', ['stage_id' => 7]);
-        $I->seeResponseCodeIs(HttpCode::FORBIDDEN);
+        $I->seeResponseCodeIs(HttpCode::CREATED);
 
-        $auth->revoke($admin, 1);
+        $auth->revoke($adminRole, 1);
     }
 
     /**
      * @param  ApiTester $I
      * @param  Example $example
      * @dataprovider updateDataProvider
-     * @depends fixtures
+     * @depends create
      * @before authToken
      */
     public function update(ApiTester $I, Example $example)
@@ -170,48 +170,11 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'update credit 1' => [
-                'url' => '/v1/credit/4/worklog/1',
+                'url' => '/v1/credit/1/worklog/1',
                 'data' => [
                     'stage_id' => 3
                 ],
                 'httpCode' => HttpCode::OK,
-            ],
-        ];
-    }
-
-    /**
-     * @param  ApiTester $I
-     * @param  Example $example
-     * @dataprovider deleteDataProvider
-     * @depends fixtures
-     * @before authToken
-     */
-    public function delete(ApiTester $I, Example $example)
-    {
-        $I->wantTo('Delete a Credit Worklog record.');
-        $this->internalDelete($I, $example);
-    }
-
-    /**
-     * @return array[] data for test `delete()`.
-     */
-    protected function deleteDataProvider()
-    {
-        return [
-            'credit worklog not found' => [
-                'url' => '/v1/credit/1/worklog/32',
-                'httpCode' => HttpCode::NOT_FOUND,
-            ],
-            'delete credit worklog 1' => [
-                'url' => '/v1/credit/4/worklog/1',
-                'httpCode' => HttpCode::NO_CONTENT,
-            ],
-            'not found' => [
-                'url' => '/v1/credit/4/worklog/1',
-                'httpCode' => HttpCode::NOT_FOUND,
-                'validationErrors' => [
-                    'name' => 'The record "1" does not exists.'
-                ],
             ],
         ];
     }

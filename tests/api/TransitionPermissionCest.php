@@ -66,8 +66,8 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
             'list with target stage' => [
                 'urlParams' => [
                     'workflow_id' => 2,
-                    'stage_id' => 4,
-                    'target_id' => 5,
+                    'stage_id' => 5,
+                    'target_id' => 7    ,
                     'expand' => 'targetStage'
                 ],
                 'httpCode' => HttpCode::OK,

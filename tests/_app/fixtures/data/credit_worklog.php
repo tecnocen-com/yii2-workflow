@@ -4,6 +4,13 @@ $now = new \yii\db\Expression('NOW()');
 
 return [
     [
+        'process_id' => 1,
+        'stage_id' => 4,
+        'commentary' => 'stage 4',
+        'created_by' => 1,
+        'created_at' => $now,
+    ],
+    [
         'process_id' => 4,
         'stage_id' => 4,
         'commentary' => 'stage 4',
