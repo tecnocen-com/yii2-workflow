@@ -3,6 +3,9 @@
 namespace tecnocen\workflow\models;
 
 use tecnocen\rmdb\models\Pivot;
+use Yii;
+use yii\web\ForbiddenHttpException;
+use yii\web\BadRequestHttpException;
 
 /**
  * @property int $id
@@ -65,6 +68,46 @@ abstract class WorkLog extends Pivot
                 'message' => 'There is no transition for the current stage'
             ],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        if (!$insert || $this->scenario == self::SCENARIO_INITIAL) {
+            // editing a worklog or creating initial worklog
+            return true;
+        }
+
+        $transition = Transition::find()->andWhere([
+            'source_stage_id' => $this->process->activeWorkLog->stage_id,
+            'target_stage_id' => $this->stage_id,
+        ])->one();
+
+        if (!isset($transition)) {
+            throw new BadRequestHttpException('Stage not transitionable.');
+        }
+
+        if (!$this->process->userAssigned(Yii::$app->user->id)) {
+            throw new ForbiddenHttpException(
+                'You are not assigned to move this process.'
+            );
+        }
+
+        if (!$transition->userCan(Yii::$app->user->id, $this->process)) {
+            throw new ForbiddenHttpException(
+                'You dont have permission for the transition.'
+            );
+        }
+
+        unset($this->process->activeWorkLog);
+
+        return true;
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace tecnocen\workflow\models;
 
+use Yii;
+
 /**
  * Model class for table `{{%workflow_transition}}`
  *
@@ -120,6 +122,32 @@ class Transition extends \tecnocen\rmdb\models\Entity
     }
 
     /**
+     * Whether the user can execute the transition.
+     *
+     * @param int $userId
+     * @param Process $process
+     * @return boolean
+     */
+    public function userCan($userId, Process  $process)
+    {
+        if (!$this->getPermissions()->exists()) {
+            return true;
+        }
+        $authManager = Yii::$app->authManager;
+
+        foreach ($this->permissions as $permission) {
+            if (!$authManager->checkAccess($userId, $permission->permission, [
+                'transition' => $this,
+                'process' => $process
+            ])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * @inheritdoc
      */
     public function attributeLabels()
@@ -152,7 +180,7 @@ class Transition extends \tecnocen\rmdb\models\Entity
      */
     public function getPermissions()
     {
-        return $this->hasOne(
+        return $this->hasMany(
             $this->permissionClass,
             [
                 'source_stage_id' => 'source_stage_id',

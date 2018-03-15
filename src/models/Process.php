@@ -70,6 +70,18 @@ abstract class Process extends Entity
     }
 
     /**
+     * Whether the user is asigned to the process.
+     *
+     * @param int $userId [description]
+     * @return boolean
+     */
+    public function userAssigned($userId)
+    {
+        return !$this->getAssignments()->exists() || $this->getAssignments()
+            ->andWhere(['user_id' => $userId]);
+    }
+
+    /**
      * @inheritdoc
      */
     public function transactions()
@@ -102,7 +114,7 @@ abstract class Process extends Entity
     {
         parent::afterSave($insert, $changedAttributes);
 
-	if ($insert) {
+        if ($insert) {
             $initialLog = ['stage_id' => $this->initial_stage_id];
             $this->initialLog($initialLog, false);
         }
@@ -159,8 +171,8 @@ abstract class Process extends Entity
         $workLogClass = $this->workLogClass();
 
         return $query->andWhere([
-            'created_at' => $workLogClass::find()
-                ->select(['MAX(created_at)'])
+            'id' => $workLogClass::find()
+                ->select(['MAX(id)'])
                 ->alias('worklog_groupwise')
                 ->andWhere('worklog.process_id = worklog_groupwise.process_id')
         ]);
