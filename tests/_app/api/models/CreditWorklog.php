@@ -28,7 +28,7 @@ class CreditWorklog extends \app\models\CreditWorklog
         return array_merge(parent::behaviors(), [
             'slug' => [
                 'class' => Slug::class,
-                'resourceName' => 'creditWorklog',
+                'resourceName' => 'credit',
             ],
         ]);
     }
@@ -39,7 +39,7 @@ class CreditWorklog extends \app\models\CreditWorklog
     public function getLinks()
     {
         return array_merge($this->getSlugLinks(), [
-            'creditWorklogs' => $this->getSelfLink() . '/creditWorklog',
+            'creditWorklogs' => $this->getSelfLink() . '/worklog',
         ]);
     }
 }
