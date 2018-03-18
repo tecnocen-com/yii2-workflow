@@ -12,10 +12,10 @@ class CreditCest
     public function fixtures(UnitTester $I)
     {
         $I->haveFixtures([
-	    'worklog' => [
-	         'class' => CreditFixture::class,
-	    ],
-	]);
+            'worklog' => [
+                'class' => CreditFixture::class,
+	        ],
+	    ]);
     }	
 
     /**
@@ -62,9 +62,9 @@ class CreditCest
     public function save(UnitTester $I, Example $example)
     {
         $credit = new Credit();
-	$credit->load($example['data'], '');
-	$credit->save();
-	$I->assertEmpty($credit->getFirstErrors());
+	    $credit->load($example['data'], '');
+	    $credit->save();
+	    $I->assertEmpty($credit->getFirstErrors());
         $I->assertTrue($credit->save());
         $I->assertNotEmpty($credit->workLogs);
         $I->assertNotEmpty($credit->activeWorkLog);
