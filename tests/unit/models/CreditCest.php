@@ -2,7 +2,7 @@
 
 namespace models;
 
-use app\fixtures\CreditFixture;
+use app\fixtures\CreditWorklogFixture;
 use app\models\Credit;
 use Codeception\Example;
 use UnitTester;
@@ -12,11 +12,11 @@ class CreditCest
     public function fixtures(UnitTester $I)
     {
         $I->haveFixtures([
-            'worklog' => [
-                'class' => CreditFixture::class,
+            'credit_worklog' => [
+                'class' => CreditWorklogFixture::class,
 	        ],
 	    ]);
-    }	
+    }
 
     /**
      * @dataprovider failedValidationData
