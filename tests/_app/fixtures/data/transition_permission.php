@@ -31,15 +31,6 @@ return [
         'updated_at' => $now,
     ],
     [
-        'source_stage_id' => 4,
-        'target_stage_id' => 5,
-        'permission' => 'admin',
-        'created_by' => 1,
-        'created_at' => $now,
-        'updated_by' => 1,
-        'updated_at' => $now,
-    ],
-    [
         'source_stage_id' => 5,
         'target_stage_id' => 6,
         'permission' => 'admin',

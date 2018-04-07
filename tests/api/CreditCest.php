@@ -17,11 +17,16 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
         $I->amBearerAuthenticated(OauthAccessTokensFixture::SIMPLE_TOKEN);
     }
 
+    /**
+     * @depends TransitionPermissionCest:fixtures
+     */
     public function fixtures(ApiTester $I)
     {
         $I->haveFixtures([
-            'access_tokens' => OauthAccessTokensFixture::class,
-            'credit' => CreditFixture::class,
+            'credit' => [
+                'class' => CreditFixture::class,
+                'depends' => []
+            ],
         ]);
     }
 
@@ -110,7 +115,7 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
      * @param  ApiTester $I
      * @param  Example $example
      * @dataprovider createDataProvider
-     * @depends fixtures
+     * @depends CreditWorklogCest:fixtures
      * @before authToken
      */
     public function create(ApiTester $I, Example $example)
@@ -214,7 +219,7 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
      * @param  ApiTester $I
      * @param  Example $example
      * @dataprovider deleteDataProvider
-     * @depends fixtures
+     * @depends CreditWorklogCest:create
      * @before authToken
      */
     public function delete(ApiTester $I, Example $example)
@@ -233,15 +238,15 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
                 'url' => '/v1/credit/10',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
-            'delete credit 1' => [
-                'url' => '/v1/credit/1',
+            'delete credit 5' => [
+                'url' => '/v1/credit/5',
                 'httpCode' => HttpCode::NO_CONTENT,
             ],
             'not found' => [
-                'url' => '/v1/credit/1',
+                'url' => '/v1/credit/5',
                 'httpCode' => HttpCode::NOT_FOUND,
                 'validationErrors' => [
-                    'name' => 'The record "1" does not exists.'
+                    'name' => 'The record "5" does not exists.'
                 ],
             ],
         ];

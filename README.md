@@ -195,6 +195,19 @@ Run tests with coverage.
 composer run-coverage
 ```
 
+## Live Demo
+
+You can run a live demo on a freshly installed project to help you run testing
+or understand the responses returned by the server. The live demo is initialized
+with the command.
+
+```
+php -S localhost:8000 -t tests/_app
+```
+
+Where `:8000` is the port number which can be changed. This allows you call ROA
+services on a browser or REST client.
+
 ## Use Cases
 
 TO DO

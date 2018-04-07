@@ -2,6 +2,7 @@
 
 use Codeception\Example;
 use Codeception\Util\HttpCode;
+use app\fixtures\AuthItemFixture;
 use app\fixtures\OauthAccessTokensFixture;
 use app\fixtures\TransitionPermissionFixture;
 
@@ -17,11 +18,17 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
         $I->amBearerAuthenticated(OauthAccessTokensFixture::SIMPLE_TOKEN);
     }
 
+    /**
+     * @depends TransitionCest:fixtures
+     */
     public function fixtures(ApiTester $I)
     {
         $I->haveFixtures([
-            'access_tokens' => OauthAccessTokensFixture::class,
-            'transition' => TransitionPermissionFixture::class,
+            'auth_item' => AuthItemFixture::class,
+            'transition_permission' => [
+                'class' => TransitionPermissionFixture::class,
+                'depends' => [],
+            ],
         ]);
     }
 
@@ -59,8 +66,8 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
             'list with target stage' => [
                 'urlParams' => [
                     'workflow_id' => 2,
-                    'stage_id' => 4,
-                    'target_id' => 5,
+                    'stage_id' => 5,
+                    'target_id' => 7    ,
                     'expand' => 'targetStage'
                 ],
                 'httpCode' => HttpCode::OK,
@@ -193,7 +200,7 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
                     'permission' => 'administrator',
                 ],
                 'httpCode' => HttpCode::NOT_FOUND,
-            ],            
+            ],
             'to short' => [
                 'urlParams' => [
                     'workflow_id' => 1,

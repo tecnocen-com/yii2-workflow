@@ -39,8 +39,9 @@
     "require-dev": {
         "codeception/base": "^2.2.11",
         "codeception/verify": "~0.3.1",
+        "flow/jsonpath": "~0.3",
         "phpunit/php-code-coverage": "5.3.*",
-        "flow/jsonpath": "~0.3"
+        "yiisoft/yii2-debug": "*"
     },
     "scripts": {
         "deploy-tests": [
@@ -48,7 +49,8 @@
             "@php tests/_app/yii.php migrate 1 -p=@app/migrations --interactive=0",
             "@php tests/_app/yii.php migrate -p=@tecnocen/oauth2server/migrations/tables --interactive=0",
             "@php tests/_app/yii.php migrate -p=@tecnocen/workflow/migrations --interactive=0",
-            "@php tests/_app/yii.php migrate -p=@app/migrations --interactive=0"
+            "@php tests/_app/yii.php migrate -p=@app/migrations --interactive=0",
+            "@php tests/_app/yii.php migrate -p=@yii/rbac/migrations --interactive=0"
         ],
         "run-tests": [
             "@php vendor/bin/codecept run --steps"

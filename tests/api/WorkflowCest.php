@@ -71,7 +71,7 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
      * @param  ApiTester $I
      * @param  Example $example
      * @dataprovider viewDataProvider
-     * @depends fixtures
+     * @depends StageCest:fixtures
      * @before authToken
      */
     public function view(ApiTester $I, Example $example)

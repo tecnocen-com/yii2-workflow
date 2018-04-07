@@ -17,11 +17,16 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
         $I->amBearerAuthenticated(OauthAccessTokensFixture::SIMPLE_TOKEN);
     }
 
+    /**
+     * @depends StageCest:fixtures
+     */
     public function fixtures(ApiTester $I)
     {
         $I->haveFixtures([
-            'access_tokens' => OauthAccessTokensFixture::class,
-            'transition' => TransitionFixture::class,
+            'transition' => [
+                'class' => TransitionFixture::class,
+                'depends' => [],
+            ]
         ]);
     }
 
@@ -202,7 +207,7 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                     'target_stage_id' => 4
                 ],
                 'httpCode' => HttpCode::NOT_FOUND,
-            ],            
+            ],
             'unique source target' => [
                 'urlParams' => [
                     'workflow_id' => 1,
@@ -302,15 +307,15 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                 'url' => '/w1/workflow/1/stage/1/transition/10',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
-            'delete stage 1' => [
-                'url' => '/w1/workflow/1/stage/1/transition/2',
+            'delete transition 1-3' => [
+                'url' => '/w1/workflow/1/stage/1/transition/3',
                 'httpCode' => HttpCode::NO_CONTENT,
             ],
             'not found' => [
-                'url' => '/w1/workflow/1/stage/1/transition/2',
+                'url' => '/w1/workflow/1/stage/1/transition/3',
                 'httpCode' => HttpCode::NOT_FOUND,
                 'validationErrors' => [
-                    'name' => 'The record "2" does not exists.'
+                    'name' => 'The record "3" does not exists.'
                 ],
             ],
         ];
