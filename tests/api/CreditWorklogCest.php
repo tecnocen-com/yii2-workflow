@@ -17,11 +17,16 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
         $I->amBearerAuthenticated(OauthAccessTokensFixture::SIMPLE_TOKEN);
     }
 
+    /**
+     * @depends CreditCest:fixtures
+     */
     public function fixtures(ApiTester $I)
     {
         $I->haveFixtures([
-            'access_tokens' => OauthAccessTokensFixture::class,
-            'credit_worklog' => CreditWorklogFixture::class,
+            'credit_worklog' => [
+                'class' => CreditWorklogFixture::class,
+                'depends' => [],
+            ]
         ]);
     }
 
@@ -45,7 +50,7 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'list' => [
-                'url' => '/v1/credit/1/worklog',
+                'url' => '/v1/credit/4/worklog',
                 'httpCode' => HttpCode::OK,
                 'headers' => [
                     'X-Pagination-Total-Count' => 4,
@@ -128,9 +133,28 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
 
     /**
      * @param  ApiTester $I
+     * @depends create
+     * @before authToken
+     */
+    public function permission(ApiTester $I)
+    {
+        $auth = Yii::$app->authManager;
+        $adminRole = $auth->getRole('admin');
+        $I->sendPOST('/v1/credit/1/worklog', ['stage_id' => 7]);
+        $I->seeResponseCodeIs(HttpCode::FORBIDDEN);
+
+        $auth->assign($adminRole, 1);
+        $I->sendPOST('/v1/credit/1/worklog', ['stage_id' => 7]);
+        $I->seeResponseCodeIs(HttpCode::CREATED);
+
+        $auth->revoke($adminRole, 1);
+    }
+
+    /**
+     * @param  ApiTester $I
      * @param  Example $example
      * @dataprovider updateDataProvider
-     * @depends fixtures
+     * @depends create
      * @before authToken
      */
     public function update(ApiTester $I, Example $example)
@@ -151,43 +175,6 @@ class CreditWorklogCest extends \tecnocen\roa\test\AbstractResourceCest
                     'stage_id' => 3
                 ],
                 'httpCode' => HttpCode::OK,
-            ],
-        ];
-    }
-
-    /**
-     * @param  ApiTester $I
-     * @param  Example $example
-     * @dataprovider deleteDataProvider
-     * @depends fixtures
-     * @before authToken
-     */
-    public function delete(ApiTester $I, Example $example)
-    {
-        $I->wantTo('Delete a Credit Worklog record.');
-        $this->internalDelete($I, $example);
-    }
-
-    /**
-     * @return array[] data for test `delete()`.
-     */
-    protected function deleteDataProvider()
-    {
-        return [
-            'credit worklog not found' => [
-                'url' => '/v1/credit/1/worklog/32',
-                'httpCode' => HttpCode::NOT_FOUND,
-            ],
-            'delete credit worklog 1' => [
-                'url' => '/v1/credit/1/worklog/1',
-                'httpCode' => HttpCode::NO_CONTENT,
-            ],
-            'not found' => [
-                'url' => '/v1/credit/1/worklog/1',
-                'httpCode' => HttpCode::NOT_FOUND,
-                'validationErrors' => [
-                    'name' => 'The record "1" does not exists.'
-                ],
             ],
         ];
     }

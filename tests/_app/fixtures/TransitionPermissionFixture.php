@@ -25,5 +25,8 @@ class TransitionPermissionFixture extends ActiveFixture
     /**
      * @inheritdoc
      */
-    public $depends = ['app\fixtures\TransitionFixture'];
+    public $depends = [
+        TransitionFixture::class,
+        AuthItemFixture::class,
+    ];
 }

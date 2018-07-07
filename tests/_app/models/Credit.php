@@ -27,6 +27,11 @@ class Credit extends \tecnocen\workflow\models\Process
         return '{{%credit}}';
     }
 
+    protected function assignmentClass()
+    {
+        return CreditAssignment::class;
+    }
+
     protected function workLogClass()
     {
         return CreditWorklog::class;

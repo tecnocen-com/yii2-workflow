@@ -5,6 +5,9 @@ namespace models;
 use UnitTester;
 use app\fixtures\CreditWorklogFixture;
 use app\models\CreditWorklog;
+use app\models\User;
+use Yii;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Cest to credit worklog model.
@@ -13,14 +16,9 @@ use app\models\CreditWorklog;
  */
 class CreditWorklogCest
 {
-
-    public function fixtures(UnitTester $I)
-    {
-        $I->haveFixtures([
-            'credit_worklog' => CreditWorklogFixture::class,
-        ]);
-    }
-
+    /**
+     * @depends models\CreditCest:save
+     */
     public function validate(UnitTester $I)
     {
         $creditWorklog = new CreditWorklog();
@@ -33,16 +31,27 @@ class CreditWorklogCest
 
     }
 
+    /**
+     * @depends models\CreditCest:save
+     */
     public function save(UnitTester $I)
     {
         $creditWorklog = new CreditWorklog();
-        $creditWorklog->process_id = 1;
-        $creditWorklog->stage_id   = 2;
-        $creditWorklog->save();
-        $I->assertEmpty($creditWorklog->getFirstErrors());
-        $I->seeRecord(CreditWorkLog::class, [
-            'process_id' => 1,
-            'stage_id' => 2,
-        ]);
+        $creditWorklog->process_id = 4; // current stage_id = 7
+        $creditWorklog->stage_id = 4;
+        $I->expectException(
+            ForbiddenHttpException::class,
+            function () use ($creditWorklog) {
+                $creditWorklog->save();
+            }
+        );
+
+        $auth = Yii::$app->authManager;
+        $adminRole = $auth->getRole('admin');
+        $auth->assign($adminRole, 1);
+        Yii::$app->user->login(User::findOne(1));
+
+        $I->assertTrue($creditWorklog->save());
+        $auth->revoke($adminRole, 1);
     }
 }

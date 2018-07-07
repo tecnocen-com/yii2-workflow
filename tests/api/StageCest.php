@@ -17,11 +17,16 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
         $I->amBearerAuthenticated(OauthAccessTokensFixture::SIMPLE_TOKEN);
     }
 
+    /**
+     * @depends WorkflowCest:fixtures
+     */
     public function fixtures(ApiTester $I)
     {
         $I->haveFixtures([
-            'access_tokens' => OauthAccessTokensFixture::class,
-            'stage' => StageFixture::class,
+            'stage' => [
+                'class' => StageFixture::class,
+                'depends' => []
+            ],
         ]);
     }
 
@@ -251,15 +256,15 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
                 'url' => '/w1/workflow/10/stage/1',
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
-            'delete stage 1' => [
-                'url' => '/w1/workflow/1/stage/1',
+            'delete stage 8' => [
+                'url' => '/w1/workflow/1/stage/8',
                 'httpCode' => HttpCode::NO_CONTENT,
             ],
             'not found' => [
-                'url' => '/w1/workflow/1/stage/1',
+                'url' => '/w1/workflow/1/stage/8',
                 'httpCode' => HttpCode::NOT_FOUND,
                 'validationErrors' => [
-                    'name' => 'The record "1" does not exists.'
+                    'name' => 'The record "8" does not exists.'
                 ],
             ],
         ];

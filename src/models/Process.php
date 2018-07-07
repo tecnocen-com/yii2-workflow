@@ -21,6 +21,12 @@ abstract class Process extends Entity
 
     /**
      * @return string full class name of the class to be used to store the
+     * assignment records.
+     */
+    protected abstract function assignmentClass();
+
+    /**
+     * @return string full class name of the class to be used to store the
      * worklog records.
      */
     protected abstract function workLogClass();
@@ -46,6 +52,18 @@ abstract class Process extends Entity
     }
 
     /**
+     * Whether the user is asigned to the process.
+     *
+     * @param int $userId [description]
+     * @return boolean
+     */
+    public function userAssigned($userId)
+    {
+        return !$this->getAssignments()->exists() || $this->getAssignments()
+            ->andWhere(['user_id' => $userId]);
+    }
+
+    /**
      * @inheritdoc
      */
     public function transactions()
@@ -63,7 +81,6 @@ abstract class Process extends Entity
         parent::afterSave($insert, $changedAttributes);
 
         if ($insert) {
-            $this->initialWorklog->save();
             $initialLog = ['stage_id' => $this->initial_stage_id];
             $this->initialLog($initialLog, false);
         }
@@ -80,7 +97,23 @@ abstract class Process extends Entity
                     . WorkLog::class
             );
         }
+        if (!is_subclass_of($this->assignmentClass(), Assignment::class)) {
+            throw new InvalidConfigException(
+                static::class . '::assignmentClass() must extend '
+                    . Assignment::class
+            );
+        }
         parent::init();
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssignments()
+    {
+        return $this->hasMany($this->assignmentClass(), [
+            'process_id' => 'id',
+        ]);
     }
 
     /**
@@ -104,8 +137,8 @@ abstract class Process extends Entity
         $workLogClass = $this->workLogClass();
 
         return $query->andWhere([
-            'created_at' => $workLogClass::find()
-                ->select(['MAX(created_at)'])
+            'id' => $workLogClass::find()
+                ->select(['MAX(id)'])
                 ->alias('worklog_groupwise')
                 ->andWhere('worklog.process_id = worklog_groupwise.process_id')
         ]);

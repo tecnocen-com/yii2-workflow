@@ -3,8 +3,8 @@
 namespace app\models;
 
 use OAuth2\Storage\UserCredentialsInterface;
-use Yii;
 use tecnocen\oauth2server\models\OauthAccessTokens as AccessToken;
+use Yii;
 use yii\web\IdentityInterface;
 
 class User extends \yii\db\ActiveRecord
@@ -20,7 +20,7 @@ class User extends \yii\db\ActiveRecord
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id]);
     }
 
     /**
