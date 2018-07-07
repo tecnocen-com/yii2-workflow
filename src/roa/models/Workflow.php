@@ -5,6 +5,7 @@ namespace tecnocen\workflow\roa\models;
 use tecnocen\roa\behaviors\Slug;
 use tecnocen\roa\hal\Embeddable;
 use tecnocen\roa\hal\EmbeddableTrait;
+use yii\web\Link;
 use yii\web\Linkable;
 use yii\web\NotFoundHttpException;
 
@@ -78,6 +79,16 @@ class Workflow extends \tecnocen\workflow\models\Workflow
     {
         return array_merge($this->getSlugLinks(), [
             'stages' => $this->getSelfLink() . '/stage',
+            'curies' => [
+                new Link([
+                    'name' => 'embeddable',
+                    'href' => $this->getSelfLink() . '?expand={rel}',
+                    'title' => 'Embeddable and not Nestable related resources.',
+                ]),
+            ],
+            'embeddable:stages' => 'stages',
+            'embeddable:detailStages' => 'detailStages',
+            'embeddable:totalStages' => 'totalStages',
         ]);
     }
 
@@ -86,6 +97,6 @@ class Workflow extends \tecnocen\workflow\models\Workflow
      */
     public function extraFields()
     {
-        return ['stages', 'detailsStages', 'totalStages'];
+        return ['stages', 'detailStages', 'totalStages'];
     }
 }

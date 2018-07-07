@@ -5,6 +5,7 @@ namespace tecnocen\workflow\roa\models;
 use tecnocen\roa\behaviors\Slug;
 use tecnocen\roa\hal\Embeddable;
 use tecnocen\roa\hal\EmbeddableTrait;
+use yii\web\Link;
 use yii\web\Linkable;
 
 /**
@@ -73,6 +74,21 @@ class Stage extends \tecnocen\workflow\models\Stage
     {
         return array_merge($this->getSlugLinks(), [
             'transitions' => $this->getSelfLink() . '/transition',
+            'curies' => [
+                new Link([
+                    'name' => 'nestable',
+                    'href' => $this->getSelfLink() . '?expand={rel}',
+                    'title' => 'Embeddable and Nestable related resources.',
+                ]),
+                new Link([
+                    'name' => 'embeddable',
+                    'href' => $this->getSelfLink() . '?expand={rel}',
+                    'title' => 'Embeddable and not Nestable related resources.',
+                ]),
+            ],
+            'nestable:workflow' => 'workflow',
+            'embeddable:detailTransitions' => 'detailTransitions',
+            'embeddable:totalTransitions' => 'totalTransitions',
         ]);
     }
 

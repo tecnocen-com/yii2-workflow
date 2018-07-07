@@ -6,6 +6,7 @@ use Yii;
 use tecnocen\roa\behaviors\Slug;
 use tecnocen\roa\hal\Embeddable;
 use tecnocen\roa\hal\EmbeddableTrait;
+use yii\web\Link;
 use yii\web\Linkable;
 
 /**
@@ -45,12 +46,24 @@ class TransitionPermission
         ]);
     }
 
+
     /**
      * @inheritdoc
      */
     public function getLinks()
     {
-        return $this->getSlugLinks();
+        return array_merge($this->getSlugLinks(), [
+            'curies' => [
+                new Link([
+                    'name' => 'nestable',
+                    'href' => $this->getSelfLink() . '?expand={rel}',
+                    'title' => 'Embeddable and Nestable related resources.',
+                ]),
+            ],
+            'nestable:transition' => 'transition',
+            'nestable:sourceStage' => 'sourceStage',
+            'nestable:targetStage' => 'targetStage',
+        ]);
     }
 
     /**
