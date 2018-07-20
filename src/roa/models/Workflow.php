@@ -2,10 +2,11 @@
 
 namespace tecnocen\workflow\roa\models;
 
+use tecnocen\roa\behaviors\Curies;
 use tecnocen\roa\behaviors\Slug;
 use tecnocen\roa\hal\Embeddable;
 use tecnocen\roa\hal\EmbeddableTrait;
-use yii\web\Link;
+use tecnocen\workflow\models as base;
 use yii\web\Linkable;
 use yii\web\NotFoundHttpException;
 
@@ -15,8 +16,7 @@ use yii\web\NotFoundHttpException;
  * @method string[] getSlugLinks()
  * @method string getSelfLink()
  */
-class Workflow extends \tecnocen\workflow\models\Workflow
-    implements Linkable, Embeddable
+class Workflow extends base\Workflow implements Linkable, Embeddable
 {
     use EmbeddableTrait {
         EmbeddableTrait::toArray as embedArray;
@@ -69,6 +69,7 @@ class Workflow extends \tecnocen\workflow\models\Workflow
                     }
                 },
             ],
+            'curies' => Curies::class,
         ]);
     }
 
@@ -77,18 +78,8 @@ class Workflow extends \tecnocen\workflow\models\Workflow
      */
     public function getLinks()
     {
-        return array_merge($this->getSlugLinks(), [
+        return array_merge($this->getSlugLinks(), $this->getCuriesLinks(), [
             'stages' => $this->getSelfLink() . '/stage',
-            'curies' => [
-                new Link([
-                    'name' => 'embeddable',
-                    'href' => $this->getSelfLink() . '?expand={rel}',
-                    'title' => 'Embeddable and not Nestable related resources.',
-                ]),
-            ],
-            'embeddable:stages' => 'stages',
-            'embeddable:detailStages' => 'detailStages',
-            'embeddable:totalStages' => 'totalStages',
         ]);
     }
 

@@ -2,10 +2,11 @@
 
 namespace tecnocen\workflow\roa\models;
 
+use tecnocen\roa\behaviors\Curies;
 use tecnocen\roa\behaviors\Slug;
 use tecnocen\roa\hal\Embeddable;
 use tecnocen\roa\hal\EmbeddableTrait;
-use yii\web\Link;
+use tecnocen\workflow\models as base;
 use yii\web\Linkable;
 
 /**
@@ -14,8 +15,7 @@ use yii\web\Linkable;
  * @method string[] getSlugLinks()
  * @method string getSelfLink()
  */
-class Transition extends \tecnocen\workflow\models\Transition
-    implements Linkable, Embeddable
+class Transition extends base\Transition implements Linkable, Embeddable
 {
     use EmbeddableTrait;
 
@@ -41,6 +41,7 @@ class Transition extends \tecnocen\workflow\models\Transition
                 'parentSlugRelation' => 'sourceStage',
                 'idAttribute' => 'target_stage_id',
             ],
+            'curies' => Curies::class,
         ]);
     }
 
@@ -49,24 +50,9 @@ class Transition extends \tecnocen\workflow\models\Transition
      */
     public function getLinks()
     {
-        return array_merge($this->getSlugLinks(), [
+        return array_merge($this->getSlugLinks(), $this->getCuriesLinks(), [
             'permissions' => $this->getSelfLink() . '/permission',
             'target_stage' => $this->targetStage->getSelfLink(),
-            'curies' => [
-                new Link([
-                    'name' => 'nestable',
-                    'href' => $this->getSelfLink() . '?expand={rel}',
-                    'title' => 'Embeddable and Nestable related resources.',
-                ]),
-                new Link([
-                    'name' => 'embeddable',
-                    'href' => $this->getSelfLink() . '?expand={rel}',
-                    'title' => 'Embeddable and not Nestable related resources.',
-                ]),
-            ],
-            'nestable:sourceStage' => 'sourceStage',
-            'nestable:targetStage' => 'targetStage',
-            'embeddable:permissions' => 'permissions',
         ]);
     }
 
