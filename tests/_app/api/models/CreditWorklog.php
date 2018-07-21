@@ -27,7 +27,7 @@ class CreditWorklog extends \app\models\CreditWorklog implements Linkable
         return array_merge(parent::behaviors(), [
             'slug' => [
                 'class' => Slug::class,
-                'resourceName' => 'workflog',
+                'resourceName' => 'worklog',
                 'parentSlugRelation' => 'process'
             ],
         ]);

@@ -4,6 +4,7 @@ namespace app\api\modules;
 
 use app\api\resources\CreditResource;
 use app\api\resources\CreditWorklogResource;
+use app\api\resources\CreditAssignmentResource;
 
 class Version extends \tecnocen\roa\modules\ApiVersion
 {

@@ -3,6 +3,7 @@
 namespace tecnocen\workflow\models;
 
 use tecnocen\rmdb\models\Pivot;
+use Yii;
 
 /**
  * @property int $process_id
