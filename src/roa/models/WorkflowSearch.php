@@ -4,6 +4,11 @@ namespace tecnocen\workflow\roa\models;
 
 use yii\data\ActiveDataProvider;
 
+/**
+ * Contract to filter and sort collections of `Workflow` records.
+ *
+ * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
+ */
 class WorkflowSearch extends Workflow implements \tecnocen\roa\ResourceSearch
 {
     /**

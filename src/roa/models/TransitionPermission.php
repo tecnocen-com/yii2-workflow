@@ -10,7 +10,6 @@ use tecnocen\workflow\models as base;
 use yii\web\Linkable;
 
 /**
- *
  * ROA contract to handle workflow transition permissions records.
  *
  * @method string[] getSlugLinks()
