@@ -20,7 +20,7 @@ class TransitionPermissionSearch extends TransitionPermission
     public function rules()
     {
         return [
-            [['source_stage_id', 'target_stage_id'], 'integer'],
+            [['created_by', 'source_stage_id', 'target_stage_id'], 'integer'],
             [['permission'], 'string'],
         ];
     }

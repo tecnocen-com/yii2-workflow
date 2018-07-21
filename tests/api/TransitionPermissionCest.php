@@ -112,6 +112,15 @@ class TransitionPermissionCest extends \tecnocen\roa\test\AbstractResourceCest
                     'X-Pagination-Total-Count' => 1,
                 ],
             ],
+            'rule created_by' => [
+                'urlParams' => [
+                    'workflow_id' => 1,
+                    'stage_id' => 1,
+                    'target_id' => 2,
+                    'created_by' => 'per',
+                ],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+            ],
         ];
     }
 

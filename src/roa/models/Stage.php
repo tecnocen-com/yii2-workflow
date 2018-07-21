@@ -86,6 +86,7 @@ class Stage extends base\Stage implements Linkable, Embeddable
     {
         return [
             'workflow',
+            'transitions',
             'detailTransitions',
             'totalTransitions',
         ];
