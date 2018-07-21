@@ -13,16 +13,6 @@ use tecnocen\roa\ResourceSearch;
  */
 class TransitionSearch extends Transition implements ResourceSearch
 {
-    /**
-     * @inhertidoc
-     */
-    protected function slugConfig()
-    {
-        return [
-            'idAttribute' => [],
-            'resourceName' => 'transition',
-        ];
-    }
 
     /**
      * @inhertidoc

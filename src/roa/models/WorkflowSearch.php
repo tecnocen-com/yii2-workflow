@@ -11,16 +11,6 @@ use yii\data\ActiveDataProvider;
  */
 class WorkflowSearch extends Workflow implements \tecnocen\roa\ResourceSearch
 {
-    /**
-     * @inhertidoc
-     */
-    protected function slugConfig()
-    {
-        return [
-            'idAttribute' => [],
-            'resourceName' => 'workflow',
-        ];
-    }
 
     /**
      * @inhertidoc

@@ -12,16 +12,6 @@ use yii\web\NotFoundHttpException;
  */
 class StageSearch extends Stage implements \tecnocen\roa\ResourceSearch
 {
-    /**
-     * @inhertidoc
-     */
-    protected function slugConfig()
-    {
-        return [
-            'idAttribute' => [],
-            'resourceName' => 'stage',
-        ];
-    }
 
     /**
      * @inhertidoc
