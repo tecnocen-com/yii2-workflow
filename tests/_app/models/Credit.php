@@ -14,12 +14,6 @@ use tecnocen\workflow\models\Workflow;
 class Credit extends \tecnocen\workflow\models\Process
 {
     /**
-     * @var string full class name of the model to be used for the relation
-     * `getWorkflow()`.
-     */
-    protected $workflowClass = Workflow::class;
-
-    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -68,13 +62,5 @@ class Credit extends \tecnocen\workflow\models\Process
             'id' => Yii::t('app', 'ID'),
             'workflow_id' => Yii::t('app', 'Workflow ID'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getWorkflow()
-    {
-        return $this->hasOne(Workflow::class, ['id' => 'workflow_id']);
     }
 }

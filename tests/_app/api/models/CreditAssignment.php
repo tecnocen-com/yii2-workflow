@@ -12,8 +12,7 @@ use yii\web\NotFoundHttpException;
  * @method string[] getSlugLinks()
  * @method string getSelfLink()
  */
-class CreditAssignment extends \app\models\CreditAssignment
-    implements Linkable
+class CreditAssignment extends \app\models\CreditAssignment implements Linkable
 {
     /**
      * @inheritdoc
@@ -24,8 +23,16 @@ class CreditAssignment extends \app\models\CreditAssignment
             'slug' => [
                 'class' => Slug::class,
                 'resourceName' => 'assignment',
-                'parentRelation' => 'process',
+                'parentSlugRelation' => 'process',
             ],
         ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getLinks()
+    {
+        return $this->getSlugLinks();
     }
 }

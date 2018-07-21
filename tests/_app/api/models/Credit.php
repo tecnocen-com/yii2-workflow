@@ -12,13 +12,17 @@ use yii\web\NotFoundHttpException;
  * @method string[] getSlugLinks()
  * @method string getSelfLink()
  */
-class Credit extends \app\models\Credit
-    implements Linkable
+class Credit extends \app\models\Credit implements Linkable
 {
-    /**
-     * @inheritdoc
-     */
-    protected $creditClass = Credit::class;
+    protected function assignmentClass()
+    {
+        return CreditAssignment::class;
+    }
+
+    protected function workLogClass()
+    {
+        return CreditWorklog::class;
+    }
 
     /**
      * @inheritdoc
@@ -52,5 +56,5 @@ class Credit extends \app\models\Credit
             'workLogs',
             'activeWorkLog',
         ];
-    } 
+    }
 }

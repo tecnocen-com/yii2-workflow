@@ -8,6 +8,7 @@ class CreditWorkLog extends \tecnocen\workflow\models\WorkLog
     {
         return '{{%credit_worklog}}';
     }
+
     protected function processClass()
     {
         return Credit::class;
