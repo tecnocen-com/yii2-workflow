@@ -74,6 +74,10 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
                 'httpCode' => HttpCode::NOT_FOUND,
             ],
+            'not found transition' => [
+                'url' => '/w1/workflow/2/stage/5/transition/1',
+                'httpCode' => HttpCode::NOT_FOUND,
+            ],
             'filter by name' => [
                 'urlParams' => [
                     'workflow_id' => 2,
@@ -84,6 +88,14 @@ class TransitionCest extends \tecnocen\roa\test\AbstractResourceCest
                 'headers' => [
                     'X-Pagination-Total-Count' => 1,
                 ],
+            ],
+            'rule created_by' => [
+                'urlParams' => [
+                    'workflow_id' => 2,
+                    'stage_id' => 5,
+                    'created_by' => 'tra',
+                ],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
             ],
         ];
     }

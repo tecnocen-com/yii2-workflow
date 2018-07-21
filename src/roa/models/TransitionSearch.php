@@ -4,24 +4,15 @@ namespace tecnocen\workflow\roa\models;
 
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
+use tecnocen\roa\ResourceSearch;
 
 /**
- * Contract to filter and sort collections of `Stage` records.
+ * Contract to filter and sort collections of `Transition` records.
  *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class TransitionSearch extends Transition implements \tecnocen\roa\ResourceSearch
+class TransitionSearch extends Transition implements ResourceSearch
 {
-    /**
-     * @inhertidoc
-     */
-    protected function slugConfig()
-    {
-        return [
-            'idAttribute' => [],
-            'resourceName' => 'transition',
-        ];
-    }
 
     /**
      * @inhertidoc

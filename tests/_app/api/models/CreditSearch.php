@@ -9,13 +9,7 @@ class CreditSearch extends Credit implements \tecnocen\roa\ResourceSearch
     /**
      * @inhertidoc
      */
-    protected function slugConfig()
-    {
-        return [
-            'idAttribute' => [],
-            'resourceName' => 'credit',
-        ];
-    }
+    protected $autogenerateInitialWorklog = false;
 
     /**
      * @inhertidoc
@@ -39,8 +33,8 @@ class CreditSearch extends Credit implements \tecnocen\roa\ResourceSearch
         $class = get_parent_class();
         return new ActiveDataProvider([
             'query' => $class::find()->andFilterWhere([
-                    'created_by' => $this->created_by,
-                ])
+                'created_by' => $this->created_by,
+            ])
         ]);
     }
 }

@@ -40,17 +40,17 @@ class CreditCest
                 'data' => [],
                 'errors' => [
                     'workflow_id' => 'Workflow ID cannot be blank.',
-                    'initial_stage_id' => 'Initial Stage Id cannot be blank.',
+                    'stage_id' => 'Stage ID cannot be blank.',
                 ],
             ],
             [
                 'data' => [
                     'workflow_id' => 10,
-                    'initial_stage_id' => 10,
+                    'stage_id' => 10,
                 ],
                 'errors' => [
                     'workflow_id' => 'Workflow ID is invalid.',
-                    'initial_stage_id' => 'Initial Stage Id is invalid.',
+                    'stage_id' => 'Not an initial stage for the workflow.',
                 ],
             ],
         ];
@@ -68,8 +68,8 @@ class CreditCest
         $I->assertTrue($credit->save());
         $I->assertNotEmpty($credit->workLogs);
         $I->assertNotEmpty($credit->activeWorkLog);
-        $I->assertNotEmpty(
-            $example['data']['initial_stage_id'],
+        $I->assertEquals(
+            $example['data']['stage_id'],
             $credit->activeWorkLog->stage_id
         );
     }
@@ -80,7 +80,7 @@ class CreditCest
             [
                 'data' => [
                     'workflow_id' => 1,
-                    'initial_stage_id' => 1,
+                    'stage_id' => 1,
                 ],
             ],
         ];

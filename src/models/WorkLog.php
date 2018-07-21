@@ -30,13 +30,15 @@ abstract class WorkLog extends Pivot
     public function rules()
     {
         return [
-            [['process_id', 'stage_id'], 'required'],
+            [['process_id'], 'required', 'except' => [self::SCENARIO_INITIAL]],
+            [['stage_id'], 'required'],
             [['process_id', 'stage_id'], 'integer'],
             [
                 ['process_id'],
                 'exist',
                 'targetAttribute' => ['process_id' => 'id'],
                 'targetClass' => $this->processClass(),
+                'except' => [self::SCENARIO_INITIAL],
             ],
             [
                 ['stage_id'],

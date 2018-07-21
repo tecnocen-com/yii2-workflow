@@ -64,6 +64,12 @@ class WorkflowCest extends \tecnocen\roa\test\AbstractResourceCest
                     'X-Pagination-Total-Count' => 2,
                 ],
             ],
+            'rule created_by' => [
+                'urlParams' => [
+                    'created_by' => 'wo',
+                ],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+            ],
         ];
     }
 

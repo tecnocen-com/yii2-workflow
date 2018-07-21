@@ -13,16 +13,6 @@ use yii\web\NotFoundHttpException;
 class TransitionPermissionSearch extends TransitionPermission
     implements \tecnocen\roa\ResourceSearch
 {
-    /**
-     * @inhertidoc
-     */
-    protected function slugConfig()
-    {
-        return [
-            'idAttribute' => [],
-            'resourceName' => 'permission',
-        ];
-    }
 
     /**
      * @inhertidoc
@@ -30,7 +20,7 @@ class TransitionPermissionSearch extends TransitionPermission
     public function rules()
     {
         return [
-            [['source_stage_id', 'target_stage_id'], 'integer'],
+            [['created_by', 'source_stage_id', 'target_stage_id'], 'integer'],
             [['permission'], 'string'],
         ];
     }

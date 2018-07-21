@@ -138,27 +138,24 @@ class CreditCest extends \tecnocen\roa\test\AbstractResourceCest
     {
         return [
             'create credit 1' => [
-                'urlParams' => [
+                'data' => [
                     'workflow_id' => 2,
-                    'initial_stage_id' => 4
+                    'stage_id' => 4,
                 ],
                 'httpCode' => HttpCode::CREATED,
             ],
             'dont exists' => [
-                'urlParams' => [
+                'data' => [
                     'workflow_id' => 123,
-                    'initial_stage_id' => 2
+                    'stage_id' => 2,
                 ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
                     'workflow_id' => 'Workflow ID is invalid.',
-                    'initial_stage_id' => 'Initial Stage Id is invalid.'
+                    'stage_id' => 'Not an initial stage for the workflow.'
                 ],
             ],
             'not blank' => [
-                'urlParams' => [
-                    'workflow_id' => '',
-                ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
                 'validationErrors' => [
                     'workflow_id' => 'Workflow ID cannot be blank.'

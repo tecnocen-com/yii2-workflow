@@ -78,6 +78,7 @@ class Workflow extends \tecnocen\rmdb\models\PersistentEntity
             'workflow_id',
             'totalStages' => 'count(distinct id)',
         ])->asArray()
+        ->inverseOf(null)
         ->groupBy('workflow_id');
     }
 

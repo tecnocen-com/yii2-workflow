@@ -88,7 +88,7 @@ class StageCest extends \tecnocen\roa\test\AbstractResourceCest
             'rule created_by' => [
                 'urlParams' => [
                     'workflow_id' => 1,
-                    'created_by' => 'wo',
+                    'created_by' => 'st',
                 ],
                 'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
             ],
