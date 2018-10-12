@@ -14,6 +14,14 @@ use yii\web\NotFoundHttpException;
  */
 class CreditAssignment extends \app\models\CreditAssignment implements Linkable
 {
+
+    /**
+     * @inheritdoc
+     */
+    protected function processClass()
+    {
+        return Credit::class;
+    }
     /**
      * @inheritdoc
      */
@@ -24,6 +32,7 @@ class CreditAssignment extends \app\models\CreditAssignment implements Linkable
                 'class' => Slug::class,
                 'resourceName' => 'assignment',
                 'parentSlugRelation' => 'process',
+                'idAttribute' => 'user_id'
             ],
         ]);
     }
