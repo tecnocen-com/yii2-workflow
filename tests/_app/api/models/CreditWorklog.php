@@ -14,6 +14,9 @@ use yii\web\NotFoundHttpException;
  */
 class CreditWorklog extends \app\models\CreditWorklog implements Linkable
 {
+    /**
+     * @inheritdoc
+     */
     protected function processClass()
     {
         return Credit::class;

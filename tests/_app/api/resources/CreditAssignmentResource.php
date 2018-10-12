@@ -16,6 +16,12 @@ class CreditAssignmentResource extends \tecnocen\roa\controllers\OAuth2Resource
      * @inheritdoc
      */
     public $modelClass = CreditAssignment::class;
-
+    /**
+     * @inheritdoc
+     */
     public $filterParams = ['process_id'];
+    /**
+     * @inheritdoc
+     */
+    public $idAttribute = 'user_id';
 }
