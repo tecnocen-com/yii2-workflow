@@ -166,6 +166,16 @@ class CreditAssignmentCest extends \tecnocen\roa\test\AbstractResourceCest
                 ],
                 'httpCode' => HttpCode::OK,
             ],
+            'update credit error ' => [
+                'url' => '/v1/credit/1/assignment/1',
+                'data' => [
+                    'user_id' => 2
+                ],
+                'httpCode' => HttpCode::UNPROCESSABLE_ENTITY,
+                'validationErrors' => [
+                    'user_id' => 'User ID is invalid.'
+                ],
+            ],
         ];
     }
     /**
