@@ -1,7 +1,7 @@
 Yii2 Workflow Change Log
 ==========================
 
-0.3.0 under development
+0.3.0 October 18, 2018
 ------------------------
 
 - Enh: Add CHANGELOG.md
