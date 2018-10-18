@@ -11,7 +11,7 @@ use tecnocen\workflow\roa\models\TransitionPermissionSearch;
  *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class PermissionResource extends \tecnocen\roa\controllers\OAuth2Resource
+class PermissionResource extends \tecnocen\roa\controllers\Resource
 {
     /**
      * @inheritdoc

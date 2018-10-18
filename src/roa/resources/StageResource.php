@@ -10,7 +10,7 @@ use tecnocen\workflow\roa\models\StageSearch;
 /**
  * Resource to
  */
-class StageResource extends \tecnocen\roa\controllers\OAuth2Resource
+class StageResource extends \tecnocen\roa\controllers\Resource
 {
     /**
      * @inheritdoc

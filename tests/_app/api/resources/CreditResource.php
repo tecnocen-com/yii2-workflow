@@ -11,7 +11,7 @@ use app\api\models\CreditSearch;
  * CRUD resource for `Credit` records
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
-class CreditResource extends \tecnocen\roa\controllers\OAuth2Resource
+class CreditResource extends \tecnocen\roa\controllers\Resource
 {
     /**
      * @inheritdoc

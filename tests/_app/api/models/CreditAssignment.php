@@ -2,8 +2,8 @@
 
 namespace app\api\models;
 
-use tecnocen\roa\behaviors\Slug;
-use yii\web\Linkable;
+use tecnocen\roa\hal\Contract;
+use tecnocen\roa\hal\ContractTrait;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -12,8 +12,11 @@ use yii\web\NotFoundHttpException;
  * @method string[] getSlugLinks()
  * @method string getSelfLink()
  */
-class CreditAssignment extends \app\models\CreditAssignment implements Linkable
+class CreditAssignment extends \app\models\CreditAssignment implements Contract
 {
+    use ContractTrait {
+        getLinks as getContractLinks;
+    }
 
     /**
      * @inheritdoc
@@ -25,18 +28,14 @@ class CreditAssignment extends \app\models\CreditAssignment implements Linkable
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    protected function slugBehaviorConfig()
     {
-        return array_merge(parent::behaviors(), [
-            'slug' => [
-                'class' => Slug::class,
-                'resourceName' => 'assignment',
-                'parentSlugRelation' => 'process',
-                'idAttribute' => 'user_id'
-            ],
-        ]);
+        return [
+            'resourceName' => 'assignment',
+            'parentSlugRelation' => 'process',
+            'idAttribute' => 'user_id'
+        ];
     }
-
     /**
      * @inheritdoc
      */

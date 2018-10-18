@@ -2,12 +2,9 @@
 
 namespace tecnocen\workflow\roa\models;
 
-use tecnocen\roa\behaviors\Curies;
-use tecnocen\roa\behaviors\Slug;
-use tecnocen\roa\hal\Embeddable;
-use tecnocen\roa\hal\EmbeddableTrait;
+use tecnocen\roa\hal\Contract;
+use tecnocen\roa\hal\ContractTrait;
 use tecnocen\workflow\models as base;
-use yii\web\Linkable;
 
 /**
  * ROA contract to handle workflow transitions records.
@@ -15,9 +12,11 @@ use yii\web\Linkable;
  * @method string[] getSlugLinks()
  * @method string getSelfLink()
  */
-class Transition extends base\Transition implements Linkable, Embeddable
+class Transition extends base\Transition implements Contract
 {
-    use EmbeddableTrait;
+    use ContractTrait {
+        getLinks as getContractLinks;
+    }
 
     /**
      * @inheritdoc
@@ -32,17 +31,13 @@ class Transition extends base\Transition implements Linkable, Embeddable
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    protected function slugBehaviorConfig()
     {
-        return array_merge(parent::behaviors(), [
-            'slug' => [
-                'class' => Slug::class,
-                'resourceName' => 'transition',
-                'parentSlugRelation' => 'sourceStage',
-                'idAttribute' => 'target_stage_id',
-            ],
-            'curies' => Curies::class,
-        ]);
+        return [
+            'resourceName' => 'transition',
+            'parentSlugRelation' => 'sourceStage',
+            'idAttribute' => 'target_stage_id',
+        ];
     }
 
     /**
@@ -50,7 +45,7 @@ class Transition extends base\Transition implements Linkable, Embeddable
      */
     public function getLinks()
     {
-        return array_merge($this->getSlugLinks(), $this->getCuriesLinks(), [
+        return array_merge($this->getContractLinks(), [
             'permissions' => $this->getSelfLink() . '/permission',
             'target_stage' => $this->targetStage->getSelfLink(),
         ]);

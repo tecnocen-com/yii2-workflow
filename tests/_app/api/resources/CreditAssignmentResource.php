@@ -10,7 +10,7 @@ use app\api\models\CreditAssignment;
  * CRUD resource for `Credit Assignment` records
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
-class CreditAssignmentResource extends \tecnocen\roa\controllers\OAuth2Resource
+class CreditAssignmentResource extends \tecnocen\roa\controllers\Resource
 {
     /**
      * @inheritdoc

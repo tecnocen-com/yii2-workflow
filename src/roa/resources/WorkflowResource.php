@@ -9,7 +9,7 @@ use tecnocen\workflow\roa\models\WorkflowSearch;
  * CRUD resource for `Workflow` records
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class WorkflowResource extends \tecnocen\roa\controllers\OAuth2Resource
+class WorkflowResource extends \tecnocen\roa\controllers\Resource
 {
     /**
      * @inheritdoc

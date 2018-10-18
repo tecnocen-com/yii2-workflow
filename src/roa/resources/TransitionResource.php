@@ -11,7 +11,7 @@ use tecnocen\workflow\roa\models\TransitionSearch;
  *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class TransitionResource extends \tecnocen\roa\controllers\OAuth2Resource
+class TransitionResource extends \tecnocen\roa\controllers\Resource
 {
     /**
      * @inhertidoc
