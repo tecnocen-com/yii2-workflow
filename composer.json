@@ -26,15 +26,17 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:tecnocen-com/yii2-roa.git"
         }
     ],
     "require": {
-        "php": "^7.0",
-        "ext-curl": "*",
-        "tecnocen/yii2-roa": "~0.3.1",
+        "php": "^7.1",
+        "tecnocen/yii2-roa": "dev-typecast as 0.5.x-dev",
         "tecnocen/yii2-rmdb": "*",
-        "yii2tech/ar-softdelete": "*",
-        "yiisoft/yii2": "~2.0.10"
+        "yii2tech/ar-softdelete": "*"
     },
     "require-dev": {
         "codeception/base": "^2.2.11",
