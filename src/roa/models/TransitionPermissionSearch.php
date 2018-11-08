@@ -2,6 +2,7 @@
 
 namespace tecnocen\workflow\roa\models;
 
+use tecnocen\roa\ResourceSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
@@ -10,10 +11,9 @@ use yii\web\NotFoundHttpException;
  *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class TransitionPermissionSearch extends TransitionPermission
-    implements \tecnocen\roa\ResourceSearch
+class TransitionPermissionSearch extends TransitionPermission implements
+    ResourceSearch
 {
-
     /**
      * @inhertidoc
      */
@@ -28,8 +28,10 @@ class TransitionPermissionSearch extends TransitionPermission
     /**
      * @inhertidoc
      */
-    public function search(array $params, $formName = '')
-    {
+    public function search(
+        array $params,
+        ?string $formName = ''
+    ): ?ActiveDataProvider {
         $this->load($params, $formName);
         if (!$this->validate()) {
             return null;

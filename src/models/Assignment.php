@@ -4,6 +4,7 @@ namespace tecnocen\workflow\models;
 
 use tecnocen\rmdb\models\Pivot;
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * @property int $process_id
@@ -16,7 +17,7 @@ abstract class Assignment extends Pivot
     /**
      * @return string class name for the process this worklog is attached to.
      */
-    protected abstract function processClass();
+    protected abstract function processClass(): string;
 
     /**
      * @inheritdoc
@@ -65,10 +66,11 @@ abstract class Assignment extends Pivot
         }
         parent::init();
     }
+
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getProcess()
+    public function getProcess(): ActiveQuery
     {
         return $this->hasOne($this->processClass(), ['id' => 'process_id']);
     }

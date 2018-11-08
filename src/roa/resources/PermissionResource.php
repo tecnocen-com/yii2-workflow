@@ -2,16 +2,16 @@
 
 namespace tecnocen\workflow\roa\resources;
 
-use Yii;
 use tecnocen\workflow\roa\models\TransitionPermission;
 use tecnocen\workflow\roa\models\TransitionPermissionSearch;
+use tecnocen\roa\controllers\Resource;
 
 /**
  * Resource to assign permissions to a transition.
  *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class PermissionResource extends \tecnocen\roa\controllers\OAuth2Resource
+class PermissionResource extends Resource
 {
     /**
      * @inheritdoc

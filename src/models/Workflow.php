@@ -2,6 +2,8 @@
 
 namespace tecnocen\workflow\models;
 
+use yii\db\ActiveQuery;
+
 /**
  * Model class for table `{{%workflow}}`
  *
@@ -58,18 +60,18 @@ class Workflow extends \tecnocen\rmdb\models\PersistentEntity
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getStages()
+    public function getStages(): ActiveQuery
     {
         return $this->hasMany($this->stageClass, ['workflow_id' => 'id'])
             ->inverseOf('workflow');
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getDetailStages()
+    public function getDetailStages(): ActiveQuery
     {
         $query = $this->getStages();
         $query->multiple = false;
@@ -85,7 +87,7 @@ class Workflow extends \tecnocen\rmdb\models\PersistentEntity
     /**
      * @return int
      */
-    public function getTotalStages()
+    public function getTotalStages(): int
     {
         return (int)$this->detailStages['totalStages'];
     }

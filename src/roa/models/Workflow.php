@@ -2,47 +2,18 @@
 
 namespace tecnocen\workflow\roa\models;
 
-use tecnocen\roa\behaviors\Curies;
-use tecnocen\roa\behaviors\Slug;
-use tecnocen\roa\hal\Embeddable;
-use tecnocen\roa\hal\EmbeddableTrait;
+use tecnocen\roa\hal\Contract;
+use tecnocen\roa\hal\ContractTrait;
 use tecnocen\workflow\models as base;
-use yii\web\Linkable;
 use yii\web\NotFoundHttpException;
 
 /**
  * ROA contract to handle workflow records.
- *
- * @method string[] getSlugLinks()
- * @method string getSelfLink()
  */
-class Workflow extends base\Workflow implements Linkable, Embeddable
+class Workflow extends base\Workflow implements Contract
 {
-    use EmbeddableTrait {
-        EmbeddableTrait::toArray as embedArray;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function toArray(
-        array $fields = [],
-        array $expand = [],
-        $recursive = true
-    ) {
-        return $this->embedArray(
-            $fields ?: $this->attributes(),
-            $expand,
-            $recursive
-        );
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        return array_merge($this->attributes(), ['totalStages']);
+    use ContractTrait {
+        getLinks as getContractLinks;
     }
 
     /**
@@ -53,24 +24,20 @@ class Workflow extends base\Workflow implements Linkable, Embeddable
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    protected function slugBehaviorConfig(): array
     {
-        return array_merge(parent::behaviors(), [
-            'slug' => [
-                'class' => Slug::class,
-                'resourceName' => 'workflow',
-                'checkAccess' => function ($params) {
-                    if (isset($params['workflow_id'])
-                        && $this->id != $params['workflow_id']
-                    ) {
-                        throw new NotFoundHttpException(
-                            'Workflow not associated to element.'
-                        );
-                    }
-                },
-            ],
-            'curies' => Curies::class,
-        ]);
+        return [
+            'resourceName' => 'workflow',
+            'checkAccess' => function ($params) {
+                if (isset($params['workflow_id'])
+                    && $this->id != $params['workflow_id']
+                ) {
+                    throw new NotFoundHttpException(
+                        'Workflow not associated to element.'
+                    );
+                }
+            },
+        ];
     }
 
     /**
@@ -78,7 +45,7 @@ class Workflow extends base\Workflow implements Linkable, Embeddable
      */
     public function getLinks()
     {
-        return array_merge($this->getSlugLinks(), $this->getCuriesLinks(), [
+        return array_merge($this->getContractLinks(), [
             'stages' => $this->getSelfLink() . '/stage',
         ]);
     }

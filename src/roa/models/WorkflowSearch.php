@@ -2,6 +2,7 @@
 
 namespace tecnocen\workflow\roa\models;
 
+use tecnocen\roa\ResourceSearch;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -9,9 +10,8 @@ use yii\data\ActiveDataProvider;
  *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class WorkflowSearch extends Workflow implements \tecnocen\roa\ResourceSearch
+class WorkflowSearch extends Workflow implements ResourceSearch
 {
-
     /**
      * @inhertidoc
      */
@@ -26,12 +26,15 @@ class WorkflowSearch extends Workflow implements \tecnocen\roa\ResourceSearch
     /**
      * @inhertidoc
      */
-    public function search(array $params, $formName = '')
-    {
+    public function search(
+        array $params,
+        ?string $formName = ''
+    ): ?ActiveDataProvider {
         $this->load($params, $formName);
         if (!$this->validate()) {
             return null;
         }
+
         $class = get_parent_class();
         return new ActiveDataProvider([
             'query' => $class::find()->andFilterWhere([

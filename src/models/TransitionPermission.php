@@ -2,6 +2,8 @@
 
 namespace tecnocen\workflow\models;
 
+use yii\db\ActiveQuery;
+
 /**
  * Model class for table `{{%workflow_transition}}`
  *
@@ -116,25 +118,25 @@ class TransitionPermission extends \tecnocen\rmdb\models\Entity
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getSourceStage()
+    public function getSourceStage(): ActiveQuery
     {
         return $this->hasOne($this->stageClass, ['id' => 'source_stage_id']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getTargetStage()
+    public function getTargetStage(): ActiveQuery
     {
         return $this->hasOne($this->stageClass, ['id' => 'target_stage_id']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getTransition()
+    public function getTransition(): ActiveQuery
     {
         return $this->hasOne(
             $this->transitionClass,

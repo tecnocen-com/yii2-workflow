@@ -2,16 +2,16 @@
 
 namespace tecnocen\workflow\roa\resources;
 
-use Yii;
+use tecnocen\roa\controllers\Resource;
 use tecnocen\workflow\roa\models\Transition;
 use tecnocen\workflow\roa\models\TransitionSearch;
 
 /**
- * Resource to handle transition records.
+ * Resource to handle `Transition` records.
  *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class TransitionResource extends \tecnocen\roa\controllers\OAuth2Resource
+class TransitionResource extends Resource
 {
     /**
      * @inhertidoc

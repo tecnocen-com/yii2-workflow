@@ -2,10 +2,12 @@
 
 namespace tecnocen\workflow\roa\modules;
 
-use tecnocen\workflow\roa\resources\PermissionResource;
-use tecnocen\workflow\roa\resources\StageResource;
-use tecnocen\workflow\roa\resources\TransitionResource;
-use tecnocen\workflow\roa\resources\WorkflowResource;
+use tecnocen\workflow\roa\resources\{
+    PermissionResource,
+    StageResource,
+    TransitionResource,
+    WorkflowResource
+};
 
 class Version extends \tecnocen\roa\modules\ApiVersion
 {

@@ -2,24 +2,16 @@
 
 namespace tecnocen\workflow\roa\models;
 
-use tecnocen\roa\behaviors\Curies;
-use tecnocen\roa\behaviors\Slug;
-use tecnocen\roa\hal\Embeddable;
-use tecnocen\roa\hal\EmbeddableTrait;
+use tecnocen\roa\hal\Contract;
+use tecnocen\roa\hal\ContractTrait;
 use tecnocen\workflow\models as base;
-use yii\web\Linkable;
 
 /**
  * ROA contract to handle workflow transition permissions records.
- *
- * @method string[] getSlugLinks()
- * @method string getSelfLink()
  */
-class TransitionPermission extends base\TransitionPermission implements
-    Linkable,
-    Embeddable
+class TransitionPermission extends base\TransitionPermission implements Contract
 {
-    use EmbeddableTrait;
+    use ContractTrait;
 
     /**
      * @inheritdoc
@@ -34,25 +26,13 @@ class TransitionPermission extends base\TransitionPermission implements
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    protected function slugBehaviorConfig(): array
     {
-        return array_merge(parent::behaviors(), [
-            'slug' => [
-                'class' => Slug::class,
-                'idAttribute' => 'permission',
-                'resourceName' => 'permission',
-                'parentSlugRelation' => 'transition',
-            ],
-            'curies' => Curies::class,
-        ]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getLinks()
-    {
-        return array_merge($this->getSlugLinks(), $this->getCuriesLinks());
+        return [
+            'idAttribute' => 'permission',
+            'resourceName' => 'permission',
+            'parentSlugRelation' => 'transition',
+        ];
     }
 
     /**

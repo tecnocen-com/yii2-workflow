@@ -2,15 +2,16 @@
 
 namespace tecnocen\workflow\roa\resources;
 
-use Yii;
-use yii\web\NotFoundHttpException;
+use tecnocen\roa\controllers\Resource;
 use tecnocen\workflow\roa\models\Stage;
 use tecnocen\workflow\roa\models\StageSearch;
 
 /**
- * Resource to
+ * Resource to handle `Stage` records.
+ *
+ * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class StageResource extends \tecnocen\roa\controllers\OAuth2Resource
+class StageResource extends Resource
 {
     /**
      * @inheritdoc

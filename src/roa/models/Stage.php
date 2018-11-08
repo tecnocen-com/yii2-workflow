@@ -2,46 +2,17 @@
 
 namespace tecnocen\workflow\roa\models;
 
-use tecnocen\roa\behaviors\Curies;
-use tecnocen\roa\behaviors\Slug;
-use tecnocen\roa\hal\Embeddable;
-use tecnocen\roa\hal\EmbeddableTrait;
+use tecnocen\roa\hal\Contract;
+use tecnocen\roa\hal\ContractTrait;
 use tecnocen\workflow\models as base;
-use yii\web\Linkable;
 
 /**
  * ROA contract to handle workflow stage records.
- *
- * @method string[] getSlugLinks()
- * @method string getSelfLink()
  */
-class Stage extends base\Stage implements Linkable, Embeddable
+class Stage extends base\Stage implements Contract
 {
-    use EmbeddableTrait {
-        EmbeddableTrait::toArray as embedArray;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function toArray(
-        array $fields = [],
-        array $expand = [],
-        $recursive = true
-    ) {
-        return $this->embedArray(
-            $fields ?: $this->attributes(),
-            $expand,
-            $recursive
-        );
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        return array_merge($this->attributes(), ['totalTransitions']);
+    use ContractTrait {
+        getLinks as getContractLinks;
     }
 
     /**
@@ -57,16 +28,12 @@ class Stage extends base\Stage implements Linkable, Embeddable
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    protected function slugBehaviorConfig(): array
     {
-        return array_merge(parent::behaviors(), [
-            'slug' => [
-                'class' => Slug::class,
-                'resourceName' => 'stage',
-                'parentSlugRelation' => 'workflow',
-            ],
-            'curies' => Curies::class,
-        ]);
+        return [
+            'resourceName' => 'stage',
+            'parentSlugRelation' => 'workflow',
+        ];
     }
 
     /**
@@ -74,7 +41,7 @@ class Stage extends base\Stage implements Linkable, Embeddable
      */
     public function getLinks()
     {
-        return array_merge($this->getSlugLinks(), $this->getCuriesLinks(), [
+        return array_merge($this->getContractLinks(), [
             'transitions' => $this->getSelfLink() . '/transition',
         ]);
     }
