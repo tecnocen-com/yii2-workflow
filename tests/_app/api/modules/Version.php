@@ -2,9 +2,11 @@
 
 namespace app\api\modules;
 
-use app\api\resources\CreditResource;
-use app\api\resources\CreditWorklogResource;
-use app\api\resources\CreditAssignmentResource;
+use app\api\resources\{
+    CreditResource,
+    CreditWorklogResource,
+    CreditAssignmentResource
+};
 
 class Version extends \tecnocen\roa\modules\ApiVersion
 {

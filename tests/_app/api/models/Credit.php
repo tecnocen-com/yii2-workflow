@@ -2,24 +2,31 @@
 
 namespace app\api\models;
 
-use tecnocen\roa\behaviors\Slug;
-use yii\web\Linkable;
-use yii\web\NotFoundHttpException;
+use app\models as base;
+use tecnocen\roa\hal\Contract;
+use tecnocen\roa\hal\ContractTrait;
 
 /**
  * ROA contract to handle credit records.
- *
- * @method string[] getSlugLinks()
- * @method string getSelfLink()
  */
-class Credit extends \app\models\Credit implements Linkable
+class Credit extends base\Credit implements Contract
 {
-    protected function assignmentClass()
+    use ContractTrait {
+        getLinks as getContractLinks;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function assignmentClass(): string
     {
         return CreditAssignment::class;
     }
 
-    protected function workLogClass()
+    /**
+     * @inheritdoc
+     */
+    protected function workLogClass(): string
     {
         return CreditWorklog::class;
     }
@@ -27,14 +34,11 @@ class Credit extends \app\models\Credit implements Linkable
     /**
      * @inheritdoc
      */
-    public function behaviors()
+    protected function slugBehaviorConfig(): array
     {
-        return array_merge(parent::behaviors(), [
-            'slug' => [
-                'class' => Slug::class,
-                'resourceName' => 'credit',
-            ],
-        ]);
+        return [
+            'resourceName' => 'credit',
+        ];
     }
 
     /**
@@ -42,7 +46,7 @@ class Credit extends \app\models\Credit implements Linkable
      */
     public function getLinks()
     {
-        return array_merge($this->getSlugLinks(), [
+        return array_merge($this->getContractLinks(), [
             'worklog' => $this->getSelfLink() . '/worklog',
         ]);
     }

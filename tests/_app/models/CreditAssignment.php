@@ -4,11 +4,18 @@ namespace app\models;
 
 class CreditAssignment extends \tecnocen\workflow\models\Assignment
 {
+    /**
+     * @inheritdoc
+     */
     public static function tableName()
     {
         return '{{%credit_assignment}}';
     }
-    protected function processClass()
+ 
+    /**
+     * @inheritdoc
+     */
+   protected function processClass(): string
     {
         return Credit::class;
     }
