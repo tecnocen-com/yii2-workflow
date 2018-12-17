@@ -1,6 +1,11 @@
 Yii2 Workflow Change Log
 ==========================
 
+0.3.1 December 17, 2018
+------------------------
+
+- Bugfix: Requires yii2 roa dev-master
+
 0.3.0 October 18, 2018
 ------------------------
 
