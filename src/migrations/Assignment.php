@@ -45,4 +45,13 @@ abstract class Assignment extends \tecnocen\rmdb\migrations\CreatePivot
            'process_id' => $this->getProcessTableName(),
         ];
     }
+ 
+    /**
+     * @inhertidoc
+     */
+    public function compositePrimaryKeys()
+    {
+        return ['process_id', 'user_id'];
+    }
+
 }

@@ -20,7 +20,6 @@ class CreditAssignment extends base\CreditAssignment implements Contract
     {
         return Credit::class;
     }
-
     /**
      * @inheritdoc
      */

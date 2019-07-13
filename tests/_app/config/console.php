@@ -1,5 +1,7 @@
 <?php
 
+use yii\console\controllers;
+
 return yii\helpers\ArrayHelper::merge(
     require __DIR__ . '/common.php',
     [
@@ -10,7 +12,7 @@ return yii\helpers\ArrayHelper::merge(
         ],
         'controllerMap' => [
             'migrate' => [
-                'class' => yii\console\controllers\MigrateController::class,
+                'class' => controllers\MigrateController::class,
                 'migrationPath' => null,
                 'migrationNamespaces' => [],
             ],
