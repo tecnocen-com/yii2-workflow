@@ -28,6 +28,7 @@ class CreditAssignment extends base\CreditAssignment implements Contract
         return [
             'resourceName' => 'assignment',
             'parentSlugRelation' => 'process',
+            'idAttribute' => 'user_id'
         ];
     }
 }
