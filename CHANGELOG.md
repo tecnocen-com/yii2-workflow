@@ -1,7 +1,20 @@
 Yii2 Workflow Change Log
 ==========================
 
-0.3.0 under development
+0.4.0 July 13, 2019
+
+- Brk: Methods now use the typecast supported in php 7.1
+
+0.3.2 December 18, 2018
+
+- fix version bump for yii2 roa tests
+
+0.3.1 December 17, 2018
+------------------------
+
+- Bugfix: Requires yii2 roa dev-master
+
+0.3.0 October 18, 2018
 ------------------------
 
 - Enh: Add CHANGELOG.md

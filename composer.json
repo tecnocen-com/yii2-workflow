@@ -34,13 +34,13 @@
     ],
     "require": {
         "php": "^7.1",
-        "tecnocen/yii2-roa": "dev-typecast as 0.5.x-dev",
+        "tecnocen/yii2-roa": "~0.5.0",
         "tecnocen/yii2-rmdb": "*",
         "yii2tech/ar-softdelete": "*"
     },
     "require-dev": {
         "codeception/base": "^2.2.11",
-        "codeception/verify": "~0.3.1",
+        "codeception/verify": "~1.0.0",
         "flow/jsonpath": "~0.3",
         "phpunit/php-code-coverage": "5.3.*",
         "yiisoft/yii2-debug": "*"
