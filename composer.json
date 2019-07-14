@@ -26,10 +26,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "git@github.com:tecnocen-com/yii2-roa.git"
         }
     ],
     "require": {
