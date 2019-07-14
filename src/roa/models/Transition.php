@@ -8,9 +8,6 @@ use tecnocen\workflow\models as base;
 
 /**
  * ROA contract to handle workflow transitions records.
- *
- * @method string[] getSlugLinks()
- * @method string getSelfLink()
  */
 class Transition extends base\Transition implements Contract
 {
@@ -31,7 +28,7 @@ class Transition extends base\Transition implements Contract
     /**
      * @inheritdoc
      */
-    protected function slugBehaviorConfig()
+    protected function slugBehaviorConfig(): array
     {
         return [
             'resourceName' => 'transition',

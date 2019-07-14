@@ -2,9 +2,10 @@
 
 namespace app\api\models;
 
+use tecnocen\roa\ResourceSearch;
 use yii\data\ActiveDataProvider;
 
-class CreditSearch extends Credit implements \tecnocen\roa\ResourceSearch
+class CreditSearch extends Credit implements ResourceSearch
 {
     /**
      * @inhertidoc
@@ -24,12 +25,15 @@ class CreditSearch extends Credit implements \tecnocen\roa\ResourceSearch
     /**
      * @inhertidoc
      */
-    public function search(array $params, $formName = '')
-    {
+    public function search(
+        array $params,
+        ?string $formName = ''
+    ): ?ActiveDataProvider {
         $this->load($params, $formName);
         if (!$this->validate()) {
             return null;
         }
+
         $class = get_parent_class();
         return new ActiveDataProvider([
             'query' => $class::find()->andFilterWhere([

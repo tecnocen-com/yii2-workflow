@@ -3,6 +3,7 @@
 namespace tecnocen\workflow\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * Model class for table `{{%workflow_transition}}`
@@ -126,13 +127,14 @@ class Transition extends \tecnocen\rmdb\models\Entity
      *
      * @param int $userId
      * @param Process $process
-     * @return boolean
+     * @return bool
      */
-    public function userCan($userId, Process  $process)
+    public function userCan(?int $userId, Process  $process): bool
     {
         if (!$this->getPermissions()->exists()) {
             return true;
         }
+
         $authManager = Yii::$app->authManager;
 
         foreach ($this->permissions as $permission) {
@@ -160,25 +162,25 @@ class Transition extends \tecnocen\rmdb\models\Entity
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getSourceStage()
+    public function getSourceStage(): ActiveQuery
     {
         return $this->hasOne($this->stageClass, ['id' => 'source_stage_id']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getTargetStage()
+    public function getTargetStage(): ActiveQuery
     {
         return $this->hasOne($this->stageClass, ['id' => 'target_stage_id']);
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getPermissions()
+    public function getPermissions(): ActiveQuery
     {
         return $this->hasMany(
             $this->permissionClass,

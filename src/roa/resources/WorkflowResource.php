@@ -2,14 +2,16 @@
 
 namespace tecnocen\workflow\roa\resources;
 
+use tecnocen\roa\controllers\Resource;
 use tecnocen\workflow\roa\models\Workflow;
 use tecnocen\workflow\roa\models\WorkflowSearch;
 
 /**
- * CRUD resource for `Workflow` records
+ * Resource to handle `Workflow` records
+ *
  * @author Angel (Faryshta) Guevara <aguevara@alquimiadigital.mx>
  */
-class WorkflowResource extends \tecnocen\roa\controllers\Resource
+class WorkflowResource extends Resource
 {
     /**
      * @inheritdoc

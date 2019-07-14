@@ -4,6 +4,7 @@ namespace tecnocen\workflow\models;
 
 use tecnocen\rmdb\models\Pivot;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\web\ForbiddenHttpException;
 use yii\web\BadRequestHttpException;
 
@@ -22,7 +23,7 @@ abstract class WorkLog extends Pivot
     /**
      * @return string class name for the process this worklog is attached to.
      */
-    protected abstract function processClass();
+    protected abstract function processClass(): string;
 
     /**
      * @inheritdoc
@@ -138,9 +139,9 @@ abstract class WorkLog extends Pivot
         parent::init();
     }
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getProcess()
+    public function getProcess(): ActiveQuery
     {
         return $this->hasOne($this->processClass(), ['id' => 'process_id']);
     }

@@ -1,6 +1,9 @@
 <?php
 
 namespace tecnocen\workflow\models;
+
+use yii\db\ActiveQuery;
+
 /**
  * Model class for table `{{%workflow_stage}}`
  *
@@ -89,9 +92,9 @@ class Stage extends \tecnocen\rmdb\models\PersistentEntity
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getWorkflow()
+    public function getWorkflow(): ActiveQuery
     {
         return $this->hasOne(
             $this->workflowClass,
@@ -100,9 +103,9 @@ class Stage extends \tecnocen\rmdb\models\PersistentEntity
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getTransitions()
+    public function getTransitions(): ActiveQuery
     {
         return $this->hasMany(
             $this->transitionClass,
@@ -111,9 +114,9 @@ class Stage extends \tecnocen\rmdb\models\PersistentEntity
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
-    public function getDetailTransitions()
+    public function getDetailTransitions(): ActiveQuery
     {
         $query = $this->getTransitions();
         $query->multiple = false;
@@ -129,15 +132,15 @@ class Stage extends \tecnocen\rmdb\models\PersistentEntity
     /**
      * @return int
      */
-    public function getTotalTransitions()
+    public function getTotalTransitions(): int
     {
         return (int)$this->detailTransitions['totalTransitions'];
     }
 
     /**
-     * @return \yii\db\ActiveQuery sibling stages for the same workflow
+     * @return ActiveQuery sibling stages for the same workflow
      */
-    public function getSiblings()
+    public function getSiblings(): ActiveQuery
     {
         return $this->hasMany(static::class, ['workflow_id' => 'workflow_id'])
             ->alias('siblings');

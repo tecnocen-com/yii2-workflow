@@ -9,9 +9,6 @@ use yii\web\NotFoundHttpException;
 
 /**
  * ROA contract to handle workflow records.
- *
- * @method string[] getSlugLinks()
- * @method string getSelfLink()
  */
 class Workflow extends base\Workflow implements Contract
 {
@@ -22,20 +19,12 @@ class Workflow extends base\Workflow implements Contract
     /**
      * @inheritdoc
      */
-    public function fields()
-    {
-        return array_merge($this->attributes(), ['totalStages']);
-    }
-
-    /**
-     * @inheritdoc
-     */
     protected $stageClass = Stage::class;
 
     /**
      * @inheritdoc
      */
-    public function slugBehaviorConfig()
+    protected function slugBehaviorConfig(): array
     {
         return [
             'resourceName' => 'workflow',
@@ -44,10 +33,10 @@ class Workflow extends base\Workflow implements Contract
                     && $this->id != $params['workflow_id']
                 ) {
                     throw new NotFoundHttpException(
-                       'Workflow not associated to element.'
+                        'Workflow not associated to element.'
                     );
                 }
-            }
+            },
         ];
     }
 

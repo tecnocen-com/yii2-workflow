@@ -8,22 +8,11 @@ use tecnocen\workflow\models as base;
 
 /**
  * ROA contract to handle workflow stage records.
- *
- * @method string[] getSlugLinks()
- * @method string getSelfLink()
  */
 class Stage extends base\Stage implements Contract
 {
     use ContractTrait {
         getLinks as getContractLinks;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function fields()
-    {
-        return array_merge($this->attributes(), ['totalTransitions']);
     }
 
     /**
@@ -39,7 +28,7 @@ class Stage extends base\Stage implements Contract
     /**
      * @inheritdoc
      */
-    public function slugBehaviorConfig()
+    protected function slugBehaviorConfig(): array
     {
         return [
             'resourceName' => 'stage',

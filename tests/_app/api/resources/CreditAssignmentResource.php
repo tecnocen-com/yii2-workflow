@@ -2,15 +2,14 @@
 
 namespace app\api\resources;
 
-use Yii;
-use yii\web\NotFoundHttpException;
 use app\api\models\CreditAssignment;
+use tecnocen\roa\controllers\Resource;
 
 /**
  * CRUD resource for `Credit Assignment` records
  * @author Carlos (neverabe) Llamosas <carlos@tecnocen.com>
  */
-class CreditAssignmentResource extends \tecnocen\roa\controllers\Resource
+class CreditAssignmentResource extends Resource
 {
     /**
      * @inheritdoc

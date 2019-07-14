@@ -8,15 +8,10 @@ use tecnocen\workflow\models as base;
 
 /**
  * ROA contract to handle workflow transition permissions records.
- *
- * @method string[] getSlugLinks()
- * @method string getSelfLink()
  */
 class TransitionPermission extends base\TransitionPermission implements Contract
 {
-    use ContractTrait {
-        getLinks as getContractLinks;
-    }
+    use ContractTrait;
 
     /**
      * @inheritdoc
@@ -31,21 +26,13 @@ class TransitionPermission extends base\TransitionPermission implements Contract
     /**
      * @inheritdoc
      */
-    public function slugBehaviorConfig()
+    protected function slugBehaviorConfig(): array
     {
         return [
             'idAttribute' => 'permission',
             'resourceName' => 'permission',
             'parentSlugRelation' => 'transition',
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getLinks()
-    {
-        return array_merge($this->getContractLinks());
     }
 
     /**
